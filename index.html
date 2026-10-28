@@ -1,0 +1,892 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>首爾賞楓醫美購物團</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="首爾行程書">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#FCF9F7">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="首爾 5 天 4 夜互動行程書">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&display=swap">
+<style>
+/* Layout: 單欄手機優先，上方日期膠囊吸頂，下方四個分頁；點任一地點從底部滑出攻略面板 */
+:root{
+  --bg:#FCF9F7; --card:#FFFFFF; --ink:#3E3640; --sub:#8A7F86; --line:#F1E8E5; --chip:#F6EFEC;
+  --accent:#E9856F; --accent-soft:#FDEBE5; --on-accent:#FFFFFF;
+  --butter:#D99A2B; --butter-s:#FCF1D9;
+  --rose:#D26C95; --rose-s:#FBE6EE;
+  --sage:#5E9A74; --sage-s:#E5F2EA;
+  --sky:#5A98C4; --sky-s:#E4F0F9;
+  --lav:#8D7BC0; --lav-s:#EDE8F8;
+  --shadow:0 6px 24px rgba(120,80,70,.08);
+  --f-body:'Huninn','jf-openhuninn','PingFang TC','Noto Sans TC','Microsoft JhengHei',system-ui,sans-serif;
+  --f-mono:ui-rounded,'Huninn',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1E1A1D; --card:#2A2529; --ink:#F3EBEE; --sub:#B0A4AB; --line:#3A3338; --chip:#352F33;
+  --accent:#F09A86; --accent-soft:#44302D; --on-accent:#2A1A16;
+  --butter:#EDB555; --butter-s:#43391F;
+  --rose:#EE8DB0; --rose-s:#47303A;
+  --sage:#7FBE95; --sage-s:#26382E;
+  --sky:#7DB6DE; --sky-s:#243543;
+  --lav:#B0A0DD; --lav-s:#352F4A;
+  --shadow:0 6px 24px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1E1A1D; --card:#2A2529; --ink:#F3EBEE; --sub:#B0A4AB; --line:#3A3338; --chip:#352F33;
+  --accent:#F09A86; --accent-soft:#44302D; --on-accent:#2A1A16;
+  --butter:#EDB555; --butter-s:#43391F;
+  --rose:#EE8DB0; --rose-s:#47303A;
+  --sage:#7FBE95; --sage-s:#26382E;
+  --sky:#7DB6DE; --sky-s:#243543;
+  --lav:#B0A0DD; --lav-s:#352F4A;
+  --shadow:0 6px 24px rgba(0,0,0,.35); color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 var(--f-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 110px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+.wrap{max-width:560px;margin:0 auto}
+h1,h2,h3,h4,p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:10px}
+.c-sight{--c:var(--butter);--cs:var(--butter-s)}
+.c-bakery{--c:var(--butter);--cs:var(--butter-s)}
+.c-cafe{--c:var(--rose);--cs:var(--rose-s)}
+.c-food{--c:var(--accent);--cs:var(--accent-soft)}
+.c-shop{--c:var(--lav);--cs:var(--lav-s)}
+.c-beauty{--c:var(--rose);--cs:var(--rose-s)}
+.c-move{--c:var(--sky);--cs:var(--sky-s)}
+.c-stay{--c:var(--sage);--cs:var(--sage-s)}
+
+/* app bar */
+.bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:calc(env(safe-area-inset-top,0px) + 14px);padding-bottom:6px}
+.bar h1{font-size:19px;line-height:1.3}
+.bar small{display:block;color:var(--sub);font-size:12px}
+.pill-btn{background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:8px 13px;font-size:13px;white-space:nowrap}
+.hero{position:relative;border-radius:24px;overflow:hidden;margin:8px 0 14px;box-shadow:var(--shadow);background:var(--chip)}
+.hero img{display:block;width:100%;height:150px;object-fit:cover;object-position:50% 60%}
+.hero .hc{position:absolute;inset:auto 0 0 0;padding:34px 16px 12px;background:linear-gradient(transparent,rgba(40,25,30,.62));color:#fff}
+.hero .hc b{font-size:17px}.hero .hc span{display:block;font-size:12.5px;opacity:.92}
+.count{display:inline-block;background:rgba(255,255,255,.9);color:#7a4a3f;border-radius:999px;padding:2px 10px;font-size:12px;position:absolute;top:12px;left:12px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.fact{background:var(--card);border-radius:18px;padding:11px 13px;box-shadow:var(--shadow);min-width:0}
+.fact small{color:var(--sub);font-size:12px;display:block}
+.fact b{font-size:14px;display:block}
+.fact.wide{grid-column:1/-1}
+
+/* day pills */
+.days{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:8px max(16px,env(safe-area-inset-left,0px));display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.days::-webkit-scrollbar{display:none}
+.day{flex:0 0 auto;min-width:66px;background:var(--card);border-radius:18px;padding:7px 10px;text-align:center;box-shadow:var(--shadow);line-height:1.25}
+.day .e{font-size:19px;display:block}.day b{font-size:13px;display:block}.day small{font-size:11px;color:var(--sub)}
+.day[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+.day[aria-pressed="true"] small{color:inherit;opacity:.9}
+.dayhead{margin:16px 0 8px}
+.dayhead h2{font-size:21px;line-height:1.35;text-wrap:balance}
+.dayhead p{color:var(--sub);font-size:13.5px;margin-top:2px}
+.wx{display:flex;align-items:center;gap:10px;background:var(--sky-s);border-radius:16px;padding:9px 13px;margin:10px 0 4px;font-size:13px}
+.wx .t{font-size:17px;color:var(--sky);white-space:nowrap}
+.wx span{min-width:0}
+
+/* timeline */
+.tl{list-style:none;margin:8px 0 0;padding:0}
+.st{display:grid;grid-template-columns:58px 18px 1fr;gap:0 6px;align-items:stretch}
+.st .tm{font-size:12.5px;color:var(--sub);padding-top:13px;text-align:right;line-height:1.3}
+.st .rail{position:relative}
+.st .rail::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--line)}
+.st:first-child .rail::before{top:20px}.st:last-child .rail::before{bottom:calc(100% - 20px)}
+.st .dot{position:absolute;left:50%;top:15px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--accent);border:3px solid var(--bg);box-sizing:content-box}
+.st .cd{margin:5px 0 8px;background:var(--card);border-radius:18px;padding:11px 12px;box-shadow:var(--shadow);text-align:left;width:100%;display:block;min-width:0}
+.cd .tt{display:flex;gap:8px;align-items:flex-start}
+.cd .tt b{font-size:15.5px;line-height:1.4;flex:1;min-width:0}
+.cd .ds{color:var(--sub);font-size:13px;margin-top:2px}
+.cd .mini{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{display:inline-flex;align-items:center;gap:4px;background:var(--cs,var(--chip));color:var(--c,var(--sub));border-radius:999px;padding:2px 10px;font-size:12px;line-height:1.6}
+.chip.go{background:var(--chip);color:var(--sub)}
+.tag{display:inline-block;border-radius:999px;font-size:11px;padding:0 8px;background:var(--cs);color:var(--c);vertical-align:1px;margin-left:6px;line-height:1.7}
+.tag.f{background:var(--rose-s);color:var(--rose)}
+.tag.m{background:var(--chip);color:var(--ink)}
+.tag.x{background:var(--butter-s);color:var(--butter)}
+.more{color:var(--accent);font-size:12.5px;margin-top:6px;display:block}
+.ex{margin:14px 0 4px}
+.ex h3{font-size:15px;margin-bottom:8px}
+.exs{display:flex;gap:10px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}
+.exs::-webkit-scrollbar{display:none}
+.xc{flex:0 0 220px;background:var(--butter-s);border-radius:18px;padding:11px 13px;text-align:left}
+.xc b{font-size:14.5px;display:block}.xc p{font-size:12.5px;color:var(--sub);margin-top:2px}
+.note{border-radius:20px;padding:13px 15px;margin:12px 0;font-size:13.5px;background:var(--accent-soft)}
+.note h3{font-size:15px;margin-bottom:4px}
+.note.sage{background:var(--sage-s)}.note.sky{background:var(--sky-s)}.note.lav{background:var(--lav-s)}.note.butter{background:var(--butter-s)}.note.rose{background:var(--rose-s)}
+.note p+p{margin-top:4px}
+.daynav{display:flex;gap:10px;margin:14px 0}
+.daynav button{flex:1;background:var(--card);border-radius:16px;padding:11px;box-shadow:var(--shadow);font-size:14px}
+
+/* rows */
+.row{display:flex;gap:10px;align-items:center;background:var(--card);border-radius:18px;padding:10px 10px 10px 12px;box-shadow:var(--shadow);margin-bottom:10px;cursor:pointer}
+.row .ico{flex:0 0 38px;height:38px;border-radius:13px;background:var(--cs);display:grid;place-items:center;font-size:19px}
+.row .rb{flex:1;min-width:0}
+.row .rt{font-size:15px;line-height:1.4}
+.row .rd{font-size:12.5px;color:var(--sub);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.row .ra{display:flex;gap:4px}
+.ib{width:36px;height:36px;border-radius:12px;background:var(--chip);display:grid;place-items:center;font-size:16px}
+.ib.on{background:var(--butter-s)}
+
+/* search */
+.search{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);padding:10px 0 4px}
+.search label{display:flex;align-items:center;gap:8px;background:var(--card);border-radius:18px;padding:0 14px;box-shadow:var(--shadow)}
+.search input{flex:1;border:0;background:none;color:var(--ink);font:inherit;padding:13px 0;min-width:0;outline:0}
+.search input::placeholder{color:var(--sub)}
+input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
+.search .x{color:var(--sub);padding:6px}
+.chips{display:flex;gap:7px;overflow-x:auto;padding:8px 0 2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.fc{flex:0 0 auto;background:var(--card);border-radius:999px;padding:5px 12px;font-size:13px;box-shadow:var(--shadow)}
+.fc[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+.cnt{display:flex;justify-content:space-between;align-items:center;color:var(--sub);font-size:12.5px;margin:10px 2px}
+.empty{text-align:center;color:var(--sub);padding:34px 10px}
+.empty b{display:block;font-size:34px}
+
+/* guides */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.tile{background:var(--card);border-radius:20px;padding:14px;box-shadow:var(--shadow);text-align:left;min-width:0}
+.tile .e{font-size:26px;display:grid;place-items:center;width:46px;height:46px;border-radius:16px;background:var(--cs);margin-bottom:8px}
+.tile b{display:block;font-size:15px}.tile small{color:var(--sub);font-size:12.5px;display:block;line-height:1.45}
+.back{display:inline-flex;gap:6px;align-items:center;color:var(--sub);padding:14px 0 4px;font-size:14px}
+.g h2{font-size:23px;line-height:1.35;margin:4px 0 4px}
+.g .lead{color:var(--sub);font-size:14px;margin-bottom:10px}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{counter-increment:s;display:flex;gap:10px;margin:9px 0;font-size:14px}
+.steps li::before{content:counter(s);flex:0 0 24px;height:24px;border-radius:50%;background:var(--c,var(--accent));color:var(--on-accent);display:grid;place-items:center;font-size:12.5px;margin-top:2px}
+.steps li>span{min-width:0}
+.card{background:var(--card);border-radius:20px;padding:14px;box-shadow:var(--shadow);margin:12px 0}
+.card h3{font-size:15.5px;margin-bottom:6px}
+.addr{display:flex;gap:10px;align-items:center;background:var(--chip);border-radius:16px;padding:10px 12px;margin:8px 0}
+.addr div{flex:1;min-width:0;font-size:14px;line-height:1.5;word-break:break-word}
+.addr small{color:var(--sub);display:block;font-size:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--accent);color:var(--on-accent);border-radius:14px;padding:9px 14px;font-size:14px}
+.btn.soft{background:var(--accent-soft);color:var(--accent)}
+.btn.ghost{background:var(--chip);color:var(--ink)}
+.btn.sm{padding:6px 11px;font-size:13px;border-radius:12px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.kr{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px dashed var(--line)}
+.kr:first-of-type{border-top:0}
+.kr div{min-width:0;flex:1}.kr b{display:block;font-size:15px;line-height:1.5}.kr small{color:var(--sub);font-size:12.5px}
+select{width:100%;font:inherit;background:var(--chip);color:var(--ink);border:0;border-radius:14px;padding:10px 12px;margin-top:6px}
+.line{display:flex;gap:10px;padding:10px 0;border-top:1px dashed var(--line);font-size:13.5px}
+.line:first-of-type{border-top:0}
+.ln{flex:0 0 26px;height:26px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:13px}
+.l2{background:#4C9A68}.l3{background:#E58F3B}.l4{background:#4A78B8}
+.line div{min-width:0}.line b{display:block}.line span{color:var(--sub)}
+.img{width:100%;border-radius:18px;display:block;margin:8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px}
+.kv{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-top:1px dashed var(--line);font-size:14px}
+.kv:first-child{border-top:0}.kv span{color:var(--sub)}
+.chk{display:flex;gap:11px;align-items:flex-start;padding:10px 0;border-top:1px dashed var(--line);font-size:14px;cursor:pointer}
+.chk:first-of-type{border-top:0}
+.chk input{width:20px;height:20px;accent-color:var(--accent);margin-top:2px;flex:0 0 auto}
+.chk.done span{text-decoration:line-through;color:var(--sub)}
+.sec{font-size:13px;color:var(--sub);margin:18px 2px 6px;letter-spacing:.06em}
+
+/* nav */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px max(10px,env(safe-area-inset-left,0px)) calc(env(safe-area-inset-bottom,0px) + 6px)}
+.nav div{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.nav button{display:flex;flex-direction:column;align-items:center;gap:0;padding:5px 0;border-radius:16px;font-size:11.5px;color:var(--sub);line-height:1.35}
+.nav button span{font-size:21px;line-height:1.2}
+.nav button[aria-current="page"]{color:var(--accent);background:var(--accent-soft)}
+
+/* sheet + overlays */
+.scrim{position:fixed;inset:0;z-index:50;background:rgba(40,25,30,.42);opacity:0;pointer-events:none;transition:opacity .2s}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:60;max-height:88%;transform:translateY(105%);transition:transform .25s ease;display:flex;justify-content:center;pointer-events:none}
+.sheet.on{transform:none;pointer-events:auto}
+.sheet .in{width:100%;max-width:560px;background:var(--bg);border-radius:26px 26px 0 0;overflow-y:auto;overscroll-behavior:contain;padding:8px max(16px,env(safe-area-inset-left,0px)) calc(env(safe-area-inset-bottom,0px) + 24px);max-height:88dvh}
+.grab{width:42px;height:5px;border-radius:9px;background:var(--line);margin:6px auto 10px}
+.sh h2{font-size:21px;line-height:1.35;display:flex;gap:8px;align-items:flex-start;justify-content:space-between}
+.sh .sub{color:var(--sub);font-size:13px}
+.sh .close{background:var(--chip);width:34px;height:34px;border-radius:50%;flex:0 0 auto}
+.acts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.act{background:var(--card);border-radius:16px;padding:9px 2px;box-shadow:var(--shadow);font-size:12px;line-height:1.35;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0}
+.act span{font-size:22px}
+.sh h3.s{font-size:14px;color:var(--sub);margin:16px 2px 8px}
+.why{background:var(--butter-s);border-radius:14px;padding:8px 12px;font-size:13px;margin:8px 0}
+.drv{position:fixed;inset:0;z-index:80;background:var(--bg);display:none;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 14px) max(18px,env(safe-area-inset-left,0px)) calc(env(safe-area-inset-bottom,0px) + 18px);overflow-y:auto}
+.drv.on{display:flex}
+.drv .big{font-size:clamp(26px,8vw,40px);line-height:1.35;font-weight:700;word-break:keep-all;overflow-wrap:anywhere}
+.drv .mid{font-size:clamp(20px,6vw,28px);line-height:1.45;margin-top:12px;overflow-wrap:anywhere}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 92px);transform:translate(-50%,20px);z-index:100;background:#3E3640;color:#fff;border-radius:999px;padding:10px 18px;font-size:14px;opacity:0;pointer-events:none;transition:.22s;max-width:90vw;text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media (max-width:360px){.acts{grid-template-columns:repeat(2,1fr)}.facts{grid-template-columns:1fr}}
+</style>
+
+
+</head>
+<body>
+<div class="wrap">
+  <header class="bar">
+    <div><h1>🍁 首爾賞楓醫美購物團</h1><small>2026.11.04 – 11.08 · 4 人 · 台中 ⇄ 首爾</small></div>
+    <button class="pill-btn" id="btnAdd">📲 加入主畫面</button>
+  </header>
+  <main id="view"></main>
+</div>
+
+<nav class="nav" aria-label="主要分頁"><div>
+  <button data-go="plan"><span>🗓️</span>行程</button>
+  <button data-go="explore"><span>🔍</span>探索</button>
+  <button data-go="guides"><span>🧭</span>攻略</button>
+  <button data-go="me"><span>⭐</span>我的</button>
+</div></nav>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="地點攻略"><div class="in" id="sheetIn"></div></div>
+<div class="drv" id="drv"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ============ 資料 ============ */
+const CAT={sight:['🍁','景點'],cafe:['☕','咖啡'],food:['🍜','美食'],bakery:['🥐','麵包'],shop:['🛍️','購物'],beauty:['💆','醫美'],move:['🚇','交通'],stay:['🏠','住宿']};
+const MEAT={beef:['🐮','牛肉'],pork:['🐷','豬肉'],both:['🐮🐷','牛豬都有'],chicken:['🐔','雞肉'],fish:['🐟','海鮮']};
+const AREA={incheon:['仁川機場','인천공항'],jongno:['安國・鍾路','안국 종로'],myeong:['明洞','명동'],dongdae:['東大門','동대문'],nam:['南大門・會賢','남대문 회현'],seoulstn:['首爾站','서울역'],seongsu:['聖水洞','성수'],gangnam:['新沙・江南','신사 강남'],hannam:['漢南・梨泰院','한남 이태원'],hongdae:['弘大','홍대']};
+// p(id,cat,名稱,韓文搜尋詞,地址,說明,選項{ar,q,x,near,why,tip})
+const P=[];const PM0={};const p=(id,cat,n,ko,a,d,o={})=>{const x={id,cat,n,ko,a,d,...o};P.push(x);PM0[id]=x};
+/* 原行程 */
+p('home','stay','民宿（退溪路50街）','퇴계로50길 6-1','서울특별시 중구 퇴계로50길 6-1','近忠武路／東大門生活圈，201 室。叫車或外送請給司機這串地址，實際交貨入口照房東影片。',{ar:'dongdae',q:'서울특별시 중구 퇴계로50길 6-1'});
+p('icn','move','仁川國際機場','인천국제공항','','去程 11/4 21:30 抵達；回程 11/8 14:15 起飛，目標 11:15 前到。確認航廈後再決定交通。',{ar:'incheon'});
+p('nyu','shop','NYU NYU 東大門','NYU NYU 동대문','서울 중구 마장로 34','髮飾、包包、飾品；開到深夜，想買才去。',{ar:'dongdae',tip:'營業時間以當天公告為準'});
+p('sung','sight','成均館明倫堂','성균관대학교 명륜당','서울 종로구 성균관로 25-2','金黃銀杏＋韓屋建築，建議停留 45–60 分鐘。',{ar:'jongno'});
+p('changdeok','sight','昌德宮','창덕궁','서울 종로구 율곡로 99','古宮秋景；秘苑若有預約票，按實際入場時間調整。',{ar:'jongno'});
+p('ikseon','sight','益善洞韓屋村','익선동 한옥마을','서울 종로구 익선동 수표로28길 一帶','午餐、小巷與咖啡店，慢慢逛 1–1.5 小時。',{ar:'jongno'});
+p('cheongsu','cafe','清水堂 Cheongsudang','청수당 익선동','서울 종로구 돈화문로11나길 31-9','庭院韓屋、甜點，適合拍照，熱門可能排隊。',{ar:'jongno',near:'d2d'});
+p('soha','food','Soha Salt Pond','Soha Salt Pond 익선동','','鹽麵包；不用為排隊犧牲整個下午。',{ar:'jongno',near:'d2d'});
+p('newmix-an','cafe','newmix 安國店','newmix 안국','서울 종로구 창덕궁1길 40','08:00–19:00；昌德宮附近，順便買咖啡伴手禮。',{ar:'jongno',near:'d2d'});
+p('namdaemun','shop','南大門市場','남대문시장','서울 중구 남대문시장4길 21','女裝、童裝、襪子、髮飾、小物；週四下午休市。',{ar:'nam',tip:'從會賢站 5 或 6 號出口進去，先逛童裝區'});
+p('vegtteok','food','南大門蔬菜糖餅','남대문 야채호떡','서울 중구 남대문로 12','逛街路上的經典小吃，香氣十足的鹹口味。',{ar:'nam',near:'d2e'});
+p('kalguksu','food','南大門刀切麵巷','남대문 칼국수 골목','','熱湯麵，通常有小菜套餐。',{ar:'nam',near:'d2e'});
+p('galchi','food','南大門燉帶魚巷','남대문 갈치조림 골목','','辣燉魚，想試市場料理可以吃。',{ar:'nam',near:'d2e'});
+p('newcore','shop','NewCore Outlet 江南','뉴코아아울렛 강남점','서울 서초구 잠원로 51','大人 NB、童裝與 Modern House 一起挖；先查當日櫃位與折扣，最好留 1.5–2 小時。',{ar:'gangnam'});
+p('hyundai','shop','Hyundai City Outlet 東大門','현대시티아울렛 동대문점','서울 중구 장충단로13길 20','離住處較近，適合補買；NB Kids 是否有櫃位待確認。',{ar:'dongdae'});
+p('daiso','shop','Daiso DUNDUN 東大門','다이소 을지로 264','서울 중구 을지로 264','大創購物方便，注意賣場打烊時間較 NYU NYU 早。',{ar:'dongdae'});
+p('oy-dhp','shop','Olive Young 東大門歷史文化公園站店','올리브영 동대문역사문화공원역점','서울 중구 장충단로 251','晚間補貨常用分店，查當天最新營業時間。',{ar:'dongdae'});
+p('nami','sight','南怡島','남이섬','강원 춘천시 남산면 남이섬길 1','森林金黃時刻，順序以導遊當日安排為準。',{ar:'gapyeong'});
+p('petite','sight','小法國村','쁘띠프랑스','경기 가평군 청평면 호반로 1063','一日遊行程之一，拍照點多。',{ar:'gapyeong'});
+p('italy','sight','小義大利村','가평 이탈리아마을','','一日遊行程之一，依導遊安排。',{ar:'gapyeong'});
+p('dhp','move','東大門歷史文化公園站','동대문역사문화공원역','','Klook 回程下車點，預計 18:50（可能塞車晚到）。',{ar:'dongdae'});
+p('sparex','beauty','SPAREX 汗蒸幕','스파렉스 동대문','','女湯搓澡服務先問時間，不要預設能直接加購。',{ar:'dongdae',tip:'若隔天做雷射／針劑，先問診所術前一天能否汗蒸'});
+p('doctors','beauty','Doctors 新沙本店','닥터스','서울 강남구 도산대로12길 7','新沙站 1 號出口附近，需確認預約。',{ar:'gangnam',q:'서울 강남구 도산대로12길 7'});
+p('goldj','beauty','GoldJ 江南','골드제이','서울 강남구 테헤란로 408','宣陵站附近；和 Doctors 不在同一站。',{ar:'gangnam',q:'서울 강남구 테헤란로 408'});
+p('anthracite','cafe','Anthracite Coffee 漢南','앤트러사이트 한남','서울 용산구 이태원로 240','工業風空間；官方週六 09:30–22:00。',{ar:'hannam'});
+p('pipeground','food','Pipeground 漢南','파이프그라운드 한남','서울 용산구 한남대로27길 66','有名的披薩與義大利麵，可四人分享；含牛肉口味需避開。',{ar:'hannam'});
+p('hanroast','food','Hannam Oriental Roast Chicken','한남 동양 로스트치킨','서울 용산구 대사관로34길 12','韓式藥膳烤雞，晚餐熱門，可能排隊。',{ar:'hannam',q:'서울 용산구 대사관로34길 12'});
+p('newmix-hn','cafe','newmix 漢南','newmix 한남','서울 용산구 이태원로54길 16-1','11:00–20:00，順買伴手禮。',{ar:'hannam'});
+p('musinsa-mega','shop','MUSINSA MEGA STORE 聖水','무신사 메가스토어 성수','서울 성동구 성수이로 62','綜合選物＋美妝；官方 11:00–22:00。',{ar:'seongsu'});
+p('musinsa-std','shop','MUSINSA STANDARD 聖水','무신사 스탠다드 성수','서울 성동구 연무장길 83','正韓俐落日常服飾；11:00–21:00。',{ar:'seongsu'});
+p('newmix-ss','cafe','newmix 聖水','newmix 성수','서울 성동구 연무장3길 3','咖啡伴手禮；11:00–20:00。',{ar:'seongsu'});
+p('onion','cafe','Cafe Onion 聖水','카페 어니언 성수','서울 성동구 아차산로9길 8','工業風麵包咖啡，聖水站 2 號出口附近。',{ar:'seongsu'});
+p('daelim','cafe','Daelim Changgo 大林倉庫','대림창고 성수','서울 성동구 성수이로 78','老倉庫咖啡、工業空間；11:00–22:00。',{ar:'seongsu'});
+p('jojo','food','Jojo Kalguksu 聖水','조조칼국수 성수','서울 성동구 성수일로8길 55','蛤蜊刀切麵、海鮮煎餅；不是牛肉主題。',{ar:'seongsu',q:'서울 성동구 성수일로8길 55'});
+p('darak','food','Seongsu Darak 聖水','성수 다락','서울 성동구 뚝섬로9길 20 2층','蛋包飯、義式韓式創意料理。',{ar:'seongsu',q:'서울 성동구 뚝섬로9길 20'});
+p('jinokhwa','food','陳玉華一隻雞','진옥화할매원조닭한마리','서울 종로구 종로40가길 18','暖胃雞鍋，四人分享；晚上若狀況良好可選。',{ar:'dongdae'});
+p('lotte','shop','LOTTE MART ZETTAPLEX 首爾站','롯데마트 서울역점','서울 중구 한강대로 405','10:00–24:00，週三特定公休日須確認。想帶回台灣的零食先看是否涉及肉製品、蛋奶。',{ar:'seoulstn'});
+p('pildong','food','Pildong Myeonok','필동면옥','서울 중구 서애로 26','平壤冷麵與餃子，近民宿；湯底可能含牛，不吃牛者先確認。',{ar:'dongdae'});
+PM0.jinokhwa.near='d4f';
+/* 營業時間：只放 PDF 已有的官方資料，其餘請按「查營業時間」 */
+Object.entries({'newmix-an':'08:00–19:00','anthracite':'週六 09:30–22:00','daelim':'11:00–22:00','musinsa-mega':'11:00–22:00','musinsa-std':'11:00–21:00','newmix-ss':'11:00–20:00','newmix-hn':'11:00–20:00','lotte':'10:00–24:00（週三特定公休日須確認）','nyu':'開到深夜（以當天公告為準）','jojo':'10:00–21:30'}).forEach(([id,h])=>{PM0[id].h=h});
+/* 朋友推薦（聖水洞）：營業時間來自朋友提供的清單；韓文店名未確認者用中英文搜尋 */
+const F=(id,cat,n,q,d,h)=>p(id,cat,n,q,'',d,{f:1,near:'d4e',h,ar:'seongsu',why:'聖水洞在地朋友推薦'});
+F('f-anmok','food','安木','안목 성수 安木','朋友推薦的聖水洞餐廳。韓文店名待確認，先用中文搜尋。','10:00–22:00');
+F('f-muguok','food','Muguok／無垢屋','Muguok 성수','朋友推薦；中午與晚上各有營業時段，下午休息。','11:30–15:00、17:30–21:00');
+F('f-gamja','food','祖傳三代馬鈴薯排骨湯','성수 감자탕 3대 원조','24 小時營業的排骨湯，晚上或深夜都能吃。含豬骨，不是牛肉湯。','24 小時營業');
+F('f-standard','bakery','Standard Bread','스탠다드브레드 성수','朋友推薦的麵包店（吐司），eden_ey 的影片也有推薦。','09:00–21:00');
+F('f-beton','bakery','Beton（鹽麵包）','Betong 성수 소금빵','聖水洞鹽麵包名店，原味與松露口味受歡迎。','09:00–18:30');
+F('f-dalim','bakery','Dalim Bread','Dalim Bread 성수','朋友推薦的麵包店，韓文店名待確認。','09:00–21:30');
+F('f-maman','cafe','Maman Gelato','Maman Gelato 성수','朋友推薦的義式冰淇淋。','09:00–22:00');
+F('f-meitawang2','cafe','Meitawang Egg Tart（2 號店）','Meitawang Egg Tart 성수 2호점','朋友推薦的蛋塔。','10:00–20:30');
+F('f-meitawang','cafe','MEITAWANG Egg Tart','Meitawang Egg Tart 성수','朋友推薦的蛋塔（另一間分店）。','10:00–22:00');
+F('f-hanjs','cafe','韓貞仙 Han Jung Sun','Han Jung Sun 성수','朋友推薦的甜點咖啡，聖水洞近期很多人提到。','10:30–22:00');
+F('f-lowkey','cafe','LowKey','LowKey 성수','朋友推薦的甜點咖啡。','10:00–20:00');
+/* 餐廳推薦 */
+p('norang','food','Norangdwaeji 노랑돼지（烤豬肉）','노랑돼지 충무로','','韓式烤豬肉，近民宿，適合不吃牛的人晚餐。地址請用地圖確認。',{near:'d2g',ar:'dongdae'});
+p('bonjuk','food','本粥 본죽（粥品）','본죽 신사','','連鎖粥品店，清淡好入口，術後想吃溫和的食物可選。',{x:1,near:'d4c',ar:'gangnam',why:'醫美後避免刺激性食物時的安全牌，詳細飲食請問診所。'});
+p('jangchung-pyeongyang','food','獎忠洞平壤麵屋','장충동 평양면옥','서울 중구 장충단로 207','平壤冷麵與餃子，湯底以牛為主，不吃牛的人請避開。',{x:1,near:'d3e',ar:'dongdae',why:'離東大門歷史文化公園站近的老字號冷麵。'});
+/* 餐廳補充（2025–2026 部落格與美食榜單整理；牛／豬分流） */
+const R=(id,n,ko,a,d,m,near,h,why,ar,extra={})=>p(id,'food',n,ko,a,d,{x:1,near,h,why,m,ar,...extra});
+R('sancheong','山清炭火花園 乙支路店','산청숯불가든 을지로','서울 중구 을지로14길 12','黑豬炭火烤肉，鹽烤五花與辣醬豬頸肉是招牌；可用 Catch Table 預約。','pork','d2g','11:30–23:00','多篇 2025–2026 台灣部落格都推薦，平日週末都可能排隊，建議預約。','dongdae',{tip:'乙支路還有分店，這是 2 號店地址，出發前確認要訂哪一間'});
+R('goldfarm','黃金牧場 明洞總店','황금목장 명동','서울 중구 충무로1가 23-10 3층','韓牛專賣，有人代烤，適合愛吃牛的人。','beef','d2g','11:00–翌日 03:00（部分來源寫 24 小時，請確認）','愛吃牛的人單獨去，明洞站 6 號出口附近；預算約每人 ₩45,000。','myeong');
+R('maple-itw','Maple Tree House 梨泰院店','단풍나무집 이태원','서울 용산구 이태원로27가길 26','韓牛與濟州黑豬（黑豬五花約 ₩16,900／150g）都有。','both','d4d','11:30–22:00（平日下午可能休息）','牛豬兼顧的好選擇，離漢南洞近，適合 Day 4 晚餐。','hannam');
+R('seongsu-gamja','소문난성수감자탕','소문난성수감자탕','서울 성동구 연무장길 45','24 小時的馬鈴薯排骨湯，主要是豬骨，不含牛。','pork','d4e','24 小時營業','和朋友推薦的「祖傳三代馬鈴薯排骨湯」可能是同一間，eden_ey 影片也推薦 24 小時排骨湯，請確認店名。','seongsu');
+/* 朋友推薦：孔陵一隻雞（東大門分店） */
+p('gongneung','food','孔陵一隻雞（東大門店）','공릉닭한마리 동대문','서울 종로구 종로5가 249','雞肉鍋，不含牛，大家可以一起吃。孔陵原店在首爾北邊，這間是東大門分店，離民宿近。',{f:1,near:'d3e',m:'chicken',h:'10:00–23:00',ar:'dongdae',tip:'地鐵 1 號線鍾路 5 街站 5、6 號出口，或 4 號線東大門站 8、9 號出口'});
+/* 社群推薦（IG 貼文截圖整理）：只有貼文有寫的資訊，地址未確認者請用地圖搜尋 */
+const Q=(id,cat,n,ko,d,why,o={})=>p(id,cat,n,ko,o.a||'',d,{x:1,src:'社群推薦',why,near:o.near,m:o.m,ar:o.ar,h:o.h});
+Q('eul-jeongyuk','food','乙支精肉','을지정육','乙支路的肉品烤肉店。','mr.lemon 首爾六間餐廳之一。',{near:'d2g',ar:'dongdae'});
+Q('eul-meokgeori','food','小吃牛百頁','먹거리양곱창','牛內臟（양곱창）烤肉，愛吃牛的人選。','mr.lemon 推薦；位置貼文未寫，請用地圖確認。',{m:'beef'});
+Q('eul-bugeo','food','武橋洞明太魚湯','무교동북어국집','清爽的明太魚湯，早餐或解膩都適合，不含牛。','st66_kr 推薦；離民宿近，Day 5 早上也可以吃。',{near:'d5a',m:'fish',ar:'dongdae'});
+Q('eul-cheolbok','food','鐵福屋（河豚）','철철복집','河豚料理，乙支路。','st66_kr 推薦；河豚料理建議先看菜單與價格。',{near:'d2g',m:'fish',ar:'dongdae'});
+Q('eul-sanbul','food','山火里脊','산불등심','牛里脊（등심）烤肉，愛吃牛的人選。','st66_kr 推薦；不吃牛的朋友另選他店。',{near:'d2g',m:'beef',ar:'dongdae'});
+Q('eul-nampo','food','南浦麵屋','남포면옥','平壤冷麵，湯底通常含牛，不吃牛請避開。','st66_kr 推薦；乙支路。',{near:'d2g',m:'beef',ar:'dongdae'});
+Q('mugeoi','food','無鐵鍋泡菜五花肉 明洞','무쇠김치삼겹 명동','韓式烤五花肉配泡菜，不吃牛的朋友可選。','eden_ey 推薦。',{near:'d2g',m:'pork',ar:'myeong'});
+Q('gyerim','food','鐘路雞林蒜蓉辣雞湯 元祖本店','종로계림닭도리탕원조 본점','辣燉雞湯（닭도리탕），不含牛。','mr.lemon 推薦；鐘路一帶，可接在益善洞或廣藏市場之後。',{near:'d2d',m:'chicken',ar:'jongno'});
+Q('tosokchon','food','土俗村參雞湯','토속촌 삼계탕','整隻小雞燉人蔘雞湯，不含牛。','eden_ey 推薦；在西村、景福宮旁，需要另外搭車前往。',{a:'서울 종로구 자하문로5길 5',near:'d2d',m:'chicken',ar:'jongno'});
+Q('gangnam-myeonok','food','江南麵屋 본점','강남면옥 본점','燉牛骨、麵類，老字號。','eden_ey 影片「先衝這間老字號」；牛肉為主，愛吃牛的人選，不吃牛的朋友另選。',{near:'d4c',m:'beef',ar:'gangnam'});
+Q('jjipbbul','food','짚뿔닭발（辣雞爪）','짚뿔닭발','辣雞爪，很辣，宵夜或配酒。','eden_ey 推薦；位置貼文未寫，請用地圖確認。',{m:'chicken'});
+Q('manjok','food','滿足五香豬腳','만족오향족발','五香豬腳（족발），不含牛。','eden_ey 推薦；請用地圖確認位置，若在獎忠洞可接 Day 3 東大門晚餐。',{m:'pork'});
+Q('kkupdang','food','烤黨 꿉당','꿉당 성수','烤肉店，米飯也有名。新沙、聖水、蠶室都有分店。','kiki_theblogger 說用餐時間常要等 1–2 小時；Catch Table 只開放現場掃 QR 登記，所以建議先到店登記候位，再去逛街。',{near:'d4e',ar:'seongsu'});
+Q('lnb','food','大燁 LIVE NOODLE BAR','대엽 라이브누들바','現做麵食。','mr.lemon 推薦；位置貼文未寫，請用地圖確認。');
+Q('sundubu','food','美味嫩豆腐＆燉泡菜','맛있는 순두부 김치찜','嫩豆腐鍋與泡菜燉肉（김치찜），暖胃。','mr.lemon 推薦；泡菜燉肉多為豬肉，下單前先確認是否有牛。');
+Q('lotteworld','sight','樂天世界','롯데월드','室內外遊樂園，位於蚕室。','eden_ey 推薦；離行程點較遠，需要另外安排半天。',{a:'서울 송파구 올림픽로 240'});
+Q('gwangjin8','sight','廣津橋 8 街','광진교8번가','漢江上的橋上休憩空間，看江景。','eden_ey 推薦；請用地圖確認位置與營業時間。');
+/* 順路加碼（AI 補充：知名度高，出發前請確認營業時間） */
+const X=(id,cat,n,ko,a,d,near,why,ar)=>p(id,cat,n,ko,a,d,{x:1,near,why,ar});
+X('cheonggye','sight','清溪川夜散步','청계천','서울 중구 청계천로 一帶','夜晚燈光步道，離民宿近，第一晚不累可以走一小段。','d1d','秋夜好走、不用排隊，順路消化行李疲勞。','dongdae');
+X('ddp1','sight','東大門設計廣場 DDP','동대문디자인플라자','서울 중구 을지로 281','銀白曲線建築，夜晚燈光最好拍。','d1d','東大門地標，夜景是主角；就在歷史文化公園站旁。','dongdae');
+X('gwangjang','food','廣藏市場','광장시장','서울 종로구 창경궁로 88','綠豆煎餅、飯捲、小吃一條街。','d2d','旅客與在地人都擠的傳統市場，小吃選擇多（生拌牛肉含牛，不吃牛請避開）。','jongno');
+X('ssamzie','shop','仁寺洞 Ssamziegil','쌈지길 인사동','서울 종로구 인사동길 44','螺旋形文創小店，買小物、伴手禮。','d2c','離昌德宮不遠，文創小物與傳統茶點一次逛完。','jongno');
+X('onion-anguk','cafe','Onion 安國','어니언 안국','서울 종로구 계동길 5','韓屋改建的人氣麵包咖啡。','d2c','韓屋空間與麵包都是熱門打卡點，早上去人較少。','jongno');
+X('myeongdong-gyoja','food','明洞餃子','명동교자','서울 중구 명동10길 29','刀切麵＋大餃子。','d2e','長年排隊的老店，湯頭清爽，適合逛完南大門再吃。','myeong');
+X('myeongdong-street','food','明洞街頭小吃','명동 길거리 음식','서울 중구 명동길 一帶','晚上攤位最多，邊走邊吃。','d2e','南大門到明洞走路可到，想補吃小吃的人一起逛。','myeong');
+X('euljiro','food','乙支路小酌巷','을지로 노가리골목','서울 중구 을지로15길 一帶','復古小酒館與乾魚片，夜晚氣氛好。','d2g','文青與在地人的夜晚去處，不喝酒也能拍氛圍。','dongdae');
+X('nami-ginkgo','sight','南怡島銀杏路與水杉路','남이섬 은행나무길','강원 춘천시 남산면 남이섬길 1','島內最有名的秋色步道。','d3b','11 月初銀杏與秋色最漂亮，抵達就先找這條路。','gapyeong');
+X('jangchung','food','獎忠洞豬腳巷','장충동 족발골목','서울 중구 장충단로 一帶','老字號豬腳店聚集。','d3e','離東大門歷史文化公園站很近，回程累了想吃肉的選擇（想吃排骨湯可二選一）。','dongdae');
+X('leeum','sight','Leeum 美術館','리움미술관','서울 용산구 이태원로55길 60-16','韓國當代與傳統藝術，建築也好看。','d4d','漢南洞最熱門的文化景點，需先確認展覽與入場方式。','hannam');
+X('garosu','shop','新沙林蔭大道','신사 가로수길','서울 강남구 가로수길 一帶','咖啡、選物店、快閃店。','d4c','走路可到，診所旁的悠閒街區，術後可在咖啡館坐著休息。','gangnam');
+X('dosan','sight','道山公園','도산공원','서울 강남구 도산대로45길 20','安靜綠地，秋天落葉好拍。','d4c','近 Doctors，想散步又不想跑太遠時的選項。','gangnam');
+X('seoulforest','sight','首爾林','서울숲','서울 성동구 뚝섬로 273','大片公園，秋季楓葉與銀杏。','d4e','離聖水洞很近，逛完店順路拍秋色。','seongsu');
+X('yeonbang','food','聖水連房','성수연방','서울 성동구 성수이로14길 14','複合式選物與美食空間。','d4e','聖水洞近期很多人推薦的新型態商場，有餐飲也有小店。','seongsu');
+
+[['jinokhwa','chicken'],['hanroast','chicken'],['norang','pork'],['pildong','beef'],['jangchung-pyeongyang','beef'],['jangchung','pork'],['pipeground','both']].forEach(([id,m])=>{PM0[id].m=m});
+/* 地址核對（網路搜尋，來源為美食榜單／地圖整理頁；v=已找到一致地址，unv=找不到可靠地址） */
+const FIX={
+ soha:{a:'서울 종로구 수표로28길 21-5',h:'09:00–20:30',v:1},
+ sung:{a:'',ko:'성균관 명륜당',h:'冬季（11–2 月）09:00–17:00，免費（2022 年資料）'},
+ jinokhwa:{a:'서울 종로구 종로40가길 18 2층',h:'10:30–翌日 01:00（另有來源寫 11:00–23:00）',v:1},
+ 'jangchung-pyeongyang':{h:'11:00–21:30，週一休',v:1},
+ tosokchon:{h:'10:00–22:00',v:1},
+ 'myeongdong-gyoja':{h:'10:30–21:00（最後點餐 20:30）',v:1,tip:'有網友說明洞餃子有本店與分店之分，到了先用地圖確認招牌'},
+ 'onion-anguk':{h:'約 07:00–21:00（週末約 09:00 開，來源不一）',v:1},
+ ssamzie:{h:'10:30–20:30',v:1},
+ leeum:{h:'10:00–18:00，週一休',v:1},
+ yeonbang:{h:'10:00–22:00（各店不同）',v:1},
+ sancheong:{v:1},goldfarm:{v:1},'maple-itw':{v:1},'seongsu-gamja':{v:1},gongneung:{v:1},
+ 'eul-bugeo':{a:'서울 중구 을지로1길 38',h:'平日 07:00–20:00；週末 07:00–15:00',v:1},
+ 'eul-cheolbok':{a:'서울 중구 을지로3길 29 1층',v:1},
+ 'eul-sanbul':{a:'서울 중구 을지로3길 30',h:'約 16:00 起，晚餐為主（午餐可能不營業）',v:1,d:'牛里脊（등심）烤肉，晚餐為主，愛吃牛的人選。'},
+ 'eul-nampo':{a:'서울 중구 을지로3길 24',h:'週一至五 11:30–22:00；週末 11:30–21:00',v:1},
+ 'f-standard':{a:'서울 성동구 성수이로18길 37',v:1},
+ 'f-beton':{a:'서울 성동구 연무장7가길 8',v:1,d:'聖水洞鹽麵包名店，原味與松露口味受歡迎。網路另有資料寫營業 11:00–21:00，請確認。'},
+ 'f-maman':{a:'서울 성동구 연무장9길 8 1층',v:1,d:'朋友推薦的義式冰淇淋。網路另有資料寫營業 11:30–21:00，請確認。'},
+ 'f-meitawang':{a:'서울 성동구 연무장길 43-1',v:1,d:'朋友推薦的蛋塔（聖水本店，地址取自地圖整理頁）。'},
+ 'f-meitawang2':{a:'서울 성동구 연무장길 5',d:'朋友推薦的蛋塔 2 號店。這個地址是查到的另一間「메이타왕」，不確定就是 2 號店，請用地圖確認。',unv:1},
+ kkupdang:{a:'서울 성동구 성수이로20길 10 1층',v:1,d:'烤肉店，米飯也有名。聖水店在 성수이로20길 10；新沙、蠶室也有分店。'},
+ 'f-anmok':{a:'서울 성동구 뚝섬로13길 34',m:'pork',v:1,d:'聖水洞豬肉湯飯（돼지국밥）與水煮肉（수육），不含牛。可預約。'},
+ 'f-muguok':{a:'서울 종로구 율곡로1길 7',m:'chicken',v:1,near:'d2c',ar:'jongno',d:'以北式蔘雞湯飯（삼계백반）聞名，不含牛。查到的店在鐘路（昌德宮、安國附近），朋友清單寫在聖水洞，請跟朋友確認是否同一間或另有聖水分店。'},
+ gyerim:{a:'서울 종로구 돈화문로4길 39',v:1},
+ manjok:{a:'서울 중구 서소문로 134-7',h:'平日 11:30–22:00；週末 12:00–22:00',m:'pork',v:1,d:'五香豬腳（족발），不含牛。查到的是市廳本店，不是獎忠洞。',why:'eden_ey 推薦；位置在市廳站一帶。'},
+ sundubu:{a:'서울 서대문구 명물길 36',h:'24 小時（評論所述）',v:1,d:'嫩豆腐鍋與泡菜燉肉，查到的是新村店（離行程點較遠）；貼文沒有寫是哪一間分店。'},
+ jjipbbul:{a:'서울 중구 퇴계로 409-9',h:'16:30–23:00（最後點餐 22:00）',m:'chicken',near:'d1d',ar:'dongdae',v:1,d:'辣雞爪，很辣，宵夜或配酒。位置在退溪路，離民宿近。'},
+ gwangjin8:{a:'서울 강동구 구천면로 77 광진교 하부（광나루한강공원）',h:'週二至日 12:00–18:00（4–10 月到 20:00），週一休',v:1},
+ italy:{a:'경기 가평군 청평면 호반로 1063',h:'09:00–18:00',v:1,d:'一日遊行程之一，依導遊安排；據查與小法國村在同一個園區。'},
+ petite:{h:'09:00–18:00',v:1},
+ sparex:{ko:'스파렉스 굿모닝시티점',h:'24 小時（찜질방）',d:'位於東大門歷史文化公園站 14 號出口前的大樓。女湯搓澡服務先問時間，不要預設能直接加購。',unv:1},
+ norang:{unv:1},bonjuk:{unv:1},'eul-jeongyuk':{unv:1},'eul-meokgeori':{unv:1},mugeoi:{unv:1},'gangnam-myeonok':{unv:1},lnb:{unv:1},'f-hanjs':{unv:1},'f-lowkey':{unv:1}
+};
+Object.assign(FIX,{
+ doctors:{h:'平日 09:30–19:00（午休 13:00–14:00）；週末 09:30–15:30',v:1,tip:'11/7 是週六，診所約 15:30 前結束，預約請排早上。診療時間以診所預約為準。'},
+ goldj:{a:'서울 강남구 테헤란로 408 대치빌딩 8층',h:'平日 10:00–19:00；週六 10:30–16:00',v:1,tip:'11/7 是週六，診所約 16:00 前結束，預約請排上午。診療時間以診所預約為準。'},
+ newcore:{h:'10:30–22:00',v:1},hyundai:{v:1},
+ nyu:{a:'서울 중구 마장로 34 1–3층',h:'11:00–翌日 05:00',v:1},
+ 'musinsa-mega':{v:1},
+ cheongsu:{v:1,tip:'注意：清水堂另有 Spa，地址是 31-19，這裡是咖啡甜點本店 31-9'},
+ daiso:{a:'서울 중구 을지로 264 3층',h:'09:30–20:30',v:1}
+});
+const NOTE='（介紹取自你提供的文字，我沒有查證）';
+Object.assign(FIX,{
+ mugeoi:{unv:1,m:'pork',d:'桌邊用鑄鐵鍋把厚切五花肉煎到酥脆，加老泡菜與豆腐拌炒；吃完可加點泡菜刀削麵或炒飯。低消通常 3 人份起。'+NOTE},
+ 'gangnam-myeonok':{unv:1,m:'beef',d:'以燉牛排骨（갈비찜）聞名，肉質軟嫩，可搭配冷麵。牛肉為主，不吃牛的人另選他店。'+NOTE},
+ lnb:{a:'서울 성동구 왕십리로2길 36',v:0,m:'beef',unv:0,ar:'seongsu',d:'平壤冷麵名店「大燁」的新館吧檯座位 Live Noodle Bar，手作蕎麥麵、饅頭與韓牛清湯。湯底含牛肉，不吃牛的人請避開。地址是查到的大燁聖水本館，新館可能在同一處或隔壁，請用地圖確認。',tip:'地址取自地圖整理頁（本館／新館菜單不同）'},
+ 'eul-jeongyuk':{unv:1,m:'pork',d:'乙支路的熟成豬肉烤肉店，招牌是夾心肉（가브리살）與豬頸肉。'+NOTE},
+ 'eul-meokgeori':{a:'서울 서초구 강남대로99길 35 원창빌딩 1층',unv:0,m:'beef',d:'牛內臟（양곱창、대창）烤肉名店，在新沙站附近。愛吃牛的人選。',tip:'地址取自榜單文章，與店名連結不夠明確，請用地圖確認'},
+ bonjuk:{unv:1,m:'both',d:'連鎖粥品店，鮑魚內臟粥、牛肉蘑菇粥受歡迎。牛肉蘑菇粥含牛，不吃牛的人請點其他口味。'+NOTE},
+ norang:{unv:1,d:'平價地道的烤豬肉小館，忠武路一帶，近明洞與東大門。可點辣炒豬肉配辣炒透抽。'+NOTE},
+ 'f-hanjs':{unv:1,d:'聖水洞熱門的糯米麻糬（찹쌀떡）專賣店，內餡有草莓、柿子等。朋友推薦，我查到在聖水洞2街，沒有門牌地址。'},
+ 'f-lowkey':{a:'서울 성동구 연무장3길 6',v:1,d:'聖水洞咖啡店，自家烘焙咖啡。網路資料寫平日 10:00–20:00、週六 12:00–21:00、週日 12:00–20:00（2025 年資訊），請確認。',unv:0},
+ sparex:{unv:1,d:'位於東大門歷史文化公園站 14 號出口前的大樓（굿모닝시티），24 小時營業。你提供的文字寫在地下 3 樓，有黃土房、冰房與搓澡服務；女湯搓澡先問時間，不要預設能直接加購。'}
+});
+Object.entries(FIX).forEach(([id,o])=>Object.assign(PM0[id],o));
+/* 行程 */
+const DAYS=[
+ {n:1,date:'11/4',w:'三',e:'✈️',c:'c-move',ti:'落地首爾，第一晚不要趕',sub:'順利入住最重要，購物與炸雞是加分。',wx:['🌤️','12° / 3°','晴時多雲；夜間入境約 6–8°C，大衣、圍巾。'],
+  note:{c:'',h:'第一晚想吃炸雞？',b:['🍗 <b>Baemin（배달의민족）</b>可用旅客模式試下單；海外付款可能因卡別或支付通道而異。','🍗 <b>Shuttle</b> 有外語介面、國際信用卡，是備案；先確認房東允許外送、騎士能在入口面交。'],go:['g-food','看外送教學']},
+  stops:[
+   {k:'d1a',t:'17:50',e:'✈️',ti:'台中起飛',ds:'RMQ → ICN。',ps:[]},
+   {k:'d1b',t:'21:30',e:'🛬',ti:'抵達仁川',ds:'抓 60–90 分鐘入境與領行李，約 23:00 前後出關；再搭車前往民宿。',ps:['icn'],taxi:'home',go:['g-from','🛬 機場→民宿前往攻略'],tips:['落地先確認末班列車與機場巴士時間；四人＋行李建議直接叫車。']},
+   {k:'d1c',t:'23:00+',e:'🏠',ti:'前往民宿入住',ds:'可用 k.ride／Uber Taxi、機場巴士或 AREX＋計程車；先確認入境航廈和末班。給司機看民宿地址。',ps:['home'],go:['g-from','🛬 機場→民宿前往攻略']},
+   {k:'d1d',t:'深夜',e:'🛍️',ti:'想買才去 NYU NYU',ds:'東大門飾品、包包、髮飾；第一晚不排強制集合。',ps:['nyu']}]},
+ {n:2,date:'11/5',w:'四',e:'🍁',c:'c-sight',ti:'銀杏 × 古宮 × 韓屋咖啡｜南大門採買',sub:'上午拍照逛街，下午南大門與折扣挖寶。',wx:['⛅','14° / 8°','多雲時晴；拍銀杏清晨偏冷，洋蔥式穿搭。'],
+  note:{c:'rose',h:'購物策略',b:['👕 <b>南大門</b>：先逛童裝區，再補女裝、飾品；不必全市場逛完。','👟 <b>New Balance Outlet</b>：過季款／加碼折扣優先，先找尺寸再看價格；NB Kids 櫃位請當天查詢。','🧳 <b>4 人分頭逛</b>：約定固定會合點，別拿大包跑整天。'],go:['g-shop','看購物攻略']},
+  stops:[
+   {k:'d2a',t:'08:30',e:'🚪',ti:'民宿出發',ds:'建議短程叫車到成均館明倫堂；深秋拍照要把陽光時間放在上午。',ps:['home']},
+   {k:'d2b',t:'09:10',e:'🍂',ti:'成均館明倫堂',ds:'金黃銀杏＋韓屋建築，建議停留 45–60 分鐘。',ps:['sung']},
+   {k:'d2c',t:'10:30',e:'🏯',ti:'昌德宮宮區',ds:'古宮秋景；秘苑若有預約票，按實際入場時間調整。',ps:['changdeok']},
+   {k:'d2d',t:'12:10',e:'🌿',ti:'益善洞韓屋村',ds:'午餐、小巷與咖啡店，慢慢逛 1–1.5 小時。',ps:['ikseon','cheongsu','soha','newmix-an']},
+   {k:'d2e',t:'14:00',e:'🧦',ti:'南大門市場',ds:'女裝、童裝、襪子、髮飾、小物；不強制買棉被。',ps:['namdaemun','vegtteok','kalguksu','galchi']},
+   {k:'d2f',t:'16:00+',e:'👟',ti:'Outlet 彈性挖折扣',ds:'江南 NewCore 較遠，建議四人視腳力與交通決定；也可改逛近處東大門 City Outlet。',ps:['newcore','hyundai']},
+   {k:'d2g',t:'19:00',e:'🍽️',ti:'晚餐（待選）',ds:'烤肉、湯飯、海鮮都可以，從下方「附近也很熱門」或探索頁挑選；愛吃牛和不吃牛的可分開吃。',ps:[]},
+   {k:'d2h',t:'夜間',e:'💄',ti:'Olive Young／大創自由補貨',ds:'不要逛太晚，隔天早起南怡島。',ps:['oy-dhp','daiso']}]},
+ {n:3,date:'11/6',w:'五',e:'🌳',c:'c-sight',ti:'南怡島，森林的金黃時刻',sub:'最完整的一日遊＋東大門深夜舒壓，不再追加其他購物點。',wx:['☁️','19° / 7°','多雲；南怡島郊外風感更明顯，防風外套。'],
+  note:{c:'sky',h:'當天穿著／提醒',b:['🧥 防風外套、保暖內搭、舒適運動鞋、隨身水；白天郊外與首爾市中心溫差可能更大。','🛁 若隔天做雷射、針劑或黃金微針，先詢問診所術前一天能否汗蒸；不要強求一定去。']},
+  stops:[
+   {k:'d3a',t:'06:20',e:'🚪',ti:'從民宿出發',ds:'依 Klook 最終憑證確認集合站、出口與時間。',ps:['home'],tips:['集合點務必以憑證上的出口和時刻為準。']},
+   {k:'d3b',t:'07:00',e:'🌳',ti:'南怡島一日遊',ds:'南怡島＋小法國村＋小義大利村；順序以導遊當日安排為準。',ps:['nami','petite','italy']},
+   {k:'d3c',t:'18:50',e:'🚌',ti:'東大門歷史文化公園下車',ds:'這是已選定的回程下車點；可能因塞車晚到。',ps:['dhp']},
+   {k:'d3d',t:'19:10',e:'🧦',ti:'民宿短暫休息',ds:'換鞋、放東西。',ps:['home']},
+   {k:'d3e',t:'20:00',e:'🍲',ti:'晚餐（待選）',ds:'熱湯很適合郊外走一天後；東大門一帶有雞鍋、豬腳、排骨湯可選，從下方挑。',ps:[]},
+   {k:'d3f',t:'21:30',e:'♨️',ti:'SPAREX 汗蒸幕',ds:'女湯搓澡服務先問時間，不要預設能直接加購。',ps:['sparex']}]},
+ {n:4,date:'11/7',w:'六',e:'💆',c:'c-beauty',ti:'醫美主場＋時髦街區',sub:'以健康和恢復優先。診所尚未決定，交通地址已準備好。',wx:['☀️','17° / 7°','晴朗；醫美後以防曬、遮陽為主。'],
+  note:{c:'lav',h:'醫美後注意',b:['💆 避免自行使用刺激性保養、熱敷、汗蒸、泡湯及飲酒；術後面膜也先問診所。','🩹 黃金微針／注射可能紅腫與留針點，後續逛街先保留彈性。','🧾 退稅和醫美不是同一回事，詳見退稅攻略。'],go:['g-tax','看退稅攻略']},
+  stops:[
+   {k:'d4a',t:'08:15',e:'🚇',ti:'去江南醫美診所',ds:'Doctors 新沙本店／GoldJ 宣陵站擇一；以最終預約時間調整。',ps:['doctors','goldj']},
+   {k:'d4b',t:'09:30',e:'✨',ti:'醫美諮詢＋療程',ds:'想做音波、麗珠蘭、黃金微針、水光，未必適合當天全部做滿。',ps:[]},
+   {k:'d4c',t:'13:00',e:'🍱',ti:'診所附近午餐＋休息',ds:'術後若紅腫就減少外出。',ps:[]},
+   {k:'d4d',t:'下午',e:'☕',ti:'漢南洞自由逛',ds:'沿梨泰院路一帶小巷找設計師品牌；醫美後想坐下休息，優先選冷氣室內的咖啡館。',ps:['anthracite','pipeground','hanroast','newmix-hn']},
+   {k:'d4e',t:'下午',e:'👟',ti:'聖水洞自由逛',ds:'從聖水站 3／4 號出口出發，進入延武場街一路看巷弄快閃、設計店、咖啡館。',ps:['musinsa-mega','musinsa-std','newmix-ss','onion','daelim','jojo','darak']},
+   {k:'d4f',t:'晚上',e:'🍽️',ti:'晚餐／樂天超市（待選）',ds:'晚餐從下方或探索頁挑選；術後不舒服就直接回民宿。',ps:['lotte']}]},
+ {n:5,date:'11/8',w:'日',e:'🧳',c:'c-move',ti:'收好戰利品，滿載回台',sub:'將零食、伴手禮提前買完，最後一天專心搭飛機。',wx:['☀️','15° / 5°','晴朗；趕機場早出門，薄外套必備。'],
+  note:{c:'',h:'早班回程：怎麼到機場？',b:['🚆 <b>AREX</b>：民宿→首爾站→機場快線，時間較可控；先看列車班次及航廈。','🚌 <b>機場巴士</b>：有大行李可考慮，注意尖峰路段。','🚕 <b>包車／計程車</b>：四人＋大行李可評估總價。'],go:['g-air','看機場攻略']},
+  stops:[
+   {k:'d5a',t:'08:30',e:'🛏️',ti:'起床整理行李',ds:'液體託運、行動電源隨身；確認退稅單及護照。',ps:[]},
+   {k:'d5b',t:'09:30–10:00',e:'🚪',ti:'民宿退房出發',ds:'建議保留充裕交通時間；不要最後早上再去明洞大採買。叫車請給司機看機場航廈。',ps:['home'],taxi:'icn',go:['g-air','✈️ 回程去機場攻略']},
+   {k:'d5c',t:'11:15 前',e:'🛫',ti:'抵達仁川機場目標',ds:'登機託運、可能的海關查驗及退稅。',ps:['icn']},
+   {k:'d5d',t:'14:15',e:'✈️',ti:'飛往台中',ds:'16:25 抵達 RMQ。',ps:[]}]}
+];
+const WX_TIP='🧥 厚外套／風衣　🧣 薄圍巾　👟 好走的鞋　☂️ 摺疊傘　🧴 保濕護唇';
+
+/* 索引 */
+const PM={};P.forEach(x=>PM[x.id]=x);
+const SM={};let ord=0;
+DAYS.forEach(d=>d.stops.forEach(s=>{s.day=d.n;s.o=ord++;SM[s.k]=s;}));
+P.forEach(x=>{x.days=new Set();x.o=999;});
+DAYS.forEach(d=>d.stops.forEach(s=>s.ps.forEach(id=>{const x=PM[id];x.days.add(s.day);x.o=Math.min(x.o,s.o);})));
+P.forEach(x=>{if(x.near&&SM[x.near]){x.days.add(SM[x.near].day);x.o=Math.min(x.o,SM[x.near].o+.5);}});
+
+/* ============ 工具 ============ */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store={get(k,d){try{const v=localStorage.getItem('seoul.'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('seoul.'+k,JSON.stringify(v))}catch(e){}}};
+const enc=encodeURIComponent;
+const qOf=x=>x.q||x.ko||x.n;
+const nav=x=>'https://map.naver.com/p/search/'+enc(qOf(x));
+const goo=x=>'https://www.google.com/maps/search/?api=1&query='+enc(qOf(x));
+const copyOf=x=>x.a||x.ko||x.n;
+let favs=store.get('favs',[]);let checks=store.get('checks',{});
+const TERM={1:{n:'仁川機場 第一航廈（3F 出境）',ko:'인천국제공항 제1터미널 출국장 3층',a:'인천 중구 공항로 272 제1여객터미널'},2:{n:'仁川機場 第二航廈（3F 出境）',ko:'인천국제공항 제2터미널 출국장 3층',a:'인천 중구 제2터미널대로 446 제2여객터미널'}};
+const termNow=()=>store.get('term',1)===2?2:1;
+['n','ko','a'].forEach(k=>Object.defineProperty(PM.icn,k,{get:()=>TERM[termNow()][k],configurable:true}));
+let S={tab:'plan',day:store.get('day',null),ctx:null,f:{q:'',cat:'',day:0,kind:'',fav:false,meat:''}};
+
+let tt;
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),1800)}
+async function copy(text,msg){
+  let ok=false;
+  try{await navigator.clipboard.writeText(text);ok=true}catch(e){}
+  if(!ok){try{const ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;opacity:0;top:0';document.body.appendChild(ta);ta.focus();ta.select();ok=document.execCommand('copy');ta.remove()}catch(e){}}
+  toast(ok?(msg||'✓ 已複製'):'請長按文字手動複製');
+}
+const copyPlace=x=>copy(copyOf(x),x.a?'✓ 已複製地址':'✓ 已複製店名（貼到地圖搜尋）');
+
+/* 旅行日判斷 */
+function tripState(){
+  const now=new Date(),d0=new Date(2026,10,4),d1=new Date(2026,10,8);
+  const t=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const diff=Math.round((d0-t)/864e5);
+  if(diff>0)return {txt:'出發倒數 '+diff+' 天',day:1};
+  const idx=Math.round((t-d0)/864e5);
+  if(t<=d1)return {txt:'旅行第 '+(idx+1)+' 天',day:idx+1};
+  return {txt:'旅程結束，歡迎回家',day:1};
+}
+
+/* ============ 共用元件 ============ */
+const favBtn=x=>`<button class="ib ${favs.includes(x.id)?'on':''}" data-fav="${x.id}" aria-label="收藏">${favs.includes(x.id)?'⭐':'☆'}</button>`;
+function row(x){
+  const c=CAT[x.cat];
+  return `<div class="row c-${x.cat}" data-open="${x.id}" role="button" tabindex="0">
+   <div class="ico">${c[0]}</div>
+   <div class="rb"><div class="rt">${esc(x.n)}${x.x?'<span class="tag x">'+(x.src||'補充')+'</span>':x.f?'<span class="tag f">朋友推薦</span>':''}${x.m?`<span class="tag m">${MEAT[x.m][0]} ${MEAT[x.m][1]}</span>`:''}${x.unv?'<span class="tag m">⚠️ 地址待確認</span>':''}</div><div class="rd">${x.h?'🕒 '+esc(x.h)+'｜':''}${esc(x.d)}</div></div>
+   <div class="ra"><button class="ib" data-copy="${x.id}" aria-label="複製地址">📋</button><a class="ib" href="${nav(x)}" target="_blank" rel="noopener" aria-label="Naver 地圖">🗺️</a></div></div>`;
+}
+const addrBlock=x=>`<div class="addr"><div>${esc(x.a||x.ko)}<small>${x.a?(x.v?'✓ 韓文地址（已用網路資料核對）':'韓文地址'):(x.unv?'⚠️ 地址未確認，先用店名在地圖搜尋':'韓文店名（地圖搜尋用）')}</small></div><button class="btn sm" data-copy="${x.id}">📋 複製</button></div>`;
+const mapBtns=x=>`<a class="btn soft sm" href="${nav(x)}" target="_blank" rel="noopener">Naver Map ↗</a><a class="btn soft sm" href="${goo(x)}" target="_blank" rel="noopener">Google 地圖 ↗</a>`;
+
+/* ============ 行程頁 ============ */
+function viewPlan(){
+  const ts=tripState();
+  if(!S.day)S.day=ts.day;
+  const d=DAYS[S.day-1];
+  const xs=P.filter(x=>(x.x||x.f)&&x.near&&SM[x.near]&&SM[x.near].day===d.n);
+  const pills=DAYS.map(x=>`<button class="day" data-day="${x.n}" aria-pressed="${x.n===S.day}"><span class="e">${x.e}</span><b>Day ${x.n}</b><small>${x.date} ${x.w}</small></button>`).join('');
+  const stops=d.stops.map(s=>{
+    const ps=s.ps.map(id=>PM[id]);
+    const first=ps[0];
+    const near=P.filter(x=>x.near===s.k).length;
+    const chips=ps.slice(0,3).map(x=>`<span class="chip c-${x.cat}">${CAT[x.cat][0]} ${esc(x.n.slice(0,14))}</span>`).join('')+(ps.length>3?`<span class="chip go">+${ps.length-3}</span>`:'')+(near?`<span class="chip c-food" style="--c:var(--butter);--cs:var(--butter-s)">✨ 順路加碼 ${near}</span>`:'');
+    const quick=first&&first.a?`<button class="ib" data-copy="${first.id}" aria-label="複製地址">📋</button>`:'';
+    return `<li class="st"><div class="tm">${esc(s.t)}</div><div class="rail"><span class="dot"></span></div>
+     <div><div class="cd" data-stop="${s.k}" role="button" tabindex="0"><div class="tt"><b>${s.e} ${esc(s.ti)}</b>${quick}</div><p class="ds">${esc(s.ds)}</p>${chips?`<div class="mini">${chips}</div>`:''}<span class="more">點開看攻略 ›</span></div></div></li>`;
+  }).join('');
+  const n=d.note;
+  const noteHtml=`<div class="note ${n.c}"><h3>${esc(n.h)}</h3>${n.b.map(t=>`<p>${t}</p>`).join('')}${n.go?`<div class="btns"><button class="btn soft sm" data-go="${n.go[0]}">${n.go[1]} ›</button></div>`:''}</div>`;
+  return `
+  ${S.day===1&&!S._noHero?`<div class="hero"><img src="img/hero.jpg" alt="秋天的首爾韓屋與銀杏" width="760" height="502"><span class="count">${esc(ts.txt)}</span><div class="hc"><b>11/04 Wed – 11/08 Sun · 5 天 4 夜</b><span>🍁 賞銀杏 ・ 💆 醫美 ・ 🛍️ 童裝女裝 ・ ☕ 咖啡店</span></div></div>
+  <div class="facts"><div class="fact"><small>去程 ✈️</small><b>11/4 17:50 RMQ → 21:30 ICN</b></div><div class="fact"><small>回程 ✈️</small><b>11/8 14:15 ICN → 16:25 RMQ</b></div>
+  <div class="fact wide"><small>🏠 民宿</small><div class="addr" style="margin:6px 0 0"><div>서울특별시 중구 퇴계로50길 6-1 201호<small>首爾中區退溪路50街 6-1 號，201 室</small></div><button class="btn sm" data-copy="home">📋 複製</button></div></div></div>`:''}
+  <div class="days" role="group" aria-label="選擇日期">${pills}</div>
+  <div class="dayhead"><h2>${d.e} ${esc(d.ti)}</h2><p>${esc(d.sub)}</p></div>
+  <div class="wx"><span class="t">${d.wx[0]} ${d.wx[1]}</span><span>${esc(d.wx[2])}</span></div>
+  <ul class="tl">${stops}</ul>
+  ${xs.length?`<div class="ex"><h3>✨ 今天順路還可以加碼</h3><div class="exs">${xs.map(x=>`<button class="xc" data-open="${x.id}"><b>${CAT[x.cat][0]} ${esc(x.n)}</b><p>${esc(x.why)}</p></button>`).join('')}</div></div>`:''}
+  ${noteHtml}
+  <div class="daynav">${S.day>1?`<button data-day="${S.day-1}">‹ Day ${S.day-1}</button>`:''}${S.day<5?`<button data-day="${S.day+1}">Day ${S.day+1} ›</button>`:''}</div>
+  <p class="sub" style="color:var(--sub);font-size:12px;text-align:center">標示「補充」的是額外加入的順路熱門店，營業時間、排隊狀況請出發前用地圖確認。</p>`;
+}
+
+/* ============ 探索頁 ============ */
+function viewExplore(){
+  const f=S.f;
+  const catChips=Object.entries(CAT).map(([k,v])=>`<button class="fc" data-fcat="${k}" aria-pressed="${f.cat===k}">${v[0]} ${v[1]}</button>`).join('');
+  const dayChips=DAYS.map(d=>`<button class="fc" data-fday="${d.n}" aria-pressed="${f.day===d.n}">Day ${d.n}・${d.date}</button>`).join('');
+  return `<div class="search"><label for="q"><span>🔍</span><input id="q" type="search" inputmode="search" enterkeyhint="search" placeholder="搜尋店名、韓文、美食、咖啡…" value="${esc(f.q)}" autocomplete="off"><button class="x" id="qx" aria-label="清除" ${f.q?'':'hidden'}>✕</button></label>
+  <div class="chips">${catChips}</div>
+  <div class="chips">${Object.entries(MEAT).map(([k,v])=>`<button class="fc" data-fmeat="${k}" aria-pressed="${f.meat===k}">${v[0]} ${v[1]}</button>`).join('')}</div>
+  <div class="chips"><button class="fc" data-fkind="main" aria-pressed="${f.kind==='main'}">📌 原行程</button><button class="fc" data-fkind="x" aria-pressed="${f.kind==='x'}">✨ 補充推薦</button><button class="fc" data-fkind="f" aria-pressed="${f.kind==='f'}">👭 朋友推薦</button><button class="fc" data-ffav="1" aria-pressed="${f.fav}">⭐ 收藏</button>${dayChips}</div></div>
+  <div id="results"></div>`;
+}
+function results(){
+  const f=S.f,q=f.q.trim().toLowerCase();
+  let L=P.filter(x=>{
+    if(f.cat&&x.cat!==f.cat)return false;
+    if(f.day&&!x.days.has(f.day))return false;
+    if(f.kind==='main'&&(x.x||x.f))return false;
+    if(f.kind==='x'&&!x.x)return false;
+    if(f.kind==='f'&&!x.f)return false;
+    if(f.fav&&!favs.includes(x.id))return false;
+    if(f.meat&&x.m!==f.meat)return false;
+    if(q){const hay=(x.n+' '+x.ko+' '+x.a+' '+x.d+' '+(x.why||'')+' '+CAT[x.cat][1]+' '+(AREA[x.ar]?AREA[x.ar][0]:'')).toLowerCase();return q.split(/\s+/).every(w=>hay.includes(w))}
+    return true;
+  }).sort((a,b)=>a.o-b.o);
+  const any=f.q||f.cat||f.day||f.kind||f.fav||f.meat;
+  $('#results').innerHTML=`<div class="cnt"><span>共 ${L.length} 個地點</span>${any?'<button class="btn ghost sm" id="fclear">清除篩選</button>':''}</div>`+
+   (L.length?L.map(row).join(''):`<div class="empty"><b>🫧</b>找不到符合的地點<br>換個關鍵字或清除篩選試試</div>`);
+}
+
+/* ============ 攻略頁 ============ */
+const GUIDES=[
+ ['g-from','🛬','機場→民宿','21:30 落地後怎麼到民宿','c-stay'],
+ ['g-taxi','🚕','叫車','k.ride／Uber，附給司機看的畫面','c-move'],
+ ['g-wow','💴','WOWPASS 換錢','機台查詢、使用步驟','c-sight'],
+ ['g-fx','🔢','韓幣台幣換算','輸入金額馬上算、可分帳','c-sight'],
+ ['g-food','🛵','叫外送','炸雞怎麼叫、給騎士的韓文','c-food'],
+ ['g-metro','🚇','地鐵','三條線就夠，各景點怎麼搭','c-stay'],
+ ['g-tax','🧾','購物退稅','₩15,000 起、流程','c-shop'],
+ ['g-kr','💬','韓文救急句','一鍵複製，貼給店員看','c-cafe'],
+ ['g-shop','🛍️','購物策略','南大門、NB、藥妝大創','c-shop'],
+ ['g-home','🏠','民宿周邊','超商、咖啡、補貨','c-stay'],
+ ['g-air','✈️','民宿→機場','回程航廈與搭車方式','c-move'],
+ ['g-wx','🌤️','天氣穿搭','五天預報與穿搭','c-sight']
+];
+function viewGuides(){
+  return `<div class="g"><h2>🧭 實用攻略</h2><p class="lead">遇到問題直接點進來，每頁都能複製韓文或打開地圖。</p>
+  <div class="tiles">${GUIDES.map(g=>`<button class="tile ${g[4]}" data-go="${g[0]}"><span class="e">${g[1]}</span><b>${g[2]}</b><small>${g[3]}</small></button>`).join('')}</div>
+  <div class="note sage" style="margin-top:16px"><h3>📲 想一鍵開啟？</h3><p>把這頁加到手機主畫面，每個人都能直接點開。</p><div class="btns"><button class="btn sm" id="btnAdd2">教我加入主畫面</button></div></div></div>`;
+}
+const back=`<button class="back" data-go="guides">‹ 回攻略</button>`;
+function dest(def){
+  const withAddr=P.filter(x=>x.a&&!x.a.includes('一帶')||x.id==='home');
+  const cur=S.ctx&&PM[S.ctx]?PM[S.ctx]:def;
+  return {cur,sel:`<select id="destSel" aria-label="選擇目的地">${withAddr.map(x=>`<option value="${x.id}" ${x.id===cur.id?'selected':''}>${CAT[x.cat][0]} ${esc(x.n)}</option>`).join('')}</select>`};
+}
+const G={};
+G['g-taxi']=()=>{const D=dest(PM.home);const x=D.cur;return `${back}<div class="g"><h2>🚕 叫車 5 步驟</h2><p class="lead">四人坐一台最省力：先把地址輸入 App，再核對車牌。</p>
+ <div class="card"><h3>選目的地，直接給司機看</h3>${D.sel}${addrBlock(x)}<div class="btns"><button class="btn" data-driver="${x.id}">🚕 給司機看（大字）</button>${mapBtns(x)}</div></div>
+ <div class="card c-move"><h3>操作流程</h3><ol class="steps"><li><span>先下載 <b>k.ride</b>（Kakao Mobility 旅客版）或 <b>Uber</b>。k.ride 支援繁體中文和海外信用卡。</span></li><li><span>打開定位；出發點選民宿附近可停靠的大路，不要硬在很窄的巷子。</span></li><li><span>用韓文搜尋目的地，確認標出的地址；選一般 Taxi 即可。</span></li><li><span>確認預估價格與付款方式 → 叫車 → 核對車牌和車型 → 上車。</span></li><li><span>下車前確認行李全部拿走，有問題用 App 客服或翻譯。</span></li></ol></div>
+ <div class="card sky" style="background:var(--sky-s)"><h3>Naver Map／地鐵搭配</h3><p>📍 搜「韓文店名＋地區」比搜尋中文更準確。</p><p>🚇 地鐵比路面交通穩定，跨區去聖水和明洞通常首選；大包購物後再改叫車。</p><p>🚌 仁川機場直達巴士方便行李，但可能塞車，回程不宜把時間抓滿。</p></div>
+ <div class="note"><p>可使用 Uber Taxi 或 k.ride；部分 Kakao T 註冊／付款選項也可用，但對旅客較容易卡在手機驗證。</p></div>
+ <div class="card"><h3>司機常用句</h3>${kr([['여기로 가 주세요.','請載我到這裡'],['여기서 세워 주세요.','請在這裡停車'],['트렁크 열어 주세요.','請開後車廂'],['카드 결제 가능해요?','可以刷卡嗎？'],['영수증 주세요.','請給我收據']])}</div></div>`};
+const kr=a=>a.map(([k,z])=>`<div class="kr"><div><b>${esc(k)}</b><small>${esc(z)}</small></div><button class="btn soft sm" data-copytext="${esc(k)}">複製</button></div>`).join('');
+G['g-kr']=()=>`${back}<div class="g"><h2>💬 韓文救急句</h2><p class="lead">點「複製」後貼到訊息或直接亮給店員看。</p>
+ <div class="card"><h3>付款・退稅</h3>${kr([['카드 결제 가능해요?','可以刷卡嗎？'],['택스 리펀 가능해요?','可以退稅嗎？'],['면세 서류 주세요.','請給我免稅文件。'],['얼마예요?','多少錢？'],['영수증 주세요.','請給我收據。']])}</div>
+ <div class="card"><h3>吃飯</h3>${kr([['소고기 안 먹어요.','不吃牛肉。'],['양파랑 파 빼 주세요.','請不要放洋蔥和蔥。'],['양파 빼 주세요.','請不要放洋蔥。'],['파 빼 주세요.','請不要放蔥。'],['포장해 주세요.','請幫我打包。'],['중국어 메뉴판 있어요?','有中文菜單嗎？'],['물 좀 주세요.','請給我水。']])}</div>
+ <div class="card"><h3>外送・會合</h3>${kr([['건물 입구에서 만나요.','在大樓入口見。'],['배달은 건물 입구에서 받을게요. 도착하시면 메시지 부탁드립니다.','外送請送到大樓入口，到了請傳訊息給我。']])}</div>
+ <div class="card"><h3>醫美</h3>${kr([['예약했어요.','我有預約。'],['시술 후 주의사항 알려 주세요.','請告訴我術後注意事項。'],['사우나 해도 돼요?','可以汗蒸嗎？']])}</div></div>`;
+G['g-food']=()=>{const x=S.ctx&&PM[S.ctx]&&PM[S.ctx].a?PM[S.ctx]:PM.home;const msg='배달은 건물 입구에서 받을게요. 도착하시면 메시지 부탁드립니다.';
+ return `${back}<div class="g"><h2>🛵 首爾深夜炸雞，這樣叫！</h2><p class="lead">不用韓國手機門號也有辦法，旅客版支付仍以 App 當下顯示為準。</p>
+ <div class="card"><h3>配送地址</h3>${dest(PM.home).sel}${addrBlock(x)}</div>
+ <div class="card c-food"><h3>如何叫到第一晚的炸雞 🍗</h3><ol class="steps"><li><span>先確認房東允許外送到住宿，問好「正確的建築入口／能否直接送上樓」。</span></li><li><span>使用 <b>Baemin 배달의민족</b> 試旅客／非會員訂餐；2026 年已新增多語介面與海外卡付款途徑，但仍依手機及付款渠道而異。</span></li><li><span>設定地址為上方這串，備註門口集合，不要自動勾選放門口。</span></li><li><span>找 <b>치킨</b> 炸雞、<b>순살</b> 無骨、<b>반반</b> 雙拼，確認起點、運費及最低訂購金額。</span></li><li><span>選「海外信用卡可用」的付款方式；若不成功，改用 <b>Shuttle Delivery</b>。</span></li><li><span>看騎士訊息，準備在可停車的入口領餐；取餐先核對訂單。</span></li></ol></div>
+ <div class="card"><h3>直接複製給外送員的韓文</h3><div class="addr"><div>${msg}<small>我會在大樓入口領餐，到了請傳訊息給我。</small></div></div><div class="btns"><button class="btn" data-copytext="${msg}">📋 複製韓文訊息</button></div></div>
+ <div class="note butter"><p>Shuttle 的配送範圍視該區當下服務而定，不保證每一家炸雞店都有。外送抵達時間和費用都是即時變動。</p></div></div>`};
+G['g-wow']=()=>{
+ const ctx=S.ctx&&PM[S.ctx]?PM[S.ctx]:null;const ca=ctx&&AREA[ctx.ar]?ctx.ar:null;
+ const rows=Object.entries(AREA).filter(([k])=>k!=='gapyeong').map(([k,v])=>{
+  const days=DAYS.filter(d=>d.stops.some(s=>s.ps.some(id=>PM[id].ar===k))||P.some(x=>x.ar===k&&x.days.has(d.n))).map(d=>'D'+d.n).join(' ');
+  const q='WOWPASS '+v[1];
+  return `<div class="row c-sight wowrow" data-area="${v[0]} ${v[1]} ${k}" style="cursor:default"><div class="ico">📍</div><div class="rb"><div class="rt">${v[0]}${k===ca?'<span class="tag x">你剛剛看的區域</span>':''}</div><div class="rd">${days?'順路 '+days:'備用區域'}</div></div><div class="ra"><a class="ib" href="https://www.google.com/maps/search/?api=1&query=${enc(q)}" target="_blank" rel="noopener" aria-label="Google 地圖">🗺️</a><a class="ib" href="https://map.naver.com/p/search/${enc(q)}" target="_blank" rel="noopener" aria-label="Naver 地圖">N</a></div></div>`}).join('');
+ return `${back}<div class="g"><h2>💴 WOWPASS 換錢</h2><p class="lead">把外幣換成可刷卡、可搭交通的預付卡。機台位置會調整，點開地圖看最新結果。</p>
+ <div class="card"><h3>📍 找機台</h3><div class="btns"><a class="btn" href="https://www.google.com/maps/search/WOWPASS" target="_blank" rel="noopener">離我最近的 WOWPASS ↗</a><a class="btn soft" href="https://www.google.com/maps/search/?api=1&query=${enc('WOWPASS kiosk')}" target="_blank" rel="noopener">全部機台 ↗</a></div>
+ <p style="color:var(--sub);font-size:12.5px;margin-top:8px">在 Google 地圖打開時請允許定位，會顯示附近的機台。也可以在下方選行程區域搜尋。</p></div>
+ <div class="search" style="position:static;padding:0"><label for="wq"><span>🔍</span><input id="wq" type="search" placeholder="搜尋區域，例如 明洞、機場" autocomplete="off"></label></div>
+ <div id="wlist" style="margin-top:12px">${rows}</div>
+ <div class="card c-sight"><h3>機台怎麼用</h3><ol class="steps"><li><span>帶好<b>護照</b>，到機台選語言（有中文）。</span></li><li><span>依畫面放入紙鈔或刷卡；機台會顯示可換的幣別、匯率與手續費，換之前看清楚。</span></li><li><span>領卡後可直接刷卡、買東西，也可搭地鐵公車（功能以官方說明為準）。</span></li><li><span>剩餘金額可回到機台退款，費用以機台顯示為準，所以不用一次換太多。</span></li></ol></div>
+ <div class="note butter"><p>💡 市場攤販、小店仍可能只收現金，建議留一點韓元現金。以上為一般使用說明，實際幣別、費率與功能請以機台及 WOWPASS 官方公告為準。</p></div></div>`};
+G['g-metro']=()=>`${back}<div class="g"><h2>🚇 抓住 3 條線就好</h2><p class="lead">站名有韓文對照，真正搭車仍建議以 App 即時導航。</p>
+ <div class="card">${[
+  ['4','南大門／明洞','忠武路站（충무로）→ 4 號線往首爾站方向 → 明洞站（명동）／會賢站（회현）。'],
+  ['3','Doctors 新沙','忠武路站 → 3 號線往梧琴方向 → 新沙站（신사），1 號出口步行到本館。'],
+  ['2','聖水 MUSINSA','東大門歷史文化公園站（동대문역사문화공원）→ 2 號線往聖水方向 → 聖水站（성수）。'],
+  ['2','GoldJ 宣陵','前往宣陵站（선릉）需轉乘，較複雜；建議用 Naver Map 選當天較快路線或叫車。'],
+  ['4','首爾站／樂天超市','忠武路站 → 4 號線往首爾站方向 → 首爾站（서울역），站內依出口指標走。']
+ ].map(l=>`<div class="line"><span class="ln l${l[0]}">${l[0]}</span><div><b>${l[1]}</b><span>${l[2]}</span></div></div>`).join('')}</div>
+ <div class="card"><h3>民宿最常用 5 條移動</h3><p>🔹 民宿→明洞／南大門：先到忠武路站，4 號線到明洞或會賢。</p><p>🔹 民宿→聖水：東大門歷史文化公園站 2 號線前往聖水。</p><p>🔹 民宿→Doctors：忠武路 3 號線往新沙。</p><p>🔹 民宿→GoldJ：到宣陵站，轉乘依 Naver Map；懶得轉車可 4 人叫車。</p><p>🔹 民宿→樂天超市：4 號線到首爾站，逛完再回民宿。</p></div>
+ <img class="img" src="img/subway.jpg" alt="首爾地鐵攻略插畫" loading="lazy"><div class="note butter"><p>⚠️ 插畫僅供當作首爾商圈視覺索引，不是準確地鐵線圖；實際站序、轉乘方向、出口請看上面的文字教學與官方地鐵圖。</p></div>
+ <div class="btns"><a class="btn soft" href="https://www.google.com/search?q=${enc('Seoul Metro route map 英文 地鐵圖')}" target="_blank" rel="noopener">官方地鐵圖 ↗</a></div></div>`;
+G['g-tax']=()=>`${back}<div class="g"><h2>🧾 購物退稅，照著做就好</h2><p class="lead">買女裝、童裝、彩妝、保養品都先看店家有沒有 TAX FREE。</p>
+ <div class="card"><ol class="steps"><li><span><b>確認店家有 TAX FREE</b><br>一般購物店消費達單筆 ₩15,000 起，符合條件才可能退稅。</span></li><li><span><b>結帳時出示護照</b><br>問是否可立即退稅（즉시환급）；有些店家會直接折抵。</span></li><li><span><b>保留發票與退稅單</b><br>記得取回紙本，或確認電子退稅記錄。</span></li><li><span><b>機場需要時查驗</b><br>如非已完成即時退稅，依指示辦理海關／退稅機或櫃台，查驗商品時先別託運。</span></li></ol></div>
+ <div class="note lav"><h3>退稅和醫美不是同一回事</h3><p>🛍️ 一般購物：符合資格、店家參與退稅計畫，可使用現場或機場退稅。</p><p>💆 醫美 VAT 專案：依法原先適用到 2025/12/31；2026/10 的現行法仍未延長，不應把醫美 10% 退稅當成已確定。</p><p>📌 醫美診所可能有自己的優惠折扣，但與政府購物退稅不同。</p></div>
+ <div class="card"><h3>可複製的韓文</h3>${kr([['택스 리펀 가능해요?','可以退稅嗎？'],['면세 서류 주세요.','請給我免稅文件。']])}</div>
+ <div class="btns"><a class="btn soft" href="https://www.google.com/search?q=${enc('韓國觀光公社 退稅 說明')}" target="_blank" rel="noopener">韓國觀光公社退稅說明 ↗</a></div></div>`;
+G['g-shop']=()=>`${back}<div class="g"><h2>🛍️ 購物策略</h2><p class="lead">大家分別買大人、小孩服飾不一定要一樣；採購區域和折扣判斷最重要。</p>
+ <div class="note butter"><h3>New Balance／童裝／Outlet</h3><p>👟 <b>NewCore Outlet 江南</b>：大人 NB、童裝及 Modern House 可能一起挖；先查當日櫃位與折扣，不保證指定尺碼。</p><p>🏬 <b>現代 City Outlet 東大門</b>：距離住宿近，大人 NB 已有資料；NB Kids 是否有櫃位待確認。</p><p>🎀 <b>南大門童裝</b>：適合買襪子、帽子、髮飾、可愛衣服；試穿與退換貨規定要問清楚。</p></div>
+ <div class="note rose"><h3>藥妝、彩妝與大創</h3><p>💄 <b>Olive Young</b>：保養、彩妝、防曬、旅行用品；熱門缺貨商品可先看大型分店。</p><p>💊 <b>藥局 약국</b>：購買 OTC 藥品可詢問藥師，注意成分、服用方式和是否適合自己。</p><p>🧸 <b>Daiso 大創</b>：文具、收納、包材、襪子、小禮物、生活雜貨。</p><p>🛍️ <b>NYU NYU</b>：髮飾、包包、飾品；按店家退換貨規定確認。</p></div>
+ <div class="card"><h3>南大門市場怎麼逛</h3><p>📍 <b>從會賢站（회현역）5 或 6 號出口進去</b>，先看童裝區，再逛飾品、小物、女裝；市場巷子多，適合拆成幾條街。</p><p>🥟 可以試蔬菜糖餅、刀切麵巷及燉帶魚巷；有些市場店家較早打烊。</p></div>
+ <img class="img" src="img/nam.jpg" alt="南大門市場分區地圖" loading="lazy">
+ <p style="color:var(--sub);font-size:12.5px">📍 原圖標示：女裝街、童裝街、飾品街、文具街、食材街、美食街。實際攤位會搬遷，請搭配 Naver Map。</p>
+ <div class="sec">相關地點</div>${['namdaemun','newcore','hyundai','daiso','oy-dhp','nyu'].map(id=>row(PM[id])).join('')}</div>`;
+G['g-home']=()=>`${back}<div class="g"><h2>🏠 民宿周邊生活指南</h2><p class="lead">回家路上買水、彩妝、零食、吃宵夜，全整理好。</p>
+ <div class="card">${addrBlock(PM.home)}<div class="btns"><button class="btn" data-driver="home">🚕 給司機看</button>${mapBtns(PM.home)}</div></div>
+ <div class="note sage"><h3>住退溪路50街，有什麼方便？</h3><p>🏠 <b>民宿</b>：近忠武路／東大門生活圈；請用房東提供的定位確認實際入口。</p><p>💚 <b>Olive Young 忠武路站店</b>：適合白天補貨；<b>Olive Young 東大門歷史文化公園站店</b> 晚上營業較晚。</p><p>🥛 <b>超商</b>：周邊有 CU、7-Eleven、GS25、emart24 等生活圈，最近門市以 Naver Map 即時搜尋。</p><p>🥐 <b>Nothing Coffee／On the Plan Coffee Lab</b>：早餐或外帶咖啡。</p><p>🍖 <b>Norangdwaeji</b>：韓式烤豬肉；<b>Pildong Myeonok</b>：冷麵與餃子。</p></div>
+ <img class="img" src="img/home.jpg" alt="民宿周邊插畫地圖" loading="lazy"><p style="color:var(--sub);font-size:12.5px">📌 AI 示意圖，不能代替導航或確認實際店家方位。實際巷口與營業時間請用 Naver Map。</p>
+ <div class="sec">周邊地點</div>${['pildong','oy-dhp','daiso','lotte'].map(id=>row(PM[id])).join('')}</div>`;
+G['g-air']=()=>`${back}<div class="g"><h2>✈️ 回程：民宿→仁川機場</h2><p class="lead">11/8 14:15 起飛，目標 11:15 前到機場。要給司機看的是機場航廈，不是民宿。</p>
+ <div class="card c-move"><h3>🛫 先確認你的航廈</h3><p style="font-size:13.5px;color:var(--sub);margin-bottom:8px">看機票或登機資訊上的 Terminal，選好後下面和「給司機看」都會跟著換。</p>${termRow()}${addrBlock(PM.icn)}<div class="btns"><button class="btn" data-driver="icn">🚕 給司機看機場航廈</button>${mapBtns(PM.icn)}</div></div>
+ <div class="card"><h3>三種方式</h3><p>🚆 <b>AREX</b>：民宿→首爾站→機場快線，時間較可控；第一與第二航廈各有車站，先看列車班次及航廈。</p><p>🚌 <b>機場巴士</b>：有大行李可考慮，注意尖峰路段。</p><p>🚕 <b>包車／計程車</b>：四人＋大行李可評估總價，早上建議提前預約（Uber／k.ride）。</p></div>
+ <div class="card"><h3>建議時間表</h3><div class="kv"><span>09:30–10:00</span><b>民宿退房、叫車</b></div><div class="kv"><span>約 10:30–11:15</span><b>抵達機場（含緩衝）</b></div><div class="kv"><span>11:15 前</span><b>託運、退稅、出境</b></div><div class="kv"><span>14:15</span><b>起飛</b></div></div>
+ <div class="card"><h3>出發前確認</h3>${['液體託運、行動電源隨身','退稅單、發票與護照放在好拿的位置','零食先看是否涉及肉製品、蛋奶或入境檢疫限制，不要僅憑超市販售就認定可攜回','WOWPASS 剩餘金額先消費或退款'].map(t=>`<div class="kv"><div>✅ ${t}</div></div>`).join('')}</div>
+ <div class="card"><h3>可複製的韓文</h3>${kr([['인천공항 제1터미널로 가 주세요.','請到仁川機場第一航廈。'],['인천공항 제2터미널로 가 주세요.','請到仁川機場第二航廈。'],['출발층(3층)에서 내려 주세요.','請在 3 樓出境層放我下車。'],['트렁크 열어 주세요.','請開後車廂。']])}</div>
+ <div class="btns"><button class="btn soft" data-go="g-wow">💴 WOWPASS 退款</button><button class="btn soft" data-go="g-tax">🧾 退稅</button></div></div>`;
+G['g-from']=()=>`${back}<div class="g"><h2>🛬 仁川機場→民宿</h2><p class="lead">11/4 約 21:30 落地，4 人＋行李。這一段要給司機看的是民宿地址。</p>
+ <div class="card c-stay"><h3>🏠 民宿地址（給司機看）</h3>${addrBlock(PM.home)}<div class="btns"><button class="btn" data-driver="home">🚕 給司機看（大字）</button>${mapBtns(PM.home)}</div>
+ <p style="color:var(--sub);font-size:12.5px;margin-top:8px">下車地點請照房東提供的入口影片，窄巷司機可能只能停在大路邊。</p></div>
+ <div class="card"><h3>⏱️ 預估時間</h3><div class="kv"><span>21:30</span><b>飛機落地</b></div><div class="kv"><span>約 22:30–23:00</span><b>入境、領行李，出關</b></div><div class="kv"><span>約 23:00–00:30</span><b>搭車，約 1 小時車程</b></div><div class="kv"><span>約 00:00 前後</span><b>抵達民宿（視排隊與路況）</b></div></div>
+ <div class="card c-move"><h3>✅ 推薦：直接叫車或排計程車</h3><p style="font-size:14px">四人＋行李，深夜又怕趕不上末班車，計程車最省事。車資多在 ₩7 萬上下，夜間可能加成，高速費另計，以 App 預估或跳表為準，四人分攤很划算。</p>
+ <ol class="steps"><li><span>入境、領完行李後，走到 <b>1 樓入境大廳</b>，跟著 <b>Taxi</b> 指標到乘車處。</span></li><li><span>也可以先在 <b>k.ride</b>／<b>Uber</b> 設好目的地，上車地點選航廈 1 樓入境大廳，先預估價格。</span></li><li><span>上車前說「<b>트렁크 열어 주세요</b>」，行李放後車廂；人多可選大型車（Van／Jumbo）。</span></li><li><span>把<b>民宿地址</b>亮給司機看（上面按鈕），確認是否含高速費、可否刷卡。</span></li><li><span>接近民宿時，用房東影片確認入口；有問題用 App 或翻譯。</span></li></ol></div>
+ <div class="card"><h3>其他方式（需先查末班）</h3><p>🚆 <b>AREX 機場快線</b>：到首爾站再轉 4 號線或叫車，深夜班次有限，<b>落地後先查末班時間</b>再決定。</p><p>🚌 <b>機場巴士／深夜公車</b>：班次少、下車點離民宿可能有段距離，拖行李較累。</p>
+ <div class="btns"><a class="btn soft sm" href="https://www.google.com/maps/dir/?api=1&origin=${enc('Incheon International Airport')}&destination=${enc(PM.home.a)}&travelmode=transit" target="_blank" rel="noopener">大眾運輸路線 ↗</a><a class="btn soft sm" href="https://www.google.com/maps/dir/?api=1&origin=${enc('Incheon International Airport')}&destination=${enc(PM.home.a)}&travelmode=driving" target="_blank" rel="noopener">開車路線 ↗</a></div></div>
+ <div class="card"><h3>📋 落地前先準備</h3>${['房東的入住方式、門禁／鎖碼，先截圖存好','eSIM／漫遊先開通，落地就能叫車','k.ride／Uber 先註冊並設好付款','手上留一點韓元現金，或先查 WOWPASS 機台（機場有人潮）','民宿地址複製好，也可直接用「給司機看」'].map(t=>`<div class="kv"><div>✅ ${t}</div></div>`).join('')}<div class="btns"><button class="btn soft sm" data-go="g-wow">💴 WOWPASS</button><button class="btn soft sm" data-go="g-taxi">🚕 叫車教學</button></div></div>
+ <div class="card"><h3>可複製的韓文</h3>${kr([['퇴계로50길 6-1로 가 주세요.','請載我到退溪路50街 6-1。'],['여기로 가 주세요.','請載我到這裡。'],['트렁크 열어 주세요.','請開後車廂。'],['고속도로 통행료 포함이에요?','高速公路費含在內嗎？'],['카드 결제 가능해요?','可以刷卡嗎？'],['건물 입구 앞에서 내려 주세요.','請在大樓入口前讓我下車。']])}</div></div>`;
+const fmt=(n,d=0)=>isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:d,minimumFractionDigits:0}):'';
+const fxRate=()=>{const r=+store.get('rate',46);return r>0?r:46};
+function fxTable(){const r=fxRate();return [1000,3000,5000,10000,15000,30000,50000,100000,300000].map(k=>`<div class="kv"><b>₩${fmt(k)}</b><span>≈ NT$ ${fmt(k/r,k<5000?1:0)}</span></div>`).join('')}
+G['g-fx']=()=>{const r=fxRate();return `${back}<div class="g"><h2>🔢 韓幣⇄台幣換算</h2><p class="lead">輸入任一邊，另一邊馬上算好。匯率可自己改，會記在這支手機。</p>
+ <div class="card"><h3>💱 匯率</h3><label for="fxRate" class="kv" style="border:0;align-items:center"><span>1 台幣 =</span><span style="display:flex;gap:6px;align-items:center;color:var(--ink)"><input id="fxRate" type="number" inputmode="decimal" step="0.01" min="0" value="${r}" style="width:90px;font:inherit;text-align:right;background:var(--chip);color:var(--ink);border:0;border-radius:12px;padding:8px 10px">韓元</span></label>
+ <p style="color:var(--sub);font-size:12.5px;margin-top:6px">預設 46 只是參考值，不是即時匯率。出發前和換錢時請到查詢匯率更新，實際換匯以機台、銀行或刷卡匯率為準。</p>
+ <div class="btns"><a class="btn soft sm" href="https://www.google.com/search?q=${enc('TWD to KRW')}" target="_blank" rel="noopener">查今日匯率 ↗</a></div></div>
+ <div class="card"><h3>🧮 換算</h3>
+  <label for="fxK" style="font-size:13px;color:var(--sub)">韓元 ₩</label><input id="fxK" class="fxin" type="number" inputmode="decimal" placeholder="例如 35000" style="width:100%;font:inherit;font-size:22px;background:var(--chip);color:var(--ink);border:0;border-radius:14px;padding:10px 12px;margin:4px 0 10px">
+  <label for="fxT" style="font-size:13px;color:var(--sub)">台幣 NT$</label><input id="fxT" class="fxin" type="number" inputmode="decimal" placeholder="例如 760" style="width:100%;font:inherit;font-size:22px;background:var(--chip);color:var(--ink);border:0;border-radius:14px;padding:10px 12px;margin:4px 0 10px">
+  <div class="kv"><span>分給</span><span style="color:var(--ink)"><select id="fxN" style="width:auto;margin:0;padding:6px 10px">${[1,2,3,4].map(n=>`<option value="${n}" ${n===4?'selected':''}>${n} 人</option>`).join('')}</select></span></div>
+  <div class="kv"><span>每人</span><b id="fxEach">—</b></div></div>
+ <div class="card"><h3>📋 常用金額速查</h3><div id="fxTab">${fxTable()}</div></div>
+ <div class="note butter"><p>🧾 一般購物 <b>₩15,000</b> 起可退稅，約 NT$ <span id="fxTax">${fmt(15000/r)}</span>。</p></div></div>`};
+function fxCalc(from){
+  const r=fxRate(),K=$('#fxK'),T=$('#fxT');if(!K)return;
+  if(from==='k'){const v=parseFloat(K.value);T.value=isFinite(v)?String(Math.round(v/r*10)/10):''}
+  else if(from==='t'){const v=parseFloat(T.value);K.value=isFinite(v)?String(Math.round(v*r)):''}
+  const k=parseFloat(K.value),n=+$('#fxN').value||1;
+  $('#fxEach').textContent=isFinite(k)?'₩'+fmt(k/n)+' ≈ NT$ '+fmt(k/n/r,1):'—';
+}
+G['g-wx']=()=>`${back}<div class="g"><h2>🌤️ 首爾秋天，怎麼穿？</h2><p class="lead">這是出發前最新取得的初步預報，不是每天一定會出現的天氣。</p>
+ ${DAYS.map(d=>`<div class="wx" style="margin:8px 0"><span style="flex:0 0 78px;color:var(--ink)"><b>${d.date}（${d.w}）</b></span><span class="t">${d.wx[0]} ${d.wx[1]}</span></div><p style="font-size:13px;color:var(--sub);margin:0 4px 6px">${esc(d.wx[2])}</p>`).join('')}
+ <div class="note sky"><p>📅 預報查詢：2026/10/28（首爾當地）。屬提前 7–11 天預報，愈接近出發可能改變；請在出發前 1–2 天更新。南怡島並非首爾市中心，體感可能更冷。</p></div>
+ <div class="note sage"><h3>隨身穿搭小提醒</h3><p>${WX_TIP}</p><p>想拍漂亮大衣照：室外備保暖內搭，室內可脫外套。</p></div></div>`;
+
+/* ============ 我的 ============ */
+const LIST=[
+ ['t1','11/4 第一晚機場交通','確認實際航廈、末班列車／機場巴士時間、民宿自助入住方式。'],
+ ['t2','11/5 昌德宮秘苑','有票就調整時間；沒票保留宮區秋景，別為搶票犧牲整天。'],
+ ['t3','11/6 Klook 集合點','務必以憑證上出口和時刻為準；18:50 是預計下車，不是保證到達。'],
+ ['t4','11/7 醫美','Doctors 或 GoldJ 擇一；確認開診、醫師、療程、術後照護及付款方式。'],
+ ['t5','護照・網路','護照效期、eSIM／漫遊、行動電源。'],
+ ['t6','先裝好 App','k.ride（或 Uber）、Baemin、Naver Map，先完成註冊與付款設定。'],
+ ['t7','WOWPASS／韓元','先決定要換多少，留一點現金。']];
+function viewMe(){
+  const done=LIST.filter(l=>checks[l[0]]).length;
+  const fl=favs.map(id=>PM[id]).filter(Boolean);
+  return `<div class="g"><h2>⭐ 我的</h2>
+  <div class="card"><h3>📲 加入手機主畫面</h3><p style="font-size:14px">把行程書放在主畫面，一點就開。</p><div class="btns"><button class="btn" id="btnAdd2">教我怎麼加入</button></div></div>
+  <div class="sec">出發前確認　${done}/${LIST.length}</div>
+  <div class="card" style="padding:4px 14px">${LIST.map(l=>`<label class="chk ${checks[l[0]]?'done':''}"><input type="checkbox" data-chk="${l[0]}" ${checks[l[0]]?'checked':''}><span><b>${l[1]}</b><br><small style="color:var(--sub)">${l[2]}</small></span></label>`).join('')}</div>
+  <div class="sec">我的收藏（餐廳候選清單）　${fl.length}</div>
+  ${fl.length?fl.map(row).join(''):`<div class="empty"><b>☆</b>逛探索頁時，在想去的店按 ☆，就會放在這裡<br>（收藏只存在這支手機，各自獨立）</div>`}
+  <div class="note"><p>📝 最後修訂 2026/10/28。這是「出發前已確認內容＋彈性推薦」，不是即時交通／醫療／天氣資訊。店家、交通與天氣有變動可能，搭車時以 Naver Map／實際訂單為準。</p></div></div>`;
+}
+
+/* ============ 面板（Sheet） ============ */
+function actsFor(x){
+  const hasAddr=x&&(x.a||x.ko);
+  return `<div class="acts">
+   <button class="act" data-act="taxi" data-p="${x.id}"><span>🚕</span>叫車</button>
+   <button class="act" data-act="wow" data-p="${x.id}"><span>💴</span>換錢</button>
+   <button class="act" data-act="food" data-p="${x.id}"><span>🛵</span>叫外送</button>
+   <button class="act" data-act="metro" data-p="${x.id}"><span>🚇</span>地鐵</button></div>`;
+}
+function openSheet(html){
+  $('#sheetIn').innerHTML='<div class="grab"></div><div class="sh">'+html+'</div>';
+  $('#sheet').classList.add('on');$('#scrim').classList.add('on');$('#sheetIn').scrollTop=0;
+}
+function closeSheet(){$('#sheet').classList.remove('on');$('#scrim').classList.remove('on')}
+function nearList(key,ex){
+  const own=(SM[key]&&SM[key].ps)||[];
+  const L=P.filter(x=>x.near===key&&x.id!==ex&&!own.includes(x.id));
+  return L.length?`<h3 class="s">📍 附近也很熱門</h3>${L.map(row).join('')}`:'';
+}
+function stopSheet(s){
+  const ps=s.ps.map(id=>PM[id]);const first=ps[0];const tx=s.taxi?PM[s.taxi]:first;
+  const d=DAYS[s.day-1];
+  let h=`<h2><span>${s.e} ${esc(s.ti)}</span><button class="close" data-close aria-label="關閉">✕</button></h2>
+   <p class="sub">Day ${s.day} ・ ${d.date} ${d.w} ・ ${esc(s.t)}</p><p style="margin-top:8px;font-size:14px">${esc(s.ds)}</p>`;
+  if(s.tips)h+=s.tips.map(t=>`<div class="why">💡 ${esc(t)}</div>`).join('');
+  if(s.go)h+=`<div class="btns" style="margin:12px 0 0"><button class="btn" data-go="${s.go[0]}">${s.go[1]} ›</button></div>`;
+  if(tx)h+=actsFor(tx);
+  if(ps.length)h+=`<h3 class="s">${ps.length>1?'這站的地點':'地點'}</h3>${ps.map(row).join('')}`;
+  h+=nearList(s.k);
+  if(!ps.length&&!P.some(x=>x.near===s.k))h+=`<div class="why" style="margin-top:14px">這個時段沒有固定地點，可到「探索」找附近的店。</div>`;
+  openSheet(h);
+  S.sheetPlace=tx?tx.id:null;
+}
+function placeSheet(x){
+  const c=CAT[x.cat];
+  let h=`<h2 class="c-${x.cat}"><span>${c[0]} ${esc(x.n)}${x.x?'<span class="tag x">'+(x.src||'補充')+'</span>':x.f?'<span class="tag f">朋友推薦</span>':''}${x.m?`<span class="tag m">${MEAT[x.m][0]} ${MEAT[x.m][1]}</span>`:''}</span><button class="close" data-close aria-label="關閉">✕</button></h2>
+  <p class="sub">${esc(x.ko)} ・ ${c[1]}${x.days.size?' ・ '+[...x.days].sort().map(n=>'Day '+n).join('、'):''}</p>
+  <p style="margin-top:8px;font-size:14px">${esc(x.d)}</p>
+  ${x.why?`<div class="why">${x.f?'👭':'✨'} ${esc(x.why)}<br><small style="color:var(--sub)">${x.f?'營業時間取自朋友提供的清單，出發前請再確認。':x.src?'來自你提供的社群貼文，我沒有逐一核對，請出發前確認地址、營業時間與是否仍在營業。':'AI 補充推薦，營業時間與排隊狀況請出發前確認。'}</small></div>`:''}
+  ${x.tip?`<div class="why">💡 ${esc(x.tip)}</div>`:''}
+  <div class="why" style="background:var(--sky-s)">🕒 營業時間：${x.h?esc(x.h):'尚未收錄'}<br><a class="btn soft sm" style="margin-top:6px" href="${goo(x)}" target="_blank" rel="noopener">查最新營業時間 ↗</a><br><small style="color:var(--sub)">店家常調整公休與時間，出發前請以地圖／官方公告為準。</small></div>
+  ${addrBlock(x)}
+  <div class="btns">${mapBtns(x)}<button class="btn ghost sm" data-fav="${x.id}">${favs.includes(x.id)?'⭐ 已收藏':'☆ 收藏'}</button></div>
+  ${actsFor(x)}`;
+  const sib=P.filter(y=>y.id!==x.id&&((x.near&&y.near===x.near)||(x.near&&SM[x.near]&&SM[x.near].ps.includes(y.id))||(!x.near&&y.near&&SM[y.near]&&SM[y.near].ps.includes(x.id))));
+  const ids=[...new Set(sib.map(y=>y.id))].slice(0,5);
+  if(ids.length)h+=`<h3 class="s">📍 附近也很熱門</h3>${ids.map(id=>row(PM[id])).join('')}`;
+  openSheet(h);S.sheetPlace=x.id;
+}
+function termRow(){const t=termNow();return `<div class="btns" style="margin:0"><button class="btn sm ${t===1?'':'ghost'}" data-term="1">第一航廈 T1</button><button class="btn sm ${t===2?'':'ghost'}" data-term="2">第二航廈 T2</button></div>`}
+function openDriver(x){
+  const air=x.id==='icn';
+  $('#drv').innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center"><span class="sub" style="color:var(--sub);font-size:14px">🚕 請給司機看</span><button class="btn ghost sm" id="drvClose">✕ 關閉</button></div>
+   <div style="margin:22px 0 8px;color:var(--accent);font-size:20px">${air?'출발층(3층)으로 가 주세요.':'이곳으로 가 주세요.'}</div>
+   ${air?`<div style="margin-bottom:10px"><div style="color:var(--sub);font-size:13px;margin-bottom:6px">先看機票確認航廈，再切換：</div>${termRow()}</div>`:''}<div class="big">${esc(x.ko)}</div>${x.a?`<div class="mid">${esc(x.a)}</div>`:''}
+   <div style="margin-top:12px;color:var(--sub)">${esc(x.n)}・${air?'請載我到出境大廳（3 樓）':'請載我到這裡'}</div>
+   <div class="btns" style="margin-top:auto;padding-top:24px"><button class="btn" data-copy="${x.id}">📋 複製地址</button><a class="btn soft" href="${nav(x)}" target="_blank" rel="noopener">Naver Map ↗</a><button class="btn ghost" data-go="g-taxi" id="drvGuide">叫車步驟</button></div>`;
+  $('#drv').classList.add('on');
+}
+function addHome(){
+  const url=(()=>{try{return location.href.split('#')[0]}catch(e){return ''}})();
+  openSheet(`<h2><span>📲 加入手機主畫面</span><button class="close" data-close aria-label="關閉">✕</button></h2>
+   <p class="sub">每位旅伴各自操作一次，之後就像 App 一樣一點就開。</p>
+   <div class="card"><h3>🍎 iPhone（Safari）</h3><ol class="steps"><li><span>用 <b>Safari</b> 開啟行程書連結（LINE 內建瀏覽器不能加）。</span></li><li><span>點下方中間的 <b>分享 ⬆️</b>。</span></li><li><span>往下滑，選 <b>「加入主畫面」</b>。</span></li><li><span>名稱可改成「首爾行程」，按右上 <b>新增</b>。</span></li></ol></div>
+   <div class="card"><h3>🤖 Android（Chrome）</h3><ol class="steps"><li><span>用 Chrome 開啟連結。</span></li><li><span>點右上 <b>⋮</b> → <b>「加到主畫面」</b>或「安裝應用程式」。</span></li></ol></div>
+   <div class="card"><h3>🔗 傳給旅伴</h3><div class="addr"><div style="font-size:12.5px">${esc(url||'請複製瀏覽器網址列的連結')}</div><button class="btn sm" data-copytext="${esc(url)}" data-msg="✓ 已複製連結">📋 複製連結</button></div>
+   <p style="color:var(--sub);font-size:12.5px">旅伴需要能開啟這個連結才看得到。收藏與勾選只會存在各自的手機。</p></div>`);
+}
+
+/* ============ 路由與渲染 ============ */
+function route(){
+  const h=location.hash.slice(1)||'plan';
+  const view=$('#view');
+  let tab='plan';
+  if(h.startsWith('g-')){tab='guides';view.innerHTML=(G[h]||(()=>viewGuides()))();}
+  else if(h==='explore'){tab='explore';view.innerHTML=viewExplore();results();}
+  else if(h==='guides'){tab='guides';view.innerHTML=viewGuides();}
+  else if(h==='me'){tab='me';view.innerHTML=viewMe();}
+  else {view.innerHTML=viewPlan();}
+  S.tab=tab;
+  document.querySelectorAll('.nav button').forEach(b=>b.toggleAttribute('aria-current',b.dataset.go===tab));
+  document.querySelectorAll('.nav button').forEach(b=>{if(b.dataset.go===tab)b.setAttribute('aria-current','page')});
+  closeSheet();$('#drv').classList.remove('on');
+}
+function go(h){window.scrollTo(0,0);if(location.hash.slice(1)===h)route();else location.hash=h;}
+function refresh(keepScroll){const y=window.scrollY;route();if(keepScroll)window.scrollTo(0,y)}
+addEventListener('hashchange',()=>{window.scrollTo(0,0);route()});
+
+document.addEventListener('click',e=>{
+  const t=e.target;
+  const q=s=>t.closest(s);
+  if(q('a[href]'))return;
+  let el;
+  if(el=q('[data-copytext]')){e.stopPropagation();copy(el.dataset.copytext,el.dataset.msg||'✓ 已複製');return}
+  if(el=q('[data-copy]')){e.stopPropagation();copyPlace(PM[el.dataset.copy]);return}
+  if(el=q('[data-fav]')){e.stopPropagation();const id=el.dataset.fav;favs=favs.includes(id)?favs.filter(i=>i!==id):[...favs,id];store.set('favs',favs);toast(favs.includes(id)?'⭐ 已加入收藏':'已取消收藏');
+    if(q('.sheet'))placeSheet(PM[id]);else if(S.tab==='explore')results();else refresh(true);return}
+  if(el=q('[data-term]')){store.set('term',+el.dataset.term);if($('#drv').classList.contains('on'))openDriver(PM.icn);else refresh(true);return}
+  if(el=q('[data-act]')){const x=PM[el.dataset.p];const a=el.dataset.act;S.ctx=x.id;
+    if(a==='taxi'){closeSheet();openDriver(x)}else go({wow:'g-wow',food:'g-food',metro:'g-metro'}[a]);return}
+  if(el=q('[data-driver]')){const x=PM[el.dataset.driver];S.ctx=x.id;openDriver(x);return}
+  if(q('#drvClose')){$('#drv').classList.remove('on');return}
+  if(q('#drvGuide')){$('#drv').classList.remove('on');go('g-taxi');return}
+  if(q('#btnAdd')||q('#btnAdd2')){addHome();return}
+  if(q('[data-close]')||t===$('#scrim')){closeSheet();return}
+  if(el=q('[data-go]')){go(el.dataset.go);return}
+  if(el=q('[data-day]')){S.day=+el.dataset.day;store.set('day',S.day);refresh();const dd=document.querySelector('.days');if(dd){const y=dd.getBoundingClientRect().top+scrollY;if(scrollY>y)window.scrollTo(0,y)}return}
+  if(el=q('[data-stop]')){stopSheet(SM[el.dataset.stop]);return}
+  if(el=q('[data-open]')){placeSheet(PM[el.dataset.open]);return}
+  if(el=q('[data-fcat]')){S.f.cat=S.f.cat===el.dataset.fcat?'':el.dataset.fcat;syncFilters();return}
+  if(el=q('[data-fday]')){const n=+el.dataset.fday;S.f.day=S.f.day===n?0:n;syncFilters();return}
+  if(el=q('[data-fkind]')){S.f.kind=S.f.kind===el.dataset.fkind?'':el.dataset.fkind;syncFilters();return}
+  if(el=q('[data-fmeat]')){S.f.meat=S.f.meat===el.dataset.fmeat?'':el.dataset.fmeat;syncFilters();return}
+  if(q('[data-ffav]')){S.f.fav=!S.f.fav;syncFilters();return}
+  if(q('#fclear')){S.f={q:'',cat:'',day:0,kind:'',fav:false,meat:''};route();return}
+  if(q('#qx')){S.f.q='';route();$('#q').focus();return}
+});
+function syncFilters(){
+  document.querySelectorAll('[data-fcat]').forEach(b=>b.setAttribute('aria-pressed',S.f.cat===b.dataset.fcat));
+  document.querySelectorAll('[data-fday]').forEach(b=>b.setAttribute('aria-pressed',S.f.day===+b.dataset.fday));
+  document.querySelectorAll('[data-fkind]').forEach(b=>b.setAttribute('aria-pressed',S.f.kind===b.dataset.fkind));
+  document.querySelectorAll('[data-fmeat]').forEach(b=>b.setAttribute('aria-pressed',S.f.meat===b.dataset.fmeat));
+  document.querySelectorAll('[data-ffav]').forEach(b=>b.setAttribute('aria-pressed',S.f.fav));
+  results();
+}
+document.addEventListener('input',e=>{
+  const t=e.target;
+  if(t.id==='q'){S.f.q=t.value;$('#qx').hidden=!t.value;results()}
+  if(t.id==='fxK')fxCalc('k');
+  if(t.id==='fxT')fxCalc('t');
+  if(t.id==='fxRate'){const v=parseFloat(t.value);if(v>0){store.set('rate',v);$('#fxTab').innerHTML=fxTable();$('#fxTax').textContent=fmt(15000/v);fxCalc($('#fxK').value?'k':'t')}}
+  if(t.id==='wq'){const v=t.value.trim().toLowerCase();document.querySelectorAll('.wowrow').forEach(r=>r.hidden=v&&!r.dataset.area.toLowerCase().includes(v))}
+  if(t.dataset&&t.dataset.chk){checks[t.dataset.chk]=t.checked;store.set('checks',checks);t.closest('.chk').classList.toggle('done',t.checked);const done=LIST.filter(l=>checks[l[0]]).length;const s=document.querySelector('.sec');if(s)s.textContent='出發前確認　'+done+'/'+LIST.length}
+});
+document.addEventListener('change',e=>{
+  if(e.target.id==='fxN'){fxCalc()}
+  if(e.target.id==='destSel'){S.ctx=e.target.value;route()}
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeSheet();$('#drv').classList.remove('on')}
+  if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('[role="button"]')){e.preventDefault();e.target.click()}
+});
+
+/* 主畫面圖示（執行時用 canvas 產生） */
+
+route();
+if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+ "name": "首爾賞楓醫美購物團",
+ "short_name": "首爾行程",
+ "description": "首爾 5 天 4 夜互動行程書",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#FCF9F7",
+ "theme_color": "#FCF9F7",
+ "lang": "zh-Hant",
+ "icons": [
+  {
+   "src": "icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any maskable"
+  },
+  {
+   "src": "icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any maskable"
+  }
+ ]
+}
