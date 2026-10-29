@@ -439,6 +439,11 @@ HN('hn-bolicine','food','볼리치네 한남','볼리치네 한남','柴燒披�
 HN('hn-keem','food','KEEM','KEEM 한남','離漢江鎮站近的早午餐店。');
 HN('hn-solsot','food','솔솥 한남점','솔솥 한남점','鍋飯專賣，可選口味。');
 HN('hn-soi','food','소이연남 한남','소이연남 한남','泰式料理。');
+/* 漢南洞指定要逛的選物店（你們點名的；搜尋找不到可靠地址） */
+p('folnua','shop','Folnua','folnua 한남','','設計師品牌與包款、選物。你的原 PDF 提到的漢南洞店。',{unv:1,ar:'hannam',tip:'我搜尋不到這間的地址與營業時間，請在 Naver Map 搜尋「folnua 한남」確認。'});
+p('feria','shop','FERIA','FERIA 한남','','你們指定要逛的店。',{unv:1,ar:'hannam',tip:'我搜尋不到這間的地址與營業時間，請在 Naver Map 搜尋「FERIA 한남」確認。'});
+p('monorow','shop','MONOROW','MONOROW 한남','','你們指定要逛的店。',{unv:1,ar:'hannam',tip:'我查到的 MONOROW 在狎鷗亭（압구정로10길 42 1층，11:30–20:30）和新沙林蔭道，沒有查到漢南洞分店，請用 Naver Map 確認是不是同一間。'});
+p('depond','shop','DEPOND','DEPOND 한남','','你們指定要逛的店。',{unv:1,ar:'hannam',tip:'我搜尋不到這間的地址與營業時間，請在 Naver Map 搜尋「DEPOND 한남」確認。'});
 /* 地址核對（網路搜尋，來源為美食榜單／地圖整理頁；v=已找到一致地址，unv=找不到可靠地址） */
 const FIX={
  soha:{a:'서울 종로구 수표로28길 21-5',h:'09:00–20:30',v:1},
@@ -536,7 +541,7 @@ const DAYS=[
    {k:'d4a',t:'08:15',e:'🚇',ti:'去清潭醫美診所 It\'s me',ds:'It\'s me 清潭（狎鷗亭羅德奧站附近）。以最終預約時間調整。地鐵和叫車都可以，點下方「地鐵路線」看怎麼搭。',ps:['itsme']},
    {k:'d4b',t:'09:30',e:'✨',ti:'醫美諮詢＋療程',ds:'想做音波、麗珠蘭、黃金微針、水光，未必適合當天全部做滿。',ps:[]},
    {k:'d4c',t:'13:00',e:'🍱',ti:'診所附近午餐＋休息',ds:'術後若紅腫就減少外出。想吃清淡選清潭純豆腐；愛吃牛選 Wooga；想坐下休息可去 우디집。',ps:[]},
-   {k:'d4d',t:'下午',e:'☕',ti:'漢南洞自由逛',ds:'沿梨泰院路一帶小巷找設計師品牌；醫美後想坐下休息，優先選冷氣室內的咖啡館。',ps:['anthracite','pipeground','hanroast','newmix-hn'],go:['g-walk','🚶 看漢南洞逛街路線圖'],walk:'hannam'},
+   {k:'d4d',t:'下午',e:'☕',ti:'漢南洞自由逛',ds:'沿梨泰院路一帶小巷找設計師品牌；醫美後想坐下休息，優先選冷氣室內的咖啡館。',ps:['folnua','feria','monorow','depond','anthracite','pipeground','hanroast','newmix-hn'],go:['g-walk','🚶 看漢南洞逛街路線圖'],walk:'hannam'},
    {k:'d4e',t:'下午',e:'👟',ti:'聖水洞自由逛',ds:'從聖水站 3／4 號出口出發，進入延武場街一路看巷弄快閃、設計店、咖啡館。',ps:['musinsa-mega','musinsa-std','newmix-ss','onion','daelim','jojo','darak'],go:['g-walk','🚶 看聖水洞逛街路線圖'],walk:'seongsu'},
    {k:'d4f',t:'晚上',e:'🍽️',ti:'晚餐／樂天超市（待選）',ds:'晚餐從下方或探索頁挑選；術後不舒服就直接回民宿。',ps:['lotte']}]},
  {n:5,date:'11/8',w:'日',e:'🧳',c:'c-move',ti:'收好戰利品，滿載回台',sub:'將零食、伴手禮提前買完，最後一天專心搭飛機。',wx:['☀️','15° / 5°','晴朗；趕機場早出門，薄外套必備。'],
@@ -781,6 +786,7 @@ const WALK={
    {e:'🚩',ti:'漢江鎮站 1 號出口',d:'出站後直走約 100 公尺，在右邊第一個巷口右轉，沿坡道往上，約 5 分鐘到 Leeum。（來源：Leeum 官方指引）'},
    {e:'🏛️',ti:'Leeum 美術館',ps:['leeum'],d:'建議停留 60–90 分。週六 10:00–18:00，入場方式請先確認。',pins:['hn-keem']},
    {w:'步行約 5–10 分（估計）',e:'🛍️',ti:'newmix 漢南',ps:['newmix-hn'],d:'Leeum 在 이태원로55길，newmix 在 54길，我依路名推估兩者很近。'},
+   {w:'位置待確認',e:'🛍️',ti:'選物店：Folnua、FERIA、MONOROW、DEPOND',ps:['folnua','feria','monorow','depond'],d:'你們指定要逛的四間。我查不到它們的地址，請先在 Naver Map 搜尋，確認位置後，把它們放在離你當下最近的一段，不要特地走回頭。',warn:'MONOROW 我只查到狎鷗亭和新沙的分店，沒查到漢南洞，請確認。'},
    {w:'步行約 10 分（估計）',e:'☕',ti:'Anthracite Coffee 漢南',ps:['anthracite'],d:'休息一下。',warn:'有一篇文章提到這間可能會結束營業，請先用地圖確認。'},
    {w:'步行約 10 分（估計）',e:'🍕',ti:'Pipeground 漢南',ps:['pipeground'],d:'披薩與義大利麵，可四人分食。',warn:'有含牛肉的口味，不吃牛請避開。',pins:['hn-bolicine','hn-manri']},
    {w:'步行約 10 分（估計）',e:'🍗',ti:'Hannam Oriental Roast Chicken',ps:['hanroast'],d:'晚餐，藥膳烤雞，不含牛。熱門可能排隊。',pins:['hn-soi','hn-solsot','maple-itw']},
