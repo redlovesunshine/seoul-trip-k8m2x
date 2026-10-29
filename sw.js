@@ -1,5 +1,5 @@
 // 離線快取：先給快取、背景更新，下次開啟就是新版
-const CACHE='seoul-trip-v11';
+const CACHE='seoul-trip-v12';
 const CORE=['./','index.html','manifest.webmanifest','img/hero.jpg','img/home.jpg','img/nam.jpg','img/subway.jpg','icons/icon-192.png','icons/icon-512.png','icons/apple-touch-icon.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
