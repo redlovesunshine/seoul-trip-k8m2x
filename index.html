@@ -192,7 +192,8 @@ select{width:100%;font:inherit;background:var(--chip);color:var(--ink);border:0;
 .line:first-of-type{border-top:0}
 .ln{flex:0 0 26px;height:26px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:13px}
 .l2{background:#4C9A68}.l3{background:#E58F3B}.l4{background:#4A78B8}
-.line div{min-width:0}.l水{background:#E4B100;font-size:12px}
+.line div{min-width:0}.lA{background:#3B7DDD;font-size:12px}
+.l水{background:#E4B100;font-size:12px}
 .line b{display:block}.line span{color:var(--sub)}
 .img{width:100%;border-radius:18px;display:block;margin:8px 0}
 table{border-collapse:collapse;width:100%;font-size:13px}
@@ -507,7 +508,7 @@ const DAYS=[
  {n:4,date:'11/7',w:'六',e:'💆',c:'c-beauty',ti:'醫美主場＋時髦街區',sub:'以健康和恢復優先。首選 It\'s me 清潭，Doctors／GoldJ 當備選。',wx:['☀️','17° / 7°','晴朗；醫美後以防曬、遮陽為主。'],
   note:{c:'lav',h:'醫美後注意',b:['💆 避免自行使用刺激性保養、熱敷、汗蒸、泡湯及飲酒；術後面膜也先問診所。','🩹 黃金微針／注射可能紅腫與留針點，後續逛街先保留彈性。','🧾 退稅和醫美不是同一回事，詳見退稅攻略。'],go:['g-tax','看退稅攻略']},
   stops:[
-   {k:'d4a',t:'08:15',e:'🚇',ti:'去清潭醫美診所',ds:'首選 It\'s me 清潭（狎鷗亭羅德奧站附近）。備選 Doctors 新沙本店／GoldJ 宣陵站。以最終預約時間調整，建議叫車。',ps:['itsme','doctors','goldj']},
+   {k:'d4a',t:'08:15',e:'🚇',ti:'去清潭醫美診所',ds:'首選 It\'s me 清潭（狎鷗亭羅德奧站附近）。備選 Doctors 新沙本店／GoldJ 宣陵站。以最終預約時間調整。地鐵和叫車都可以，點下方「地鐵路線」看怎麼搭。',ps:['itsme','doctors','goldj']},
    {k:'d4b',t:'09:30',e:'✨',ti:'醫美諮詢＋療程',ds:'想做音波、麗珠蘭、黃金微針、水光，未必適合當天全部做滿。',ps:[]},
    {k:'d4c',t:'13:00',e:'🍱',ti:'診所附近午餐＋休息',ds:'術後若紅腫就減少外出。',ps:[]},
    {k:'d4d',t:'下午',e:'☕',ti:'漢南洞自由逛',ds:'沿梨泰院路一帶小巷找設計師品牌；醫美後想坐下休息，優先選冷氣室內的咖啡館。',ps:['anthracite','pipeground','hanroast','newmix-hn']},
@@ -841,13 +842,13 @@ function viewMe(){
 }
 
 /* ============ 面板（Sheet） ============ */
-function actsFor(x){
+function actsFor(x,k){
   const hasAddr=x&&(x.a||x.ko);
   return `<div class="acts">
    <button class="act" data-act="taxi" data-p="${x.id}"><span>🚕</span>叫車</button>
    <button class="act" data-act="wow" data-p="${x.id}"><span>💴</span>換錢</button>
    <button class="act" data-act="food" data-p="${x.id}"><span>🛵</span>叫外送</button>
-   <button class="act" data-act="metro" data-p="${x.id}"><span>🚇</span>地鐵</button></div>`;
+   <button class="act" data-act="metro" data-p="${x.id}" data-k="${k||''}"><span>🚇</span>${k?'地鐵路線':'地鐵'}</button></div>`;
 }
 const storyHtml=x=>x&&x.story?`<div class="card story"><h3>📖 故事講解：${esc(x.n)}</h3>${x.story.map(b=>`<h4>${b[0]}</h4><p>${b[1]}</p>`).join('')}</div>`:'';
 function openSheet(html){
@@ -855,6 +856,70 @@ function openSheet(html){
   $('#sheet').classList.add('on');$('#scrim').classList.add('on');$('#sheetIn').scrollTop=0;
 }
 function closeSheet(){$('#sheet').classList.remove('on');$('#scrim').classList.remove('on')}
+/* 地鐵路線：依地鐵路線圖與網路資料整理的參考，站數與時間為估計 */
+const M=(l,t,d,e)=>['m',l,t,d,e];
+const W=(t,d)=>['w',t,d||''];
+const ROUTES={
+ d1c:{from:'icn',to:'home',total:'約 1 小時 20 分～1 小時 40 分（含轉乘、步行）',steps:[
+  M('A','在仁川機場第 2 航廈站搭 AREX 機場鐵路，往首爾站方向','直達列車約 51–53 分；一般列車約 59–66 分','在「首爾站」下車'),
+  M('4','轉 4 號線，往 당고개（Danggogae）方向','3 站（會賢、明洞、忠武路），約 6–8 分','在「忠武路站」下車'),
+  W('出站後步行到民宿','依 Naver Map 導航，我沒有核對步行時間')],
+  notes:['你們 21:30 落地、約 23:00 出關，已經趕不上直達列車的末班（T2 約 22:40）。','一般列車 T2 末班約 23:50，深夜有部分班次只到數位媒體城（DMC），上車前看終點站，否則要在 DMC 換車。','抵達首爾站可能已近午夜，4 號線末班時間我沒有查到，所以第一晚我建議直接叫車。']},
+ d2a:{from:'home',to:'onion-anguk',total:'約 25–30 分（含走到忠武路站）',steps:[
+  W('走到忠武路站','依 Naver Map 導航'),
+  M('3','搭 3 號線，往 대화（Daehwa）方向','3 站（乙支路 3 街、鍾路 3 街、安國），約 6–8 分','在「安國站」下車：Artist Bakery 走 1 號出口，Cafe Onion 走 3 號出口（步行約 3 分）')],
+  notes:['Artist Bakery 不接受預約，現場用平板登記，7:30 起開始排隊。']},
+ d2b:{from:'onion-anguk',to:'changdeok',total:'步行約 10–15 分',steps:[W('從安國站一帶步行到昌德宮','沿 율곡로 方向走，依 Naver Map 導航')]},
+ d2e:{from:'changdeok',to:'namdaemun',total:'約 40–50 分（含走到安國站、轉乘）',steps:[
+  W('從昌德宮走到安國站','約 10–15 分'),
+  M('3','搭 3 號線，往 오금（Ogeum）方向','3 站（鍾路 3 街、乙支路 3 街、忠武路），約 6–8 分','在「忠武路站」下車並轉乘'),
+  M('4','轉 4 號線，往 사당／오이도（Sadang／Oido，南向）方向','2 站（明洞、會賢），約 4–5 分','在「會賢站」下車，走 5 或 6 號出口'),
+  W('步行到南大門市場','約 5 分')],
+  notes:['如果走累了，這一段叫車也可以，南大門離昌德宮不遠。']},
+ d2g:{from:'namdaemun',to:'home',total:'約 25–30 分（含步行）',steps:[
+  W('走到會賢站','約 5 分'),
+  M('4','搭 4 號線，往 당고개（Danggogae）方向','2 站（明洞、忠武路），約 4–5 分','在「忠武路站」下車'),
+  W('步行回民宿','依 Naver Map 導航')]},
+ d3d:{from:'dhp',to:'home',total:'步行約 12 分',steps:[W('從東大門歷史文化公園站步行回民宿','約 12 分（你的原行程書的估計）')]},
+ d3e:{from:'home',to:'gongneung',total:'約 20–25 分（含步行）',steps:[
+  W('走到忠武路站','依 Naver Map 導航'),
+  M('4','搭 4 號線，往 당고개（Danggogae）方向','2 站（東大門歷史文化公園、東大門），約 4–5 分','在「東大門站」下車，走 8 或 9 號出口'),
+  W('步行到孔陵一隻雞（鍾路 5 街附近）','約 5 分')]},
+ d3f:{from:'gongneung',to:'sparex',total:'約 10–15 分',steps:[
+  M('4','搭 4 號線，往 사당／오이도（南向）方向','1 站，約 3 分','在「東大門歷史文化公園站」下車，走 14 號出口'),
+  W('SPAREX 在 14 號出口前的大樓','')]},
+ d4a:{from:'home',to:'itsme',total:'約 40–55 分，換成叫車約 25–35 分（我沒有查到即時車況）',steps:[
+  W('走到忠武路站','依 Naver Map 導航'),
+  M('3','搭 3 號線，往 오금（Ogeum）方向','5 站（東國大學、藥水、金湖、玉水、狎鷗亭），約 12–15 分','在「狎鷗亭站」下車'),
+  W('從狎鷗亭站走到 It\'s me','約 15–20 分，或改搭計程車／公車（我沒有查到公車路線）')],
+  notes:['3 號線的「狎鷗亭站」和診所旁的「狎鷗亭羅德奧站」是不同車站，後者屬於水仁盆唐線，沒有和忠武路直達。','Naver Map 可能推薦經水仁盆唐線的轉乘路線，請以當天結果為準。']},
+ d5c:{from:'home',to:'icn',total:'約 1 小時 30 分～1 小時 45 分（含等車、轉乘）',steps:[
+  W('走到忠武路站','依 Naver Map 導航'),
+  M('4','搭 4 號線，往 사당／오이도（Sadang／Oido，南向）方向','3 站（明洞、會賢、首爾站），約 6–8 分','在「首爾站」下車並轉 AREX'),
+  M('A','搭 AREX 往仁川機場第 2 航廈方向','直達約 51–53 分；一般約 59–66 分','在「第 2 航廈站」下車')],
+  notes:['直達列車要買對號車票（來源寫原價約 ₩13,000，網路預購可能更便宜），不能直接刷交通卡；一般列車可刷交通卡。','14:15 起飛、目標 11:15 前到機場，建議 9:30 前出發。']}
+};
+const prevPid=k=>{let id='home';for(const d of DAYS)for(const s of d.stops){if(s.k===k)return id;if(s.ps&&s.ps.length)id=s.ps[0]}return id};
+const gdir=(a,b,m)=>'https://www.google.com/maps/dir/?api=1&origin='+enc(a.a||a.ko||a.n)+'&destination='+enc(b.a||b.ko||b.n)+'&travelmode='+m;
+function stepRow(st){
+  if(st[0]==='w')return `<div class="line"><span class="ln" style="background:var(--chip);color:var(--ink)">🚶</span><div><b>${esc(st[1])}</b><span>${esc(st[2])}</span></div></div>`;
+  return `<div class="line"><span class="ln l${st[1]}">${esc(st[1])}</span><div><b>${esc(st[2])}</b><span>${esc(st[3])}<br>🚪 ${esc(st[4])}</span></div></div>`;
+}
+function showRoute(k){
+  const s=SM[k],R=ROUTES[k];
+  const toP=R?PM[R.to]:(s.taxi?PM[s.taxi]:PM[s.ps[0]]);
+  const fromP=R?PM[R.from]:PM[prevPid(k)];
+  if(!toP){openSheet(`<h2><span>🚇 地鐵路線</span><button class="close" data-close aria-label="關閉">✕</button></h2><p class="sub">這個時段沒有固定地點，沒有路線可以查。</p>`);return}
+  let h=`<h2><span>🚇 前往：${esc(s.ti)}</span><button class="close" data-close aria-label="關閉">✕</button></h2>
+   <p class="sub">${esc(fromP.n)} → ${esc(toP.n)}</p>`;
+  if(R){h+=`<div class="why" style="background:var(--sky-s)">⏱️ 預估：<b>${esc(R.total)}</b></div><div class="card" style="padding:4px 14px">${R.steps.map(stepRow).join('')}</div>`;
+    if(R.notes)h+=`<div class="note butter">${R.notes.map(t=>`<p>• ${esc(t)}</p>`).join('')}</div>`}
+  else h+=`<div class="note butter"><p>這一段我沒有整理好的地鐵路線。下面兩個按鈕會用地圖查當下最準的路線、站數和時間。</p></div>`;
+  h+=`<div class="btns"><a class="btn" href="${gdir(fromP,toP,'transit')}" target="_blank" rel="noopener">Google 大眾運輸 ↗</a><a class="btn soft" href="${nav(toP)}" target="_blank" rel="noopener">Naver Map 目的地 ↗</a><button class="btn ghost" data-driver="${toP.id}">🚕 改叫車</button></div>
+   <p style="color:var(--sub);font-size:12.5px;margin-top:10px">${R?'這是我依地鐵路線圖和網路資料整理的參考，站數與時間是估計，不是即時資訊。實際請以 Naver Map 或 Google 地圖為準。':'地圖會顯示即時班次、出口與步行時間。'}</p>
+   <div class="btns"><button class="btn ghost sm" data-backstop="${k}">‹ 回這一站</button></div>`;
+  openSheet(h);
+}
 function nearList(key,ex){
   const own=(SM[key]&&SM[key].ps)||[];
   const L=P.filter(x=>x.near===key&&x.id!==ex&&!own.includes(x.id));
@@ -867,7 +932,7 @@ function stopSheet(s){
    <p class="sub">Day ${s.day} ・ ${d.date} ${d.w} ・ ${esc(s.t)}</p><p style="margin-top:8px;font-size:14px">${esc(s.ds)}</p>`;
   if(s.tips)h+=s.tips.map(t=>`<div class="why">💡 ${esc(t)}</div>`).join('');
   if(s.go)h+=`<div class="btns" style="margin:12px 0 0"><button class="btn" data-go="${s.go[0]}">${s.go[1]} ›</button></div>`;
-  if(tx)h+=actsFor(tx);
+  if(tx)h+=actsFor(tx,s.k);
   ps.forEach(x=>{h+=storyHtml(x)});
   if(ps.length)h+=`<h3 class="s">${ps.length>1?'這站的地點':'地點'}</h3>${ps.map(row).join('')}`;
   h+=nearList(s.k);
@@ -948,7 +1013,8 @@ document.addEventListener('click',e=>{
     if(q('.sheet'))placeSheet(PM[id]);else if(S.tab==='explore')results();else refresh(true);return}
   if(el=q('[data-term]')){store.set('term',+el.dataset.term);if($('#drv').classList.contains('on'))openDriver(PM.icn);else refresh(true);return}
   if(el=q('[data-act]')){const x=PM[el.dataset.p];const a=el.dataset.act;S.ctx=x.id;
-    if(a==='taxi'){closeSheet();openDriver(x)}else go({wow:'g-wow',food:'g-food',metro:'g-metro'}[a]);return}
+    if(a==='taxi'){closeSheet();openDriver(x)}else if(a==='metro'&&el.dataset.k){showRoute(el.dataset.k)}else go({wow:'g-wow',food:'g-food',metro:'g-metro'}[a]);return}
+  if(el=q('[data-backstop]')){stopSheet(SM[el.dataset.backstop]);return}
   if(el=q('[data-driver]')){const x=PM[el.dataset.driver];S.ctx=x.id;openDriver(x);return}
   if(q('#drvClose')){$('#drv').classList.remove('on');return}
   if(q('#drvGuide')){$('#drv').classList.remove('on');go('g-taxi');return}
