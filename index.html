@@ -119,6 +119,8 @@ a{color:inherit;text-decoration:none}
 .tag.f{background:var(--rose-s);color:var(--rose)}
 .tag.m{background:var(--chip);color:var(--ink)}
 .tag.x{background:var(--butter-s);color:var(--butter)}
+.story h4{font-size:14px;margin:12px 0 2px;color:var(--ink)}
+.story p{font-size:14px;color:var(--ink);margin:0}
 .more{color:var(--accent);font-size:12.5px;margin-top:6px;display:block}
 .ex{margin:14px 0 4px}
 .ex h3{font-size:15px;margin-bottom:8px}
@@ -368,6 +370,26 @@ X('yeonbang','food','聖水連房','성수연방','서울 성동구 성수이로
 [['jinokhwa','chicken'],['hanroast','chicken'],['norang','pork'],['pildong','beef'],['jangchung-pyeongyang','beef'],['jangchung','pork'],['pipeground','both']].forEach(([id,m])=>{PM0[id].m=m});
 p('artist-bakery','bakery','Artist Bakery 安國','아티스트베이커리 안국','서울 종로구 율곡로 45 1층','安國站 1 號出口附近的鹽麵包店，倫敦貝果博物館的姊妹店，和 Cafe Onion 二選一當早餐。',{ar:'jongno',h:'08:00–20:00',v:1,tip:'不接受預約，現場用店門口平板登記，7:30 起開始排隊'});
 p('burdeng','shop','Burdeng 童裝商場','부르뎅 아동복 남대문시장','서울 중구 남대문시장8길 14','南大門童裝商場，今天的第一站。白天通常只營業到約 17:00，所以下午一到就先來。',{ar:'nam',unv:1,tip:'地址取自你貼的截圖，我沒查證。舊資料寫過週一休、週四休，說法不一；11/5 是週四，出發前請打電話確認（舊資料電話 02-755-5737）'});
+p('huwon','sight','昌德宮後苑（秘苑）','창덕궁 후원','서울 종로구 율곡로 99 창덕궁 내','只能跟導覽團進入的王室後花園，導覽約 90 分鐘。',{ar:'jongno',h:'依預約場次入場，導覽約 90 分鐘',tip:'一定要先預約，並依票券時間集合。聽說有英文場次，時間與票價各來源不一，以預約頁和你的票券為準。路上有坡道，穿好走的鞋。'});
+const STORY={
+ changdeok:[
+  ['🎧 一句話版','昌德宮是朝鮮國王的「第二個家」，後來變成他們住最久的家。'],
+  ['📖 它的故事','朝鮮的第一座正宮是景福宮。1405 年，國王在旁邊另外蓋了昌德宮，當作備用的宮殿。後來戰亂把景福宮破壞，沒有馬上修好，昌德宮就變成國王平常居住和辦公的主要宮殿，好幾個世紀都是這樣。木造建築怕火，這裡也燒過、重建過好幾次。'],
+  ['🌿 為什麼是世界遺產','1997 年被列入聯合國世界遺產。它的特別之處是不把地整成平地，而是順著山坡、樹林和地形來蓋房子，看起來像房子是長在山裡面。'],
+  ['👀 一路會看到什麼','・<b>敦化門</b>：大門，現存宮殿裡最古老的宮門之一（約 1412 年）。<br>・<b>仁政殿</b>：正殿，像國王的大禮堂，登基、接見外國使節這類大事在這裡舉行。<br>・<b>宣政殿</b>：國王日常辦公的地方，據說是少數藍色瓦片的建築，找找屋頂顏色。<br>・<b>大造殿</b>：王后住的主要房子。<br>・<b>樂善齋</b>：外觀像一般韓屋的住宅，比其他宮殿樸素，可以對照看看。'],
+  ['📸 11 月初拍照提醒','宮裡有銀杏和楓葉，早上光線最好。走到正殿前先看屋頂和後面的山，會很有「宮殿融進山裡」的感覺。'],
+  ['💡 帶回家的一句話','「皇宮不是蓋在平地上，是長在山裡的。」']
+ ],
+ huwon:[
+  ['🎧 一句話版','昌德宮後面的國王私人花園，只能跟導覽團進去。'],
+  ['📖 為什麼叫「秘苑」','它是王室專用的後花園，以前外人進不來，所以有「秘密花園」的名字。現在也不能自由進出，要預約並跟著導覽團走，一團大約 90 分鐘。'],
+  ['🌳 它跟一般花園哪裡不一樣','不是整齊對稱的花園，而是保留原本的山坡和樹林，把池塘和亭子自然放在裡面，感覺像走進一座小山谷。國王在這裡休息、讀書、欣賞風景。'],
+  ['👀 導覽一路會看到什麼','・<b>芙蓉池</b>：長方形池塘，據說導覽通常第一個到這裡，旁邊的亭子倒映在水上。<br>・<b>宙合樓</b>：池邊的兩層樓，秋天倒影最好拍，也是熱門拍照點。據說以前是國王的藏書閣。<br>・<b>愛蓮池</b>：種蓮花的池塘，旁邊有小亭子。<br>・<b>不老門</b>：名字的意思是「不會老」，傳說走過去會長壽，很多人排隊拍照。<br>・<b>尊德亭</b>：池塘邊的亭子群，是後苑比較晚加進去的一角。'],
+  ['📸 秋天拍照提醒','這裡是昌德宮楓葉最美的區域。導覽團會一起移動，想拍照要掌握時間，別落隊。'],
+  ['💡 帶回家的一句話','「國王的私人秘密花園，不能自己逛，要跟導覽團才進得去。」']
+ ]
+};
+Object.entries(STORY).forEach(([id,st])=>{PM0[id].story=st});
 /* 地址核對（網路搜尋，來源為美食榜單／地圖整理頁；v=已找到一致地址，unv=找不到可靠地址） */
 const FIX={
  soha:{a:'서울 종로구 수표로28길 21-5',h:'09:00–20:30',v:1},
@@ -446,7 +468,7 @@ const DAYS=[
    {k:'d2a',t:'08:30–09:40',e:'🥐',ti:'安國站附近吃早餐',ds:'Cafe Onion 或 Artist Bakery 二選一。從民宿到忠武路站搭 3 號線，直達安國站。',ps:['onion-anguk','artist-bakery'],taxi:'onion-anguk'},
    {k:'d2b',t:'09:40–10:15',e:'🚶',ti:'前往昌德宮、入園',ds:'從安國站步行到昌德宮，依門票時間入園。',ps:['changdeok']},
    {k:'d2c',t:'10:15–11:10',e:'🏯',ti:'昌德宮拍照，慢慢往秘苑入口移動',ds:'古宮秋景，拍照後走到秘苑入口。',ps:[]},
-   {k:'d2d',t:'11:30–約 13:00',e:'🌿',ti:'秘苑英文導覽（4 人）',ds:'秘苑需依預約票的時間入場，請以實際票券時間為準。',ps:['changdeok'],tips:['秘苑導覽一定要先預約，票券時間以實際為準。']},
+   {k:'d2d',t:'11:30–約 13:00',e:'🌿',ti:'秘苑英文導覽（4 人）',ds:'秘苑需依預約票的時間入場，請以實際票券時間為準。導覽約 90 分鐘，一路有坡道。',ps:['huwon'],tips:['秘苑導覽一定要先預約，票券時間以實際為準。']},
    {k:'d2e',t:'13:00–13:45',e:'🚕',ti:'前往南大門市場',ds:'叫車或搭地鐵前往，途中可簡單吃點東西。',ps:[],taxi:'namdaemun'},
    {k:'d2f',t:'13:45–17:00',e:'🛍️',ti:'南大門採買：今天的購物主場',ds:'童裝、女裝、飾品、小物。下午一到先去童裝區，因為童裝商場多半營業到約 17:00。',ps:['burdeng','namdaemun','vegtteok','kalguksu','galchi']},
    {k:'d2g',t:'17:00–18:30',e:'🛒',ti:'繼續逛仍營業的店家，或回民宿休息',ds:'繼續逛還開著的店；想補貨可去 Olive Young、大創，也可以回民宿休息。',ps:[]},
@@ -529,7 +551,7 @@ function row(x){
   const c=CAT[x.cat];
   return `<div class="row c-${x.cat}" data-open="${x.id}" role="button" tabindex="0">
    <div class="ico">${c[0]}</div>
-   <div class="rb"><div class="rt">${esc(x.n)}${x.x?'<span class="tag x">'+(x.src||'補充')+'</span>':x.f?'<span class="tag f">朋友推薦</span>':''}${x.m?`<span class="tag m">${MEAT[x.m][0]} ${MEAT[x.m][1]}</span>`:''}${x.unv?'<span class="tag m">⚠️ 地址待確認</span>':''}</div><div class="rd">${x.h?'🕒 '+esc(x.h)+'｜':''}${esc(x.d)}</div></div>
+   <div class="rb"><div class="rt">${esc(x.n)}${x.x?'<span class="tag x">'+(x.src||'補充')+'</span>':x.f?'<span class="tag f">朋友推薦</span>':''}${x.m?`<span class="tag m">${MEAT[x.m][0]} ${MEAT[x.m][1]}</span>`:''}${x.unv?'<span class="tag m">⚠️ 地址待確認</span>':''}${x.story?'<span class="tag f">📖 故事</span>':''}</div><div class="rd">${x.h?'🕒 '+esc(x.h)+'｜':''}${esc(x.d)}</div></div>
    <div class="ra"><button class="ib" data-copy="${x.id}" aria-label="複製地址">📋</button><a class="ib" href="${nav(x)}" target="_blank" rel="noopener" aria-label="Naver 地圖">🗺️</a></div></div>`;
 }
 const addrBlock=x=>`<div class="addr"><div>${esc(x.a||x.ko)}<small>${x.a?(x.v?'✓ 韓文地址（已用網路資料核對）':'韓文地址'):(x.unv?'⚠️ 地址未確認，先用店名在地圖搜尋':'韓文店名（地圖搜尋用）')}</small></div><button class="btn sm" data-copy="${x.id}">📋 複製</button></div>`;
@@ -804,6 +826,7 @@ function actsFor(x){
    <button class="act" data-act="food" data-p="${x.id}"><span>🛵</span>叫外送</button>
    <button class="act" data-act="metro" data-p="${x.id}"><span>🚇</span>地鐵</button></div>`;
 }
+const storyHtml=x=>x&&x.story?`<div class="card story"><h3>📖 故事講解：${esc(x.n)}</h3>${x.story.map(b=>`<h4>${b[0]}</h4><p>${b[1]}</p>`).join('')}</div>`:'';
 function openSheet(html){
   $('#sheetIn').innerHTML='<div class="grab"></div><div class="sh">'+html+'</div>';
   $('#sheet').classList.add('on');$('#scrim').classList.add('on');$('#sheetIn').scrollTop=0;
@@ -822,6 +845,7 @@ function stopSheet(s){
   if(s.tips)h+=s.tips.map(t=>`<div class="why">💡 ${esc(t)}</div>`).join('');
   if(s.go)h+=`<div class="btns" style="margin:12px 0 0"><button class="btn" data-go="${s.go[0]}">${s.go[1]} ›</button></div>`;
   if(tx)h+=actsFor(tx);
+  ps.forEach(x=>{h+=storyHtml(x)});
   if(ps.length)h+=`<h3 class="s">${ps.length>1?'這站的地點':'地點'}</h3>${ps.map(row).join('')}`;
   h+=nearList(s.k);
   if(!ps.length&&!P.some(x=>x.near===s.k))h+=`<div class="why" style="margin-top:14px">這個時段沒有固定地點，可到「探索」找附近的店。</div>`;
@@ -836,6 +860,7 @@ function placeSheet(x){
   ${x.why?`<div class="why">${x.f?'👭':'✨'} ${esc(x.why)}<br><small style="color:var(--sub)">${x.f?'營業時間取自朋友提供的清單，出發前請再確認。':x.src?'來自你提供的社群貼文，我沒有逐一核對，請出發前確認地址、營業時間與是否仍在營業。':'AI 補充推薦，營業時間與排隊狀況請出發前確認。'}</small></div>`:''}
   ${x.tip?`<div class="why">💡 ${esc(x.tip)}</div>`:''}
   <div class="why" style="background:var(--sky-s)">🕒 營業時間：${x.h?esc(x.h):'尚未收錄'}<br><a class="btn soft sm" style="margin-top:6px" href="${goo(x)}" target="_blank" rel="noopener">查最新營業時間 ↗</a><br><small style="color:var(--sub)">店家常調整公休與時間，出發前請以地圖／官方公告為準。</small></div>
+  ${storyHtml(x)}
   ${addrBlock(x)}
   <div class="btns">${mapBtns(x)}${x.link?`<a class="btn soft sm" href="${x.link}" target="_blank" rel="noopener">Airbnb 房源 ↗</a>`:''}<button class="btn ghost sm" data-fav="${x.id}">${favs.includes(x.id)?'⭐ 已收藏':'☆ 收藏'}</button></div>
   ${actsFor(x)}`;
