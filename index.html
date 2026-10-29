@@ -123,6 +123,21 @@ a{color:inherit;text-decoration:none}
 .tag.x{background:var(--butter-s);color:var(--butter)}
 .story h4{font-size:14px;margin:12px 0 2px;color:var(--ink)}
 .story p{font-size:14px;color:var(--ink);margin:0}
+.rtl{position:relative;padding-left:46px;margin-top:10px}
+.rtl::before{content:"";position:absolute;left:17px;top:10px;bottom:10px;width:4px;border-radius:4px;background:var(--accent-soft)}
+.rn{position:relative;margin:0 0 6px}
+.rn .dt{position:absolute;left:-46px;top:0;width:38px;height:38px;border-radius:50%;background:var(--card);border:3px solid var(--accent);box-shadow:var(--shadow);display:grid;place-items:center;font-size:18px}
+.rn.end .dt{background:var(--accent);border-color:var(--accent)}
+.rn h4{margin:6px 0 4px;font-size:15.5px}
+.rn .nd{font-size:13px;color:var(--sub);margin-bottom:6px}
+.rw{position:relative;margin:2px 0 14px;font-size:12px;color:var(--sub)}
+.rw span{background:var(--chip);border-radius:999px;padding:2px 10px}
+.rn .row{margin-bottom:8px}
+.pins{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px}
+.pinchip{background:var(--butter-s);color:var(--ink);border-radius:999px;padding:5px 11px;font-size:12.5px;text-align:left}
+.pinlab{font-size:12px;color:var(--sub);margin-top:2px}
+.wtabs{display:flex;gap:8px;margin:8px 0}
+.wtabs .fc{flex:1;text-align:center;padding:9px}
 .more{color:var(--accent);font-size:12.5px;margin-top:6px;display:block}
 .ex{margin:14px 0 4px}
 .ex h3{font-size:15px;margin-bottom:8px}
@@ -291,9 +306,7 @@ p('petite','sight','小法國村','쁘띠프랑스','경기 가평군 청평면 
 p('italy','sight','小義大利村','가평 이탈리아마을','','一日遊行程之一，依導遊安排。',{ar:'gapyeong'});
 p('dhp','move','東大門歷史文化公園站','동대문역사문화공원역','','Klook 回程下車點，預計 18:50（可能塞車晚到）。',{ar:'dongdae'});
 p('sparex','beauty','SPAREX 汗蒸幕','스파렉스 동대문','','女湯搓澡服務先問時間，不要預設能直接加購。',{ar:'dongdae',tip:'若隔天做雷射／針劑，先問診所術前一天能否汗蒸'});
-p('itsme','beauty',"It's me 清潭","IT'S ME 클리닉 청담",'서울 강남구 선릉로157길 14 3~4층','清潭的醫美診所（IT\'S ME Clinic），3、4 樓。現在是首選。離狎鷗亭羅德奧站很近（據說步行約 2 分鐘，5 號出口約 128 公尺）。',{ar:'gangnam',q:'서울 강남구 선릉로157길 14',h:'週一、四 10:00–19:00；週二、五 10:00–20:30；週六 10:00–17:00；週三、日休',v:1,tip:'11/7 是週六，診所約營業到 17:00（另有來源寫 16:30），建議預約上午。時間與預約以診所官網和診所通知為準。'});
-p('doctors','beauty','Doctors 新沙本店','닥터스','서울 강남구 도산대로12길 7','新沙站 1 號出口附近，需確認預約。',{ar:'gangnam',q:'서울 강남구 도산대로12길 7'});
-p('goldj','beauty','GoldJ 江南','골드제이','서울 강남구 테헤란로 408','宣陵站附近；和 Doctors 不在同一站。',{ar:'gangnam',q:'서울 강남구 테헤란로 408'});
+p('itsme','beauty',"It's me 清潭","IT'S ME 클리닉 청담",'서울 강남구 선릉로157길 14 3~4층','清潭的醫美診所（IT\'S ME Clinic），3、4 樓。已確定去這間。離狎鷗亭羅德奧站很近（據說步行約 2 分鐘，5 號出口約 128 公尺）。',{ar:'gangnam',q:'서울 강남구 선릉로157길 14',h:'週一、四 10:00–19:00；週二、五 10:00–20:30；週六 10:00–17:00；週三、日休',v:1,tip:'11/7 是週六，診所約營業到 17:00（另有來源寫 16:30），建議預約上午。時間與預約以診所官網和診所通知為準。'});
 p('anthracite','cafe','Anthracite Coffee 漢南','앤트러사이트 한남','서울 용산구 이태원로 240','工業風空間；官方週六 09:30–22:00。',{ar:'hannam'});
 p('pipeground','food','Pipeground 漢南','파이프그라운드 한남','서울 용산구 한남대로27길 66','有名的披薩與義大利麵，可四人分享；含牛肉口味需避開。',{ar:'hannam'});
 p('hanroast','food','Hannam Oriental Roast Chicken','한남 동양 로스트치킨','서울 용산구 대사관로34길 12','韓式藥膳烤雞，晚餐熱門，可能排隊。',{ar:'hannam',q:'서울 용산구 대사관로34길 12'});
@@ -369,7 +382,7 @@ X('nami-ginkgo','sight','南怡島銀杏路與水杉路','남이섬 은행나무
 X('jangchung','food','獎忠洞豬腳巷','장충동 족발골목','서울 중구 장충단로 일대','老字號豬腳店聚集。','d3e','離東大門歷史文化公園站很近，回程累了想吃肉的選擇（想吃排骨湯可二選一）。','dongdae');
 X('leeum','sight','Leeum 美術館','리움미술관','서울 용산구 이태원로55길 60-16','韓國當代與傳統藝術，建築也好看。','d4d','漢南洞最熱門的文化景點，需先確認展覽與入場方式。','hannam');
 X('garosu','shop','新沙林蔭大道','신사 가로수길','서울 강남구 가로수길 일대','咖啡、選物店、快閃店。','d4c','走路可到，診所旁的悠閒街區，術後可在咖啡館坐著休息。','gangnam');
-X('dosan','sight','道山公園','도산공원','서울 강남구 도산대로45길 20','安靜綠地，秋天落葉好拍。','d4c','近 Doctors，想散步又不想跑太遠時的選項。','gangnam');
+X('dosan','sight','道山公園','도산공원','서울 강남구 도산대로45길 20','安靜綠地，秋天落葉好拍。','d4c','離 It\'s me 不遠，想散步又不想跑太遠時的選項。','gangnam');
 X('seoulforest','sight','首爾林','서울숲','서울 성동구 뚝섬로 273','大片公園，秋季楓葉與銀杏。','d4e','離聖水洞很近，逛完店順路拍秋色。','seongsu');
 X('yeonbang','food','聖水連房','성수연방','서울 성동구 성수이로14길 14','複合式選物與美食空間。','d4e','聖水洞近期很多人推薦的新型態商場，有餐飲也有小店。','seongsu');
 
@@ -413,6 +426,19 @@ Object.assign(STORY,{
  ]
 });
 Object.entries(STORY).forEach(([id,st])=>{PM0[id].story=st});
+/* 清潭午餐與休息（旅客文章與榜單整理，多數沒有查到地址或營業時間） */
+p('cd-sundubu','food','清潭純豆腐 本店','청담순두부 본점','서울 강남구 도산대로53길 19','純豆腐與石鍋飯，清淡暖胃，價格實惠。',{x:1,src:'榜單推薦',near:'d4c',ar:'gangnam',why:'旅客文章說離羅德奧站走路約 5 分鐘，適合診所後吃清淡的。',tip:'地址只找到一個來源，營業時間沒查到，請用地圖確認。'});
+p('newmandu','food','뉴만두집','뉴만두집','','平壤餃子湯（만둣국），餃子大顆。湯底用牛骨熬，不吃牛的人請避開。',{x:1,src:'榜單推薦',near:'d4c',m:'beef',unv:1,ar:'gangnam',h:'12:00 開始營業（打烊時間沒查到）',why:'被列為首爾三大餃子店之一，在神社洞一帶。'});
+p('downtowner','food','Downtowner 清潭','다운타우너 청담','','厚漢堡，套餐約 ₩17,000，附續杯飲料，漢堡肉是牛肉。',{x:1,src:'榜單推薦',near:'d4c',m:'beef',unv:1,ar:'gangnam',why:'上班族午餐店，在清潭洞巷弄內，停車不方便。'});
+p('wooga','food','Wooga 牛家（午餐生牛肉拌飯）','Wooga 압구정','','午餐限定的炙燒生牛肉拌飯，一個人吃也不尷尬。愛吃牛的人選。',{x:1,src:'榜單推薦',near:'d4c',m:'beef',unv:1,ar:'gangnam',why:'多篇旅客文章推薦午餐這款。韓文店名我沒查到，請用 Wooga 搜尋。'});
+p('woodyzip','cafe','우디집（甜點咖啡）','우디집 압구정','서울 강남구 압구정로46길 32','甜點好吃的咖啡店，適合診所後坐下休息。',{x:1,src:'榜單推薦',near:'d4c',ar:'gangnam',why:'兩年前的文章推薦，週末人多。請確認還在營業。',tip:'資料較舊，營業時間沒查到。'});
+/* 漢南洞沿路熱門（2026 年 6 月榜單，沒有地址） */
+const HN=(id,cat,n,ko,d)=>p(id,cat,n,ko,'',d,{x:1,src:'榜單推薦',near:'d4d',unv:1,ar:'hannam',why:'2026 年 6 月美食榜單推薦；沒有查到地址與營業時間。'});
+HN('hn-manri','food','한남만리','한남만리','家常韓式定食，適合想吃清淡、安靜吃飯。');
+HN('hn-bolicine','food','볼리치네 한남','볼리치네 한남','柴燒披薩與手工麵，適合多人分食。');
+HN('hn-keem','food','KEEM','KEEM 한남','離漢江鎮站近的早午餐店。');
+HN('hn-solsot','food','솔솥 한남점','솔솥 한남점','鍋飯專賣，可選口味。');
+HN('hn-soi','food','소이연남 한남','소이연남 한남','泰式料理。');
 /* 地址核對（網路搜尋，來源為美食榜單／地圖整理頁；v=已找到一致地址，unv=找不到可靠地址） */
 const FIX={
  soha:{a:'서울 종로구 수표로28길 21-5',h:'09:00–20:30',v:1},
@@ -450,8 +476,6 @@ const FIX={
  norang:{unv:1},'f-dalim':{unv:1},'f-gamja':{unv:1},bonjuk:{unv:1},'eul-jeongyuk':{unv:1},'eul-meokgeori':{unv:1},mugeoi:{unv:1},'gangnam-myeonok':{unv:1},lnb:{unv:1},'f-hanjs':{unv:1},'f-lowkey':{unv:1}
 };
 Object.assign(FIX,{
- doctors:{h:'平日 09:30–19:00（午休 13:00–14:00）；週末 09:30–15:30',v:1,tip:'11/7 是週六，診所約 15:30 前結束，預約請排早上。診療時間以診所預約為準。'},
- goldj:{a:'서울 강남구 테헤란로 408 대치빌딩 8층',h:'平日 10:00–19:00；週六 10:30–16:00',v:1,tip:'11/7 是週六，診所約 16:00 前結束，預約請排上午。診療時間以診所預約為準。'},
  newcore:{h:'10:30–22:00',v:1},hyundai:{v:1},
  nyu:{a:'서울 중구 마장로 34 1–3층',h:'11:00–翌日 05:00',v:1},
  'musinsa-mega':{v:1},
@@ -476,6 +500,7 @@ P.forEach(x=>{if(x.near==='d2g')x.near='d2h'});
 Object.assign(PM0['onion-anguk'],{x:0,near:'',why:'',src:''});
 [['f-muguok','d2e'],['ssamzie','d2e'],['gyerim','d2e'],['tosokchon','d2e'],['gwangjang','d2e'],['cheongsu','d2h'],['soha','d2h'],['ikseon','d2h'],['newmix-an','d2a'],['vegtteok','d2f'],['kalguksu','d2f'],['galchi','d2f'],['myeongdong-gyoja','d2g'],['myeongdong-street','d2g'],['oy-dhp','d2g'],['daiso','d2g'],['hyundai','d2g'],['newcore','d2g']].forEach(([id,k])=>{PM0[id].near=k});
 PM0.sung.near='';
+PM0.garosu.near='';PM0['gangnam-myeonok'].near='';
 /* 行程 */
 const DAYS=[
  {n:1,date:'11/4',w:'三',e:'✈️',c:'c-move',ti:'落地首爾，第一晚不要趕',sub:'順利入住最重要，購物與炸雞是加分。',wx:['🌤️','12° / 3°','晴時多雲；夜間入境約 6–8°C，大衣、圍巾。'],
@@ -505,14 +530,14 @@ const DAYS=[
    {k:'d3d',t:'19:10',e:'🧦',ti:'民宿短暫休息',ds:'換鞋、放東西。',ps:['home']},
    {k:'d3e',t:'20:00',e:'🍲',ti:'晚餐（待選）',ds:'熱湯很適合郊外走一天後；東大門一帶有雞鍋、豬腳、排骨湯可選，從下方挑。',ps:[]},
    {k:'d3f',t:'21:30',e:'♨️',ti:'SPAREX 汗蒸幕',ds:'女湯搓澡服務先問時間，不要預設能直接加購。',ps:['sparex']}]},
- {n:4,date:'11/7',w:'六',e:'💆',c:'c-beauty',ti:'醫美主場＋時髦街區',sub:'以健康和恢復優先。首選 It\'s me 清潭，Doctors／GoldJ 當備選。',wx:['☀️','17° / 7°','晴朗；醫美後以防曬、遮陽為主。'],
+ {n:4,date:'11/7',w:'六',e:'💆',c:'c-beauty',ti:'醫美主場＋時髦街區',sub:'以健康和恢復優先。醫美確定去 It\'s me 清潭。',wx:['☀️','17° / 7°','晴朗；醫美後以防曬、遮陽為主。'],
   note:{c:'lav',h:'醫美後注意',b:['💆 避免自行使用刺激性保養、熱敷、汗蒸、泡湯及飲酒；術後面膜也先問診所。','🩹 黃金微針／注射可能紅腫與留針點，後續逛街先保留彈性。','🧾 退稅和醫美不是同一回事，詳見退稅攻略。'],go:['g-tax','看退稅攻略']},
   stops:[
-   {k:'d4a',t:'08:15',e:'🚇',ti:'去清潭醫美診所',ds:'首選 It\'s me 清潭（狎鷗亭羅德奧站附近）。備選 Doctors 新沙本店／GoldJ 宣陵站。以最終預約時間調整。地鐵和叫車都可以，點下方「地鐵路線」看怎麼搭。',ps:['itsme','doctors','goldj']},
+   {k:'d4a',t:'08:15',e:'🚇',ti:'去清潭醫美診所 It\'s me',ds:'It\'s me 清潭（狎鷗亭羅德奧站附近）。以最終預約時間調整。地鐵和叫車都可以，點下方「地鐵路線」看怎麼搭。',ps:['itsme']},
    {k:'d4b',t:'09:30',e:'✨',ti:'醫美諮詢＋療程',ds:'想做音波、麗珠蘭、黃金微針、水光，未必適合當天全部做滿。',ps:[]},
-   {k:'d4c',t:'13:00',e:'🍱',ti:'診所附近午餐＋休息',ds:'術後若紅腫就減少外出。',ps:[]},
-   {k:'d4d',t:'下午',e:'☕',ti:'漢南洞自由逛',ds:'沿梨泰院路一帶小巷找設計師品牌；醫美後想坐下休息，優先選冷氣室內的咖啡館。',ps:['anthracite','pipeground','hanroast','newmix-hn']},
-   {k:'d4e',t:'下午',e:'👟',ti:'聖水洞自由逛',ds:'從聖水站 3／4 號出口出發，進入延武場街一路看巷弄快閃、設計店、咖啡館。',ps:['musinsa-mega','musinsa-std','newmix-ss','onion','daelim','jojo','darak']},
+   {k:'d4c',t:'13:00',e:'🍱',ti:'診所附近午餐＋休息',ds:'術後若紅腫就減少外出。想吃清淡選清潭純豆腐；愛吃牛選 Wooga；想坐下休息可去 우디집。',ps:[]},
+   {k:'d4d',t:'下午',e:'☕',ti:'漢南洞自由逛',ds:'沿梨泰院路一帶小巷找設計師品牌；醫美後想坐下休息，優先選冷氣室內的咖啡館。',ps:['anthracite','pipeground','hanroast','newmix-hn'],go:['g-walk','🚶 看漢南洞逛街路線圖'],walk:'hannam'},
+   {k:'d4e',t:'下午',e:'👟',ti:'聖水洞自由逛',ds:'從聖水站 3／4 號出口出發，進入延武場街一路看巷弄快閃、設計店、咖啡館。',ps:['musinsa-mega','musinsa-std','newmix-ss','onion','daelim','jojo','darak'],go:['g-walk','🚶 看聖水洞逛街路線圖'],walk:'seongsu'},
    {k:'d4f',t:'晚上',e:'🍽️',ti:'晚餐／樂天超市（待選）',ds:'晚餐從下方或探索頁挑選；術後不舒服就直接回民宿。',ps:['lotte']}]},
  {n:5,date:'11/8',w:'日',e:'🧳',c:'c-move',ti:'收好戰利品，滿載回台',sub:'將零食、伴手禮提前買完，最後一天專心搭飛機。',wx:['☀️','15° / 5°','晴朗；趕機場早出門，薄外套必備。'],
   note:{c:'',h:'早班回程：怎麼到機場？',b:['🚆 <b>AREX</b>：民宿→首爾站→機場快線，時間較可控；先看列車班次及航廈。','🚌 <b>機場巴士</b>：有大行李可考慮，注意尖峰路段。','🚕 <b>包車／計程車</b>：四人＋大行李可評估總價。'],go:['g-air','看機場攻略']},
@@ -644,6 +669,7 @@ function results(){
 /* ============ 攻略頁 ============ */
 const GUIDES=[
  ['g-from','🛬','機場→民宿','21:30 落地後怎麼到民宿','c-stay'],
+ ['g-walk','🚶','漢南・聖水逛街路線','不回頭路線圖＋沿路美食','c-shop'],
  ['g-taxi','🚕','叫車','k.ride／Uber，附給司機看的畫面','c-move'],
  ['g-wow','💴','WOWPASS 換錢','領卡、儲值、手續費、機台','c-sight'],
  ['g-fx','🔢','韓幣台幣換算','輸入金額馬上算、可分帳','c-sight'],
@@ -748,16 +774,52 @@ G['g-wow']=()=>{
   <div class="search" style="position:static;padding:0"><label for="wq"><span>🔍</span><input id="wq" type="search" placeholder="搜尋區域，例如 明洞、機場" autocomplete="off"></label></div>
   <div id="wlist" style="margin-top:10px">${rows}</div></div>
  <div class="note butter"><p>💡 市場攤販、小店仍可能只收現金，留一點韓元備用。以上費率與位置常調整，出發前請用 WOWPASS App 的機台搜尋再確認一次。</p></div></div>`};
+const WALK={
+ hannam:{ti:'漢南洞',start:'6 號線 漢江鎮站（한강진역）1 號出口',time:'逛街＋咖啡＋用餐約 4–5 小時',
+  gOrigin:'한강진역 1번 출구',gIds:['leeum','newmix-hn','anthracite','pipeground'],gDest:'hanroast',
+  nodes:[
+   {e:'🚩',ti:'漢江鎮站 1 號出口',d:'出站後直走約 100 公尺，在右邊第一個巷口右轉，沿坡道往上，約 5 分鐘到 Leeum。（來源：Leeum 官方指引）'},
+   {e:'🏛️',ti:'Leeum 美術館',ps:['leeum'],d:'建議停留 60–90 分。週六 10:00–18:00，入場方式請先確認。',pins:['hn-keem']},
+   {w:'步行約 5–10 分（估計）',e:'🛍️',ti:'newmix 漢南',ps:['newmix-hn'],d:'Leeum 在 이태원로55길，newmix 在 54길，我依路名推估兩者很近。'},
+   {w:'步行約 10 分（估計）',e:'☕',ti:'Anthracite Coffee 漢南',ps:['anthracite'],d:'休息一下。',warn:'有一篇文章提到這間可能會結束營業，請先用地圖確認。'},
+   {w:'步行約 10 分（估計）',e:'🍕',ti:'Pipeground 漢南',ps:['pipeground'],d:'披薩與義大利麵，可四人分食。',warn:'有含牛肉的口味，不吃牛請避開。',pins:['hn-bolicine','hn-manri']},
+   {w:'步行約 10 分（估計）',e:'🍗',ti:'Hannam Oriental Roast Chicken',ps:['hanroast'],d:'晚餐，藥膳烤雞，不含牛。熱門可能排隊。',pins:['hn-soi','hn-solsot','maple-itw']},
+   {w:'',e:'🏁',ti:'收工',end:1,d:'叫車去聖水洞，或走回漢江鎮站搭 6 號線。'}]},
+ seongsu:{ti:'聖水洞',start:'2 號線 聖水站（성수역）3 號出口',time:'逛街＋咖啡＋用餐約 4–5 小時',
+  gOrigin:'성수역 3번 출구',gIds:['kkupdang','daelim','musinsa-mega','yeonbang','newmix-ss','f-meitawang','musinsa-std','jojo'],gDest:'seoulforest',
+  nodes:[
+   {e:'🚩',ti:'聖水站 3 號出口',d:'聖水洞的逛街從這裡開始。Musinsa 與大林倉庫在 3 號出口步行約 3 分（2024 年報導），連房和連武場街一帶也在 3、4 號出口附近。'},
+   {w:'先看位置',e:'🥩',ti:'烤黨（꿉당）先登記候位',ps:['kkupdang'],d:'用餐時間常要等 1–2 小時，只能到店現場掃 QR 登記。先登記，再去逛街。'},
+   {w:'步行約 3 分',e:'🛍️',ti:'大林倉庫＋Musinsa Mega Store',ps:['daelim','musinsa-mega'],d:'兩間都在 성수이로，Musinsa Mega Store 於 2026 年 4 月開幕。'},
+   {w:'步行約 5–10 分（估計）',e:'🥐',ti:'Standard Bread、聖水連房',ps:['f-standard','yeonbang'],d:'麵包與複合式選物空間，都在 성수이로 的側巷。'},
+   {w:'步行約 5–10 分（估計）',e:'☕',ti:'연무장길 咖啡與小物',ps:['newmix-ss','f-lowkey','f-beton','f-maman'],d:'依路名編號由小到大：newmix（3길 3）→ LowKey（3길 6）→ Beton（7가길 8）→ Maman Gelato（9길 8）。'},
+   {w:'步行約 5–10 分（估計）',e:'🍲',ti:'蛋塔與排骨湯',ps:['f-meitawang','seongsu-gamja'],d:'연무장길 43-1 與 45，彼此相鄰。想吃正餐的話，這裡可以吃。',pins:['kkupdang']},
+   {w:'步行約 10 分（估計）',e:'👟',ti:'Musinsa Standard 聖水',ps:['musinsa-std'],d:'연무장길 83，這條路的後半段。'},
+   {w:'步行約 10 分（估計）',e:'🍜',ti:'Jojo 刀削麵、Darak、安木',ps:['jojo','darak','f-anmok'],d:'靠近首爾林一側的食物區。傍晚吃晚餐正好。'},
+   {w:'步行約 10 分（估計）',e:'🍁',ti:'首爾林（서울숲）',ps:['seoulforest'],d:'最後散步看秋色，走累了就叫車回民宿。',end:1}]}
+};
+G['g-walk']=()=>{
+ const k=S.walk==='seongsu'?'seongsu':'hannam',W2=WALK[k];
+ const lbl=id=>PM[id];
+ const wp=W2.gIds.map(id=>lbl(id).a||lbl(id).ko).map(enc).join('%7C');
+ const dst=lbl(W2.gDest);const glink='https://www.google.com/maps/dir/?api=1&origin='+enc(W2.gOrigin)+'&destination='+enc(dst.a||dst.ko)+'&waypoints='+wp+'&travelmode=walking';
+ const nodes=W2.nodes.map(n=>{
+   const rows=(n.ps||[]).map(id=>row(PM[id])).join('');
+   const pins=(n.pins||[]).length?`<div class="pinlab">📍 沿路熱門（位置為約略）</div><div class="pins">${n.pins.map(id=>`<button class="pinchip" data-open="${id}">${PM[id].cat==='cafe'?'☕':'🍜'} ${esc(PM[id].n)}</button>`).join('')}</div>`:'';
+   return `${n.w?`<div class="rw"><span>🚶 ${esc(n.w)}</span></div>`:''}<div class="rn ${n.end?'end':''}"><span class="dt">${n.e}</span><h4>${esc(n.ti)}</h4>${n.d?`<div class="nd">${esc(n.d)}</div>`:''}${n.warn?`<div class="why">⚠️ ${esc(n.warn)}</div>`:''}${rows}${pins}</div>`}).join('');
+ return `${back}<div class="g"><h2>🚶 ${W2.ti}逛街路線</h2><p class="lead">照這個順序走，目標是少走回頭路。起點：${esc(W2.start)}。${esc(W2.time)}。</p>
+ <div class="wtabs"><button class="fc" data-wtab="hannam" aria-pressed="${k==='hannam'}">🏛️ 漢南洞</button><button class="fc" data-wtab="seongsu" aria-pressed="${k==='seongsu'}">👟 聖水洞</button></div>
+ <div class="note butter"><p>⚠️ 這張路線是<b>示意順序</b>，不是地圖。順序依路名、門牌編號和旅客文章推估，步行時間是我的估計，我沒有地圖座標資料，無法保證完全不繞路。</p><p>出發前先按下面按鈕，用 Google 地圖看實際步行路線，覺得繞路就跟我說，我再調整。</p><div class="btns"><a class="btn" href="${glink}" target="_blank" rel="noopener">看實際步行路線（Google 地圖）↗</a></div></div>
+ <div class="rtl">${nodes}</div>
+ ${k==='seongsu'?`<div class="card" style="margin-top:12px"><h3>不在這條線上</h3><p style="font-size:13.5px;color:var(--sub)">Cafe Onion 聖水（아차산로9길 8）：我查不到它離哪個出口，先用地圖看位置，再決定要不要排進來。</p>${row(PM.onion)}</div>`:''}</div>`};
 G['g-metro']=()=>`${back}<div class="g"><h2>🚇 抓住 3 條線就好</h2><p class="lead">站名有韓文對照，真正搭車仍建議以 App 即時導航。</p>
  <div class="card">${[
   ['4','南大門／明洞','忠武路站（충무로）→ 4 號線往首爾站方向 → 明洞站（명동）／會賢站（회현）。'],
-  ['3','Doctors 新沙','忠武路站 → 3 號線往梧琴方向 → 新沙站（신사），1 號出口步行到本館。'],
-  ['2','聖水 MUSINSA','東大門歷史文化公園站（동대문역사문화공원）→ 2 號線往聖水方向 → 聖水站（성수）。'],
+    ['2','聖水 MUSINSA','東大門歷史文化公園站（동대문역사문화공원）→ 2 號線往聖水方向 → 聖水站（성수）。'],
   ['水','It\'s me 清潭','建議叫車，或用 Naver Map 選當天路線。最近站是狎鷗亭羅德奧站（水仁盆唐線）5 號出口，步行約 2 分鐘。'],
-  ['2','GoldJ 宣陵','前往宣陵站（선릉）需轉乘，較複雜；建議用 Naver Map 選當天較快路線或叫車。'],
   ['4','首爾站／樂天超市','忠武路站 → 4 號線往首爾站方向 → 首爾站（서울역），站內依出口指標走。']
  ].map(l=>`<div class="line"><span class="ln l${l[0]}">${l[0]}</span><div><b>${l[1]}</b><span>${l[2]}</span></div></div>`).join('')}</div>
- <div class="card"><h3>民宿最常用 5 條移動</h3><p>🔹 民宿→明洞／南大門：先到忠武路站，4 號線到明洞或會賢。</p><p>🔹 民宿→聖水：東大門歷史文化公園站 2 號線前往聖水。</p><p>🔹 民宿→Doctors：忠武路 3 號線往新沙。</p><p>🔹 民宿→GoldJ：到宣陵站，轉乘依 Naver Map；懶得轉車可 4 人叫車。</p><p>🔹 民宿→樂天超市：4 號線到首爾站，逛完再回民宿。</p></div>
+ <div class="card"><h3>民宿最常用 5 條移動</h3><p>🔹 民宿→明洞／南大門：先到忠武路站，4 號線到明洞或會賢。</p><p>🔹 民宿→聖水：東大門歷史文化公園站 2 號線前往聖水。</p><p>🔹 民宿→It\'s me 清潭：忠武路 3 號線到狎鷗亭站再步行或換車，詳見行程裡的「地鐵路線」。</p><p>🔹 民宿→樂天超市：4 號線到首爾站，逛完再回民宿。</p></div>
  <img class="img" src="img/subway.jpg" alt="首爾地鐵攻略插畫" loading="lazy"><div class="note butter"><p>⚠️ 插畫僅供當作首爾商圈視覺索引，不是準確地鐵線圖；實際站序、轉乘方向、出口請看上面的文字教學與官方地鐵圖。</p></div>
  <div class="btns"><a class="btn soft" href="https://www.google.com/search?q=${enc('Seoul Metro route map 英文 地鐵圖')}" target="_blank" rel="noopener">官方地鐵圖 ↗</a></div></div>`;
 G['g-tax']=()=>`${back}<div class="g"><h2>🧾 購物退稅，照著做就好</h2><p class="lead">買女裝、童裝、彩妝、保養品都先看店家有沒有 TAX FREE。</p>
@@ -825,7 +887,7 @@ const LIST=[
  ['t1','11/4 第一晚機場交通','來回都是第二航廈（T2）。確認末班列車／機場巴士時間、民宿自助入住方式。'],
  ['t2','11/5 昌德宮秘苑','有票就調整時間；沒票保留宮區秋景，別為搶票犧牲整天。'],
  ['t3','11/6 Klook 集合點','務必以憑證上出口和時刻為準；18:50 是預計下車，不是保證到達。'],
- ['t4','11/7 醫美','首選 It\'s me 清潭，備選 Doctors／GoldJ；確認開診（11/7 週六）、醫師、療程、術後照護及付款方式。'],
+ ['t4','11/7 醫美','It\'s me 清潭；確認開診（11/7 週六約 17:00 前）、醫師、療程、術後照護及付款方式。'],
  ['t5','護照・網路','護照效期、eSIM／漫遊、行動電源。'],
  ['t6','先裝好 App','k.ride（或 Uber）、Baemin、Naver Map，先完成註冊與付款設定。'],
  ['t7','WOWPASS 預約領卡','選仁川 T2＋機場 CU 領卡，付款後把條碼截圖；另留一點韓元現金。']];
@@ -899,6 +961,28 @@ const ROUTES={
   M('A','搭 AREX 往仁川機場第 2 航廈方向','直達約 51–53 分；一般約 59–66 分','在「第 2 航廈站」下車')],
   notes:['直達列車要買對號車票（來源寫原價約 ₩13,000，網路預購可能更便宜），不能直接刷交通卡；一般列車可刷交通卡。','14:15 起飛、目標 11:15 前到機場，建議 9:30 前出發。']}
 };
+Object.assign(ROUTES,{
+ d1d:{from:'home',to:'nyu',total:'約 20–25 分',steps:[
+  W('走到忠武路站','依 Naver Map 導航'),
+  M('4','搭 4 號線，往 당고개（Danggogae）方向','1 站，約 3 分','在「東大門歷史文化公園站」下車'),
+  W('步行到 NYU NYU','約 10–15 分。網路資料寫從東大門歷史文化公園站或新堂站走路都可以到')],
+  notes:['NYU NYU 營業到凌晨約 05:00，第一晚想去再去。']},
+ d2f:{from:'namdaemun',to:'burdeng',total:'市場內步行約 5 分',steps:[W('從會賢站 5 或 6 號出口進市場，先找童裝區','Burdeng 的地址取自截圖，到了用 Naver Map 搜尋「부르뎅 아동복」')]},
+ d2h:{from:'home',to:'sancheong',total:'約 15–20 分（到乙支路）',steps:[
+  W('走到忠武路站','依 Naver Map 導航'),
+  M('3','搭 3 號線，往 대화（Daehwa）方向','1 站（乙支路 3 街），約 3 分','在「乙支路 3 街站」下車。乙支路 3 길一帶有明太魚湯、河豚、冷麵、烤肉'),
+  W('步行到你選的餐廳','用地圖導航')],
+  notes:['想去明洞：忠武路搭 4 號線往 사당／오이도（南向）1 站就是明洞站。','熱門店要預約或先登記候位。']},
+ d3a:{info:'集合點、出口與時間以 Klook 憑證為準，我沒有憑證上的資料，無法預先整理。請把憑證上的集合地址貼到 Naver Map 或 Google 地圖，選「大眾運輸」，並預留 20 分鐘緩衝。',notes:['6:20 出發，抵達後先確認是不是集合站的正確出口。']},
+ d3b:{info:'南怡島一日遊是 Klook 遊覽車，全程由遊覽車接送，不需要自己搭地鐵。'},
+ d3c:{info:'回程是 Klook 遊覽車，在東大門歷史文化公園站下車，預計 18:50（可能塞車）。到站後步行約 12 分鐘回民宿。'},
+ d4d:{from:'itsme',to:'leeum',total:'建議叫車，約 20–30 分（估計）',steps:[W('建議叫車到漢南洞','清潭在漢江南岸、漢南洞在北岸，地鐵要轉乘兩次以上。叫車請給司機看 Leeum 或漢江鎮站。我沒有查到即時車況。')],notes:['到了之後照「漢南・聖水逛街路線」的順序逛，起點是漢江鎮站 1 號出口。']},
+ d4e:{from:'hanroast',to:'musinsa-mega',total:'建議叫車，約 20–30 分（估計）',steps:[W('漢南洞到聖水洞建議叫車','兩區沒有直達地鐵，需要轉乘兩次以上。我沒有查到即時車況。')],notes:['想搭地鐵請按下方 Google 大眾運輸，看當天的轉乘結果。']},
+ d4f:{from:'seoulforest',to:'home',total:'約 40–50 分（含步行）',steps:[
+  W('從首爾林或聖水連房走到聖水站','約 15–20 分（估計），累了可叫車'),
+  M('2','搭 2 號線外環，往 시청（市廳）方向','6 站（뚝섬、한양대、왕십리、상왕십리、신당、동대문역사문화공원），約 12–15 分','在「東大門歷史文化公園站」下車'),
+  W('步行回民宿','約 12 分')]}
+});
 const prevPid=k=>{let id='home';for(const d of DAYS)for(const s of d.stops){if(s.k===k)return id;if(s.ps&&s.ps.length)id=s.ps[0]}return id};
 const gdir=(a,b,m)=>'https://www.google.com/maps/dir/?api=1&origin='+enc(a.a||a.ko||a.n)+'&destination='+enc(b.a||b.ko||b.n)+'&travelmode='+m;
 function stepRow(st){
@@ -907,6 +991,7 @@ function stepRow(st){
 }
 function showRoute(k){
   const s=SM[k],R=ROUTES[k];
+  if(R&&R.info){openSheet(`<h2><span>🚇 前往：${esc(s.ti)}</span><button class="close" data-close aria-label="關閉">✕</button></h2><p style="margin-top:8px;font-size:14px">${esc(R.info)}</p>${R.notes?`<div class="note butter">${R.notes.map(t=>`<p>• ${esc(t)}</p>`).join('')}</div>`:''}<div class="btns"><button class="btn ghost sm" data-backstop="${k}">‹ 回這一站</button></div>`);return}
   const toP=R?PM[R.to]:(s.taxi?PM[s.taxi]:PM[s.ps[0]]);
   const fromP=R?PM[R.from]:PM[prevPid(k)];
   if(!toP){openSheet(`<h2><span>🚇 地鐵路線</span><button class="close" data-close aria-label="關閉">✕</button></h2><p class="sub">這個時段沒有固定地點，沒有路線可以查。</p>`);return}
@@ -931,7 +1016,7 @@ function stopSheet(s){
   let h=`<h2><span>${s.e} ${esc(s.ti)}</span><button class="close" data-close aria-label="關閉">✕</button></h2>
    <p class="sub">Day ${s.day} ・ ${d.date} ${d.w} ・ ${esc(s.t)}</p><p style="margin-top:8px;font-size:14px">${esc(s.ds)}</p>`;
   if(s.tips)h+=s.tips.map(t=>`<div class="why">💡 ${esc(t)}</div>`).join('');
-  if(s.go)h+=`<div class="btns" style="margin:12px 0 0"><button class="btn" data-go="${s.go[0]}">${s.go[1]} ›</button></div>`;
+  if(s.go)h+=`<div class="btns" style="margin:12px 0 0"><button class="btn" data-go="${s.go[0]}" data-walk="${s.walk||''}">${s.go[1]} ›</button></div>`;
   if(tx)h+=actsFor(tx,s.k);
   ps.forEach(x=>{h+=storyHtml(x)});
   if(ps.length)h+=`<h3 class="s">${ps.length>1?'這站的地點':'地點'}</h3>${ps.map(row).join('')}`;
@@ -1021,7 +1106,8 @@ document.addEventListener('click',e=>{
   if(q('#btnRefresh')){hardRefresh();return}
   if(q('#btnAdd')||q('#btnAdd2')){addHome();return}
   if(q('[data-close]')||t===$('#scrim')){closeSheet();return}
-  if(el=q('[data-go]')){go(el.dataset.go);return}
+  if(el=q('[data-wtab]')){S.walk=el.dataset.wtab;route();return}
+  if(el=q('[data-go]')){if(el.dataset.walk)S.walk=el.dataset.walk;go(el.dataset.go);return}
   if(el=q('[data-day]')){S.day=+el.dataset.day;store.set('day',S.day);refresh();const dd=document.querySelector('.days');if(dd){const y=dd.getBoundingClientRect().top+scrollY;if(scrollY>y)window.scrollTo(0,y)}return}
   if(el=q('[data-stop]')){stopSheet(SM[el.dataset.stop]);return}
   if(el=q('[data-open]')){placeSheet(PM[el.dataset.open]);return}
