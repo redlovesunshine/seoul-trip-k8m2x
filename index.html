@@ -262,7 +262,7 @@ const AREA={incheon:['仁川機場','인천공항'],jongno:['安國・鍾路','�
 // p(id,cat,名稱,韓文搜尋詞,地址,說明,選項{ar,q,x,near,why,tip})
 const P=[];const PM0={};const p=(id,cat,n,ko,a,d,o={})=>{const x={id,cat,n,ko,a,d,...o};P.push(x);PM0[id]=x};
 /* 原行程 */
-p('home','stay','民宿（退溪路50가길）','퇴계로50가길 6-1','서울특별시 중구 퇴계로50가길 6-1, 201호','近忠武路／東大門生活圈，201 室。叫車或外送請給司機這串地址，實際交貨入口照房東影片。',{ar:'dongdae',q:'서울특별시 중구 퇴계로50가길 6-1',link:'https://www.airbnb.com.tw/rooms/1571603518248584566'});
+p('home','stay','民宿 Mono Bloom Stay（세림빌라）','세림빌라','서울특별시 중구 퇴계로50가길 6-1, 201호','建築名稱「세림빌라（Serim Villa）」，Airbnb 房源名稱「모노블룸 스테이（Mono Bloom Stay）」，201 室。Naver 導航用地址搜尋最準。叫車或外送請給司機這串地址，實際交貨入口照房東影片。',{ar:'dongdae',q:'서울특별시 중구 퇴계로50가길 6-1',link:'https://www.airbnb.com.tw/rooms/1571603518248584566'});
 p('icn','move','仁川國際機場','인천국제공항','','去程 11/4 21:30 抵達；回程 11/8 14:15 起飛，目標 11:15 前到。來回都是第二航廈（T2）。',{ar:'incheon'});
 p('nyu','shop','NYU NYU 東大門','NYU NYU 동대문','서울 중구 마장로 34','髮飾、包包、飾品；開到深夜，想買才去。',{ar:'dongdae',tip:'營業時間以當天公告為準'});
 p('sung','sight','成均館明倫堂','성균관대학교 명륜당','서울 종로구 성균관로 25-2','金黃銀杏＋韓屋建築，建議停留 45–60 分鐘。',{ar:'jongno'});
@@ -550,7 +550,7 @@ function viewPlan(){
   return `
   ${S.day===1&&!S._noHero?`<div class="hero"><img src="img/hero.jpg" alt="秋天的首爾韓屋與銀杏" width="760" height="502"><span class="count">${esc(ts.txt)}</span><div class="hc"><b>11/04 Wed – 11/08 Sun · 5 天 4 夜</b><span>🍁 賞銀杏 ・ 💆 醫美 ・ 🛍️ 童裝女裝 ・ ☕ 咖啡店</span></div></div>
   <div class="facts"><div class="fact"><small>去程 ✈️</small><b>11/4 17:50 RMQ → 21:30 ICN</b></div><div class="fact"><small>回程 ✈️</small><b>11/8 14:15 ICN → 16:25 RMQ</b></div>
-  <div class="fact wide"><small>🏠 民宿</small><div class="addr" style="margin:6px 0 0"><div>서울특별시 중구 퇴계로50가길 6-1, 201호<small>首爾中區退溪路50街 6-1 號，201 室</small></div><button class="btn sm" data-copy="home">📋 複製</button></div><div class="btns" style="margin-top:8px"><a class="btn soft sm" href="https://www.airbnb.com.tw/rooms/1571603518248584566" target="_blank" rel="noopener">Airbnb 房源頁 ↗</a></div></div></div>`:''}
+  <div class="fact wide"><small>🏠 民宿</small><div class="addr" style="margin:6px 0 0"><div>서울특별시 중구 퇴계로50가길 6-1, 201호<small>建築：세림빌라（Serim Villa）・Mono Bloom Stay 201 室</small></div><button class="btn sm" data-copy="home">📋 複製</button></div><div class="btns" style="margin-top:8px"><a class="btn soft sm" href="https://www.airbnb.com.tw/rooms/1571603518248584566" target="_blank" rel="noopener">Airbnb 房源頁 ↗</a></div></div></div>`:''}
   <div class="days" role="group" aria-label="選擇日期">${pills}</div>
   <div class="dayhead"><h2>${d.e} ${esc(d.ti)}</h2><p>${esc(d.sub)}</p></div>
   <div class="wx"><span class="t">${d.wx[0]} ${d.wx[1]}</span><span>${esc(d.wx[2])}</span></div>
