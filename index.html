@@ -263,7 +263,7 @@ const AREA={incheon:['仁川機場','인천공항'],jongno:['安國・鍾路','�
 const P=[];const PM0={};const p=(id,cat,n,ko,a,d,o={})=>{const x={id,cat,n,ko,a,d,...o};P.push(x);PM0[id]=x};
 /* 原行程 */
 p('home','stay','民宿（退溪路50街）','퇴계로50길 6-1','서울특별시 중구 퇴계로50길 6-1','近忠武路／東大門生活圈，201 室。叫車或外送請給司機這串地址，實際交貨入口照房東影片。',{ar:'dongdae',q:'서울특별시 중구 퇴계로50길 6-1'});
-p('icn','move','仁川國際機場','인천국제공항','','去程 11/4 21:30 抵達；回程 11/8 14:15 起飛，目標 11:15 前到。確認航廈後再決定交通。',{ar:'incheon'});
+p('icn','move','仁川國際機場','인천국제공항','','去程 11/4 21:30 抵達；回程 11/8 14:15 起飛，目標 11:15 前到。來回都是第二航廈（T2）。',{ar:'incheon'});
 p('nyu','shop','NYU NYU 東大門','NYU NYU 동대문','서울 중구 마장로 34','髮飾、包包、飾品；開到深夜，想買才去。',{ar:'dongdae',tip:'營業時間以當天公告為準'});
 p('sung','sight','成均館明倫堂','성균관대학교 명륜당','서울 종로구 성균관로 25-2','金黃銀杏＋韓屋建築，建議停留 45–60 分鐘。',{ar:'jongno'});
 p('changdeok','sight','昌德宮','창덕궁','서울 종로구 율곡로 99','古宮秋景；秘苑若有預約票，按實際入場時間調整。',{ar:'jongno'});
@@ -430,8 +430,8 @@ const DAYS=[
   note:{c:'',h:'第一晚想吃炸雞？',b:['🍗 <b>Baemin（배달의민족）</b>可用旅客模式試下單；海外付款可能因卡別或支付通道而異。','🍗 <b>Shuttle</b> 有外語介面、國際信用卡，是備案；先確認房東允許外送、騎士能在入口面交。'],go:['g-food','看外送教學']},
   stops:[
    {k:'d1a',t:'17:50',e:'✈️',ti:'台中起飛',ds:'RMQ → ICN。',ps:[]},
-   {k:'d1b',t:'21:30',e:'🛬',ti:'抵達仁川',ds:'抓 60–90 分鐘入境與領行李，約 23:00 前後出關；再搭車前往民宿。',ps:['icn'],taxi:'home',go:['g-from','🛬 機場→民宿前往攻略'],tips:['落地先確認末班列車與機場巴士時間；四人＋行李建議直接叫車。']},
-   {k:'d1c',t:'23:00+',e:'🏠',ti:'前往民宿入住',ds:'可用 k.ride／Uber Taxi、機場巴士或 AREX＋計程車；先確認入境航廈和末班。給司機看民宿地址。',ps:['home'],go:['g-from','🛬 機場→民宿前往攻略']},
+   {k:'d1b',t:'21:30',e:'🛬',ti:'抵達仁川',ds:'抓 60–90 分鐘入境與領行李，約 23:00 前後出關（第二航廈 T2）；再搭車前往民宿。',ps:['icn'],taxi:'home',go:['g-from','🛬 機場→民宿前往攻略'],tips:['落地先確認末班列車與機場巴士時間；四人＋行李建議直接叫車。']},
+   {k:'d1c',t:'23:00+',e:'🏠',ti:'前往民宿入住',ds:'可用 k.ride／Uber Taxi、機場巴士或 AREX＋計程車；航廈是第二航廈（T2），先確認末班。給司機看民宿地址。',ps:['home'],go:['g-from','🛬 機場→民宿前往攻略']},
    {k:'d1d',t:'深夜',e:'🛍️',ti:'想買才去 NYU NYU',ds:'東大門飾品、包包、髮飾；第一晚不排強制集合。',ps:['nyu']}]},
  {n:2,date:'11/5',w:'四',e:'🍁',c:'c-sight',ti:'銀杏 × 古宮 × 韓屋咖啡｜南大門採買',sub:'上午拍照逛街，下午南大門與折扣挖寶。',wx:['⛅','14° / 8°','多雲時晴；拍銀杏清晨偏冷，洋蔥式穿搭。'],
   note:{c:'rose',h:'購物策略',b:['👕 <b>南大門</b>：先逛童裝區，再補女裝、飾品；不必全市場逛完。','👟 <b>New Balance Outlet</b>：過季款／加碼折扣優先，先找尺寸再看價格；NB Kids 櫃位請當天查詢。','🧳 <b>4 人分頭逛</b>：約定固定會合點，別拿大包跑整天。'],go:['g-shop','看購物攻略']},
@@ -466,8 +466,8 @@ const DAYS=[
   note:{c:'',h:'早班回程：怎麼到機場？',b:['🚆 <b>AREX</b>：民宿→首爾站→機場快線，時間較可控；先看列車班次及航廈。','🚌 <b>機場巴士</b>：有大行李可考慮，注意尖峰路段。','🚕 <b>包車／計程車</b>：四人＋大行李可評估總價。'],go:['g-air','看機場攻略']},
   stops:[
    {k:'d5a',t:'08:30',e:'🛏️',ti:'起床整理行李',ds:'液體託運、行動電源隨身；確認退稅單及護照。',ps:[]},
-   {k:'d5b',t:'09:30–10:00',e:'🚪',ti:'民宿退房出發',ds:'建議保留充裕交通時間；不要最後早上再去明洞大採買。叫車請給司機看機場航廈。',ps:['home'],taxi:'icn',go:['g-air','✈️ 回程去機場攻略']},
-   {k:'d5c',t:'11:15 前',e:'🛫',ti:'抵達仁川機場目標',ds:'登機託運、可能的海關查驗及退稅。',ps:['icn']},
+   {k:'d5b',t:'09:30–10:00',e:'🚪',ti:'民宿退房出發',ds:'建議保留充裕交通時間；不要最後早上再去明洞大採買。叫車請給司機看「仁川機場第二航廈 3 樓出境」。',ps:['home'],taxi:'icn',go:['g-air','✈️ 回程去機場攻略']},
+   {k:'d5c',t:'11:15 前',e:'🛫',ti:'抵達仁川機場目標',ds:'登機託運、可能的海關查驗及退稅；在第二航廈（T2）3 樓出境。',ps:['icn']},
    {k:'d5d',t:'14:15',e:'✈️',ti:'飛往台中',ds:'16:25 抵達 RMQ。',ps:[]}]}
 ];
 const WX_TIP='🧥 厚外套／風衣　🧣 薄圍巾　👟 好走的鞋　☂️ 摺疊傘　🧴 保濕護唇';
@@ -491,7 +491,7 @@ const goo=x=>'https://www.google.com/maps/search/?api=1&query='+enc(qOf(x));
 const copyOf=x=>x.a||x.ko||x.n;
 let favs=store.get('favs',[]);let checks=store.get('checks',{});
 const TERM={1:{n:'仁川機場 第一航廈（3F 出境）',ko:'인천국제공항 제1터미널 출국장 3층',a:'인천 중구 공항로 272 제1여객터미널'},2:{n:'仁川機場 第二航廈（3F 出境）',ko:'인천국제공항 제2터미널 출국장 3층',a:'인천 중구 제2터미널대로 446 제2여객터미널'}};
-const termNow=()=>store.get('term',1)===2?2:1;
+const termNow=()=>store.get('term',2)===1?1:2;
 ['n','ko','a'].forEach(k=>Object.defineProperty(PM.icn,k,{get:()=>TERM[termNow()][k],configurable:true}));
 let S={tab:'plan',day:store.get('day',null),ctx:null,f:{q:'',cat:'',day:0,kind:'',fav:false,meat:''}};
 
@@ -676,8 +676,8 @@ G['g-home']=()=>`${back}<div class="g"><h2>🏠 民宿周邊生活指南</h2><p 
  <img class="img" src="img/home.jpg" alt="民宿周邊插畫地圖" loading="lazy"><p style="color:var(--sub);font-size:12.5px">📌 AI 示意圖，不能代替導航或確認實際店家方位。實際巷口與營業時間請用 Naver Map。</p>
  <div class="sec">周邊地點</div>${['pildong','oy-dhp','daiso','lotte'].map(id=>row(PM[id])).join('')}</div>`;
 G['g-air']=()=>`${back}<div class="g"><h2>✈️ 回程：民宿→仁川機場</h2><p class="lead">11/8 14:15 起飛，目標 11:15 前到機場。要給司機看的是機場航廈，不是民宿。</p>
- <div class="card c-move"><h3>🛫 先確認你的航廈</h3><p style="font-size:13.5px;color:var(--sub);margin-bottom:8px">看機票或登機資訊上的 Terminal，選好後下面和「給司機看」都會跟著換。</p>${termRow()}${addrBlock(PM.icn)}<div class="btns"><button class="btn" data-driver="icn">🚕 給司機看機場航廈</button>${mapBtns(PM.icn)}</div></div>
- <div class="card"><h3>三種方式</h3><p>🚆 <b>AREX</b>：民宿→首爾站→機場快線，時間較可控；第一與第二航廈各有車站，先看列車班次及航廈。</p><p>🚌 <b>機場巴士</b>：有大行李可考慮，注意尖峰路段。</p><p>🚕 <b>包車／計程車</b>：四人＋大行李可評估總價，早上建議提前預約（Uber／k.ride）。</p></div>
+ <div class="card c-move"><h3>🛫 你們的航廈：第二航廈（T2）</h3><p style="font-size:13.5px;color:var(--sub);margin-bottom:8px">來回航班都在第二航廈，已預設選好。之後如果改航班，再切換下面的選項。</p>${termRow()}${addrBlock(PM.icn)}<div class="btns"><button class="btn" data-driver="icn">🚕 給司機看機場航廈</button>${mapBtns(PM.icn)}</div></div>
+ <div class="card"><h3>三種方式</h3><p>🚆 <b>AREX</b>：民宿→首爾站→機場快線，時間較可控；到「仁川機場第2航廈站」，先看列車班次。</p><p>🚌 <b>機場巴士</b>：有大行李可考慮，注意尖峰路段。</p><p>🚕 <b>包車／計程車</b>：四人＋大行李可評估總價，早上建議提前預約（Uber／k.ride）。</p></div>
  <div class="card"><h3>建議時間表</h3><div class="kv"><span>09:30–10:00</span><b>民宿退房、叫車</b></div><div class="kv"><span>約 10:30–11:15</span><b>抵達機場（含緩衝）</b></div><div class="kv"><span>11:15 前</span><b>託運、退稅、出境</b></div><div class="kv"><span>14:15</span><b>起飛</b></div></div>
  <div class="card"><h3>出發前確認</h3>${['液體託運、行動電源隨身','退稅單、發票與護照放在好拿的位置','零食先看是否涉及肉製品、蛋奶或入境檢疫限制，不要僅憑超市販售就認定可攜回','WOWPASS 剩餘金額先消費或退款'].map(t=>`<div class="kv"><div>✅ ${t}</div></div>`).join('')}</div>
  <div class="card"><h3>可複製的韓文</h3>${kr([['인천공항 제1터미널로 가 주세요.','請到仁川機場第一航廈。'],['인천공항 제2터미널로 가 주세요.','請到仁川機場第二航廈。'],['출발층(3층)에서 내려 주세요.','請在 3 樓出境層放我下車。'],['트렁크 열어 주세요.','請開後車廂。']])}</div>
@@ -687,7 +687,7 @@ G['g-from']=()=>`${back}<div class="g"><h2>🛬 仁川機場→民宿</h2><p cla
  <p style="color:var(--sub);font-size:12.5px;margin-top:8px">下車地點請照房東提供的入口影片，窄巷司機可能只能停在大路邊。</p></div>
  <div class="card"><h3>⏱️ 預估時間</h3><div class="kv"><span>21:30</span><b>飛機落地</b></div><div class="kv"><span>約 22:30–23:00</span><b>入境、領行李，出關</b></div><div class="kv"><span>約 23:00–00:30</span><b>搭車，約 1 小時車程</b></div><div class="kv"><span>約 00:00 前後</span><b>抵達民宿（視排隊與路況）</b></div></div>
  <div class="card c-move"><h3>✅ 推薦：直接叫車或排計程車</h3><p style="font-size:14px">四人＋行李，深夜又怕趕不上末班車，計程車最省事。車資多在 ₩7 萬上下，夜間可能加成，高速費另計，以 App 預估或跳表為準，四人分攤很划算。</p>
- <ol class="steps"><li><span>入境、領完行李後，走到 <b>1 樓入境大廳</b>，跟著 <b>Taxi</b> 指標到乘車處。</span></li><li><span>也可以先在 <b>k.ride</b>／<b>Uber</b> 設好目的地，上車地點選航廈 1 樓入境大廳，先預估價格。</span></li><li><span>上車前說「<b>트렁크 열어 주세요</b>」，行李放後車廂；人多可選大型車（Van／Jumbo）。</span></li><li><span>把<b>民宿地址</b>亮給司機看（上面按鈕），確認是否含高速費、可否刷卡。</span></li><li><span>接近民宿時，用房東影片確認入口；有問題用 App 或翻譯。</span></li></ol></div>
+ <ol class="steps"><li><span>入境、領完行李後，走到 <b>第二航廈 1 樓入境大廳</b>，跟著 <b>Taxi</b> 指標到乘車處。</span></li><li><span>也可以先在 <b>k.ride</b>／<b>Uber</b> 設好目的地，上車地點選航廈 1 樓入境大廳，先預估價格。</span></li><li><span>上車前說「<b>트렁크 열어 주세요</b>」，行李放後車廂；人多可選大型車（Van／Jumbo）。</span></li><li><span>把<b>民宿地址</b>亮給司機看（上面按鈕），確認是否含高速費、可否刷卡。</span></li><li><span>接近民宿時，用房東影片確認入口；有問題用 App 或翻譯。</span></li></ol></div>
  <div class="card"><h3>其他方式（需先查末班）</h3><p>🚆 <b>AREX 機場快線</b>：到首爾站再轉 4 號線或叫車，深夜班次有限，<b>落地後先查末班時間</b>再決定。</p><p>🚌 <b>機場巴士／深夜公車</b>：班次少、下車點離民宿可能有段距離，拖行李較累。</p>
  <div class="btns"><a class="btn soft sm" href="https://www.google.com/maps/dir/?api=1&origin=${enc('Incheon International Airport')}&destination=${enc(PM.home.a)}&travelmode=transit" target="_blank" rel="noopener">大眾運輸路線 ↗</a><a class="btn soft sm" href="https://www.google.com/maps/dir/?api=1&origin=${enc('Incheon International Airport')}&destination=${enc(PM.home.a)}&travelmode=driving" target="_blank" rel="noopener">開車路線 ↗</a></div></div>
  <div class="card"><h3>📋 落地前先準備</h3>${['房東的入住方式、門禁／鎖碼，先截圖存好','eSIM／漫遊先開通，落地就能叫車','k.ride／Uber 先註冊並設好付款','手上留一點韓元現金，或先查 WOWPASS 機台（機場有人潮）','民宿地址複製好，也可直接用「給司機看」'].map(t=>`<div class="kv"><div>✅ ${t}</div></div>`).join('')}<div class="btns"><button class="btn soft sm" data-go="g-wow">💴 WOWPASS</button><button class="btn soft sm" data-go="g-taxi">🚕 叫車教學</button></div></div>
@@ -720,7 +720,7 @@ G['g-wx']=()=>`${back}<div class="g"><h2>🌤️ 首爾秋天，怎麼穿？</h2
 
 /* ============ 我的 ============ */
 const LIST=[
- ['t1','11/4 第一晚機場交通','確認實際航廈、末班列車／機場巴士時間、民宿自助入住方式。'],
+ ['t1','11/4 第一晚機場交通','來回都是第二航廈（T2）。確認末班列車／機場巴士時間、民宿自助入住方式。'],
  ['t2','11/5 昌德宮秘苑','有票就調整時間；沒票保留宮區秋景，別為搶票犧牲整天。'],
  ['t3','11/6 Klook 集合點','務必以憑證上出口和時刻為準；18:50 是預計下車，不是保證到達。'],
  ['t4','11/7 醫美','Doctors 或 GoldJ 擇一；確認開診、醫師、療程、術後照護及付款方式。'],
@@ -793,7 +793,7 @@ function openDriver(x){
   const air=x.id==='icn';
   $('#drv').innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center"><span class="sub" style="color:var(--sub);font-size:14px">🚕 請給司機看</span><button class="btn ghost sm" id="drvClose">✕ 關閉</button></div>
    <div style="margin:22px 0 8px;color:var(--accent);font-size:20px">${air?'출발층(3층)으로 가 주세요.':'이곳으로 가 주세요.'}</div>
-   ${air?`<div style="margin-bottom:10px"><div style="color:var(--sub);font-size:13px;margin-bottom:6px">先看機票確認航廈，再切換：</div>${termRow()}</div>`:''}<div class="big">${esc(x.ko)}</div>${x.a?`<div class="mid">${esc(x.a)}</div>`:''}
+   ${air?`<div style="margin-bottom:10px"><div style="color:var(--sub);font-size:13px;margin-bottom:6px">目前航班是第二航廈，如有改變再切換：</div>${termRow()}</div>`:''}<div class="big">${esc(x.ko)}</div>${x.a?`<div class="mid">${esc(x.a)}</div>`:''}
    <div style="margin-top:12px;color:var(--sub)">${esc(x.n)}・${air?'請載我到出境大廳（3 樓）':'請載我到這裡'}</div>
    <div class="btns" style="margin-top:auto;padding-top:24px"><button class="btn" data-copy="${x.id}">📋 複製地址</button><a class="btn soft" href="${nav(x)}" target="_blank" rel="noopener">Naver Map ↗</a><button class="btn ghost" data-go="g-taxi" id="drvGuide">叫車步驟</button></div>`;
   $('#drv').classList.add('on');
