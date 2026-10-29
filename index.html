@@ -262,7 +262,7 @@ const AREA={incheon:['仁川機場','인천공항'],jongno:['安國・鍾路','�
 // p(id,cat,名稱,韓文搜尋詞,地址,說明,選項{ar,q,x,near,why,tip})
 const P=[];const PM0={};const p=(id,cat,n,ko,a,d,o={})=>{const x={id,cat,n,ko,a,d,...o};P.push(x);PM0[id]=x};
 /* 原行程 */
-p('home','stay','民宿（退溪路50街）','퇴계로50길 6-1','서울특별시 중구 퇴계로50길 6-1','近忠武路／東大門生活圈，201 室。叫車或外送請給司機這串地址，實際交貨入口照房東影片。',{ar:'dongdae',q:'서울특별시 중구 퇴계로50길 6-1'});
+p('home','stay','民宿（退溪路50가길）','퇴계로50가길 6-1','서울특별시 중구 퇴계로50가길 6-1, 201호','近忠武路／東大門生活圈，201 室。叫車或外送請給司機這串地址，實際交貨入口照房東影片。',{ar:'dongdae',q:'서울특별시 중구 퇴계로50가길 6-1',link:'https://www.airbnb.com.tw/rooms/1571603518248584566'});
 p('icn','move','仁川國際機場','인천국제공항','','去程 11/4 21:30 抵達；回程 11/8 14:15 起飛，目標 11:15 前到。來回都是第二航廈（T2）。',{ar:'incheon'});
 p('nyu','shop','NYU NYU 東大門','NYU NYU 동대문','서울 중구 마장로 34','髮飾、包包、飾品；開到深夜，想買才去。',{ar:'dongdae',tip:'營業時間以當天公告為準'});
 p('sung','sight','成均館明倫堂','성균관대학교 명륜당','서울 종로구 성균관로 25-2','金黃銀杏＋韓屋建築，建議停留 45–60 分鐘。',{ar:'jongno'});
@@ -550,7 +550,7 @@ function viewPlan(){
   return `
   ${S.day===1&&!S._noHero?`<div class="hero"><img src="img/hero.jpg" alt="秋天的首爾韓屋與銀杏" width="760" height="502"><span class="count">${esc(ts.txt)}</span><div class="hc"><b>11/04 Wed – 11/08 Sun · 5 天 4 夜</b><span>🍁 賞銀杏 ・ 💆 醫美 ・ 🛍️ 童裝女裝 ・ ☕ 咖啡店</span></div></div>
   <div class="facts"><div class="fact"><small>去程 ✈️</small><b>11/4 17:50 RMQ → 21:30 ICN</b></div><div class="fact"><small>回程 ✈️</small><b>11/8 14:15 ICN → 16:25 RMQ</b></div>
-  <div class="fact wide"><small>🏠 民宿</small><div class="addr" style="margin:6px 0 0"><div>서울특별시 중구 퇴계로50길 6-1 201호<small>首爾中區退溪路50街 6-1 號，201 室</small></div><button class="btn sm" data-copy="home">📋 複製</button></div></div></div>`:''}
+  <div class="fact wide"><small>🏠 民宿</small><div class="addr" style="margin:6px 0 0"><div>서울특별시 중구 퇴계로50가길 6-1, 201호<small>首爾中區退溪路50街 6-1 號，201 室</small></div><button class="btn sm" data-copy="home">📋 複製</button></div><div class="btns" style="margin-top:8px"><a class="btn soft sm" href="https://www.airbnb.com.tw/rooms/1571603518248584566" target="_blank" rel="noopener">Airbnb 房源頁 ↗</a></div></div></div>`:''}
   <div class="days" role="group" aria-label="選擇日期">${pills}</div>
   <div class="dayhead"><h2>${d.e} ${esc(d.ti)}</h2><p>${esc(d.sub)}</p></div>
   <div class="wx"><span class="t">${d.wx[0]} ${d.wx[1]}</span><span>${esc(d.wx[2])}</span></div>
@@ -741,7 +741,7 @@ G['g-from']=()=>`${back}<div class="g"><h2>🛬 仁川機場→民宿</h2><p cla
  <div class="card"><h3>其他方式（需先查末班）</h3><p>🚆 <b>AREX 機場快線</b>：到首爾站再轉 4 號線或叫車，深夜班次有限，<b>落地後先查末班時間</b>再決定。</p><p>🚌 <b>機場巴士／深夜公車</b>：班次少、下車點離民宿可能有段距離，拖行李較累。</p>
  <div class="btns"><a class="btn soft sm" href="https://www.google.com/maps/dir/?api=1&origin=${enc('Incheon International Airport')}&destination=${enc(PM.home.a)}&travelmode=transit" target="_blank" rel="noopener">大眾運輸路線 ↗</a><a class="btn soft sm" href="https://www.google.com/maps/dir/?api=1&origin=${enc('Incheon International Airport')}&destination=${enc(PM.home.a)}&travelmode=driving" target="_blank" rel="noopener">開車路線 ↗</a></div></div>
  <div class="card"><h3>📋 落地前先準備</h3>${['房東的入住方式、門禁／鎖碼，先截圖存好','eSIM／漫遊先開通，落地就能叫車','k.ride／Uber 先註冊並設好付款','先預約 WOWPASS 機場 CU 領卡（T2），條碼截圖；手上留一點韓元現金','民宿地址複製好，也可直接用「給司機看」'].map(t=>`<div class="kv"><div>✅ ${t}</div></div>`).join('')}<div class="btns"><button class="btn soft sm" data-go="g-wow">💴 WOWPASS</button><button class="btn soft sm" data-go="g-taxi">🚕 叫車教學</button></div></div>
- <div class="card"><h3>可複製的韓文</h3>${kr([['퇴계로50길 6-1로 가 주세요.','請載我到退溪路50街 6-1。'],['여기로 가 주세요.','請載我到這裡。'],['트렁크 열어 주세요.','請開後車廂。'],['고속도로 통행료 포함이에요?','高速公路費含在內嗎？'],['카드 결제 가능해요?','可以刷卡嗎？'],['건물 입구 앞에서 내려 주세요.','請在大樓入口前讓我下車。']])}</div></div>`;
+ <div class="card"><h3>可複製的韓文</h3>${kr([['퇴계로50가길 6-1로 가 주세요.','請載我到退溪路50街 6-1。'],['여기로 가 주세요.','請載我到這裡。'],['트렁크 열어 주세요.','請開後車廂。'],['고속도로 통행료 포함이에요?','高速公路費含在內嗎？'],['카드 결제 가능해요?','可以刷卡嗎？'],['건물 입구 앞에서 내려 주세요.','請在大樓入口前讓我下車。']])}</div></div>`;
 const fmt=(n,d=0)=>isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:d,minimumFractionDigits:0}):'';
 const fxRate=()=>{const r=+store.get('rate',46);return r>0?r:46};
 function fxTable(){const r=fxRate();return [1000,3000,5000,10000,15000,30000,50000,100000,300000].map(k=>`<div class="kv"><b>₩${fmt(k)}</b><span>≈ NT$ ${fmt(k/r,k<5000?1:0)}</span></div>`).join('')}
@@ -831,7 +831,7 @@ function placeSheet(x){
   ${x.tip?`<div class="why">💡 ${esc(x.tip)}</div>`:''}
   <div class="why" style="background:var(--sky-s)">🕒 營業時間：${x.h?esc(x.h):'尚未收錄'}<br><a class="btn soft sm" style="margin-top:6px" href="${goo(x)}" target="_blank" rel="noopener">查最新營業時間 ↗</a><br><small style="color:var(--sub)">店家常調整公休與時間，出發前請以地圖／官方公告為準。</small></div>
   ${addrBlock(x)}
-  <div class="btns">${mapBtns(x)}<button class="btn ghost sm" data-fav="${x.id}">${favs.includes(x.id)?'⭐ 已收藏':'☆ 收藏'}</button></div>
+  <div class="btns">${mapBtns(x)}${x.link?`<a class="btn soft sm" href="${x.link}" target="_blank" rel="noopener">Airbnb 房源 ↗</a>`:''}<button class="btn ghost sm" data-fav="${x.id}">${favs.includes(x.id)?'⭐ 已收藏':'☆ 收藏'}</button></div>
   ${actsFor(x)}`;
   const sib=P.filter(y=>y.id!==x.id&&((x.near&&y.near===x.near)||(x.near&&SM[x.near]&&SM[x.near].ps.includes(y.id))||(!x.near&&y.near&&SM[y.near]&&SM[y.near].ps.includes(x.id))));
   const ids=[...new Set(sib.map(y=>y.id))].slice(0,5);
