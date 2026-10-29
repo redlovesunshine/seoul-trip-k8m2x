@@ -427,7 +427,7 @@ Object.entries(FIX).forEach(([id,o])=>Object.assign(PM0[id],o));
 /* 行程 */
 const DAYS=[
  {n:1,date:'11/4',w:'三',e:'✈️',c:'c-move',ti:'落地首爾，第一晚不要趕',sub:'順利入住最重要，購物與炸雞是加分。',wx:['🌤️','12° / 3°','晴時多雲；夜間入境約 6–8°C，大衣、圍巾。'],
-  note:{c:'',h:'第一晚想吃炸雞？',b:['🍗 <b>Baemin（배달의민족）</b>可用旅客模式試下單；海外付款可能因卡別或支付通道而異。','🍗 <b>Shuttle</b> 有外語介面、國際信用卡，是備案；先確認房東允許外送、騎士能在入口面交。'],go:['g-food','看外送教學']},
+  note:{c:'',h:'第一晚想吃炸雞？',b:['🍗 用 <b>Woowa／Baemin（배달의민족）</b>下單，出發前先在家註冊並設好付款（Apple Pay 或海外信用卡）。','🍗 先跟房東確認能不能外送到住宿，以及騎士能不能在入口面交。'],go:['g-food','看外送教學']},
   stops:[
    {k:'d1a',t:'17:50',e:'✈️',ti:'台中起飛',ds:'RMQ → ICN。',ps:[]},
    {k:'d1b',t:'21:30',e:'🛬',ti:'抵達仁川',ds:'抓 60–90 分鐘入境與領行李，約 23:00 前後出關（第二航廈 T2）；再搭車前往民宿。',ps:['icn'],taxi:'home',go:['g-from','🛬 機場→民宿前往攻略'],tips:['落地先確認末班列車與機場巴士時間；四人＋行李建議直接叫車。']},
@@ -595,7 +595,7 @@ const GUIDES=[
  ['g-taxi','🚕','叫車','k.ride／Uber，附給司機看的畫面','c-move'],
  ['g-wow','💴','WOWPASS 換錢','機台查詢、使用步驟','c-sight'],
  ['g-fx','🔢','韓幣台幣換算','輸入金額馬上算、可分帳','c-sight'],
- ['g-food','🛵','叫外送','炸雞怎麼叫、給騎士的韓文','c-food'],
+ ['g-food','🛵','叫外送（Woowa）','Baemin 註冊、付款、給騎士的韓文','c-food'],
  ['g-metro','🚇','地鐵','三條線就夠，各景點怎麼搭','c-stay'],
  ['g-tax','🧾','購物退稅','₩15,000 起、流程','c-shop'],
  ['g-kr','💬','韓文救急句','一鍵複製，貼給店員看','c-cafe'],
@@ -629,11 +629,15 @@ G['g-kr']=()=>`${back}<div class="g"><h2>💬 韓文救急句</h2><p class="lead
  <div class="card"><h3>外送・會合</h3>${kr([['건물 입구에서 만나요.','在大樓入口見。'],['배달은 건물 입구에서 받을게요. 도착하시면 메시지 부탁드립니다.','外送請送到大樓入口，到了請傳訊息給我。']])}</div>
  <div class="card"><h3>醫美</h3>${kr([['예약했어요.','我有預約。'],['시술 후 주의사항 알려 주세요.','請告訴我術後注意事項。'],['사우나 해도 돼요?','可以汗蒸嗎？']])}</div></div>`;
 G['g-food']=()=>{const x=S.ctx&&PM[S.ctx]&&PM[S.ctx].a?PM[S.ctx]:PM.home;const msg='배달은 건물 입구에서 받을게요. 도착하시면 메시지 부탁드립니다.';
- return `${back}<div class="g"><h2>🛵 首爾深夜炸雞，這樣叫！</h2><p class="lead">不用韓國手機門號也有辦法，旅客版支付仍以 App 當下顯示為準。</p>
- <div class="card"><h3>配送地址</h3>${dest(PM.home).sel}${addrBlock(x)}</div>
- <div class="card c-food"><h3>如何叫到第一晚的炸雞 🍗</h3><ol class="steps"><li><span>先確認房東允許外送到住宿，問好「正確的建築入口／能否直接送上樓」。</span></li><li><span>使用 <b>Baemin 배달의민족</b> 試旅客／非會員訂餐；2026 年已新增多語介面與海外卡付款途徑，但仍依手機及付款渠道而異。</span></li><li><span>設定地址為上方這串，備註門口集合，不要自動勾選放門口。</span></li><li><span>找 <b>치킨</b> 炸雞、<b>순살</b> 無骨、<b>반반</b> 雙拼，確認起點、運費及最低訂購金額。</span></li><li><span>選「海外信用卡可用」的付款方式；若不成功，改用 <b>Shuttle Delivery</b>。</span></li><li><span>看騎士訊息，準備在可停車的入口領餐；取餐先核對訂單。</span></li></ol></div>
- <div class="card"><h3>直接複製給外送員的韓文</h3><div class="addr"><div>${msg}<small>我會在大樓入口領餐，到了請傳訊息給我。</small></div></div><div class="btns"><button class="btn" data-copytext="${msg}">📋 複製韓文訊息</button></div></div>
- <div class="note butter"><p>Shuttle 的配送範圍視該區當下服務而定，不保證每一家炸雞店都有。外送抵達時間和費用都是即時變動。</p></div></div>`};
+ return `${back}<div class="g"><h2>🛵 Woowa 外送 App 教學</h2><p class="lead">Woowa Brothers（우아한형제들）是 <b>Baemin（배달의민족）</b>的母公司，要下載的 App 名稱是 Baemin。</p>
+ <div class="card c-food"><h3>① 出發前在家先做好</h3><ol class="steps"><li><span>App Store／Google Play 搜尋 <b>Baemin</b> 或 <b>배달의민족</b>，下載安裝。</span></li><li><span><b>換成中文或英文介面</b>：2026 年 2 月起支援英文、中文、日文，但不會自動切換，要到手機「設定 → App → Baemin → 語言」改。</span></li><li><span><b>先試註冊</b>：各家說法不一，有的說要韓國手機號碼收 6 位數簡訊，也有說 2026 年 7 月底起不用。請在家先打開 App 試一次，卡住就不要硬撐，到了現場改去店裡吃。</span></li><li><span><b>先設付款</b>：優先用 <b>Apple Pay</b>（海外 Visa、Mastercard、JCB、Amex 已支援），或結帳時選「해외 신용카드（海外信用卡）」。</span></li></ol></div>
+ <div class="card"><h3>② 配送地址（貼 Naver 地址，不要用英文）</h3>${dest(PM.home).sel}${addrBlock(x)}<p style="color:var(--sub);font-size:12.5px;margin-top:6px">先問房東能不能外送到住宿、正確的入口在哪，備註寫「在大樓入口領餐」。</p></div>
+ <div class="card c-food"><h3>③ 下單步驟</h3><ol class="steps"><li><span>打開 App，確認地址是上面這串。</span></li><li><span>搜尋 <b>치킨</b>（炸雞）、<b>순살</b>（無骨）、<b>반반</b>（雙拼），看起點金額和運費。</span></li><li><span>選店、選餐，湊到最低訂購金額。</span></li><li><span>結帳選 <b>Apple Pay</b> 或 <b>海外信用卡</b>。</span></li><li><span>在「給騎士」備註貼下面的韓文，不要選放門口。</span></li><li><span>用 App 追蹤進度，騎士到了會傳韓文訊息，用翻譯看；取餐時核對訂單。</span></li></ol></div>
+ <div class="card"><h3>④ 可複製的備註</h3><div class="kr" style="border:0"><div><b>${msg}</b><small>外送請送到大樓入口，到了請傳訊息給我。</small></div><button class="btn soft sm" data-copytext="${msg}">複製</button></div>
+ <div class="kr"><div><b>양파랑 파 빼 주세요.</b><small>請不要放洋蔥和蔥。</small></div><button class="btn soft sm" data-copytext="양파랑 파 빼 주세요.">複製</button></div>
+ <div class="kr"><div><b>소고기 안 들어간 메뉴로 부탁드려요.</b><small>請幫我選不含牛肉的餐點。</small></div><button class="btn soft sm" data-copytext="소고기 안 들어간 메뉴로 부탁드려요.">複製</button></div></div>
+ <div class="note butter"><h3>⚠️ 先知道</h3><p>• 英文介面只在你這端，<b>店家和騎士都用韓文溝通</b>。</p><p>• 海外信用卡有時今天能付、明天失敗，取決於 App、發卡行和時間。付款失敗就換一張卡或改用 Apple Pay。</p><p>• 註冊規定和付款方式常更新，以 App 當下畫面為準。到達時間與費用都是即時變動。</p></div>
+ <div class="card"><h3>參考資料</h3><div class="btns"><a class="btn soft sm" href="https://latteinseoul.com/how-to-use-baemin-in-korea-english-guide/" target="_blank" rel="noopener">Baemin 英文與海外卡教學 ↗</a><a class="btn soft sm" href="https://lacha.co.kr/korea-guide/en/food-delivery-app-english-korea/" target="_blank" rel="noopener">外送 App 英文與海外卡 ↗</a></div></div></div>`};
 G['g-wow']=()=>{
  const ctx=S.ctx&&PM[S.ctx]?PM[S.ctx]:null;const ca=ctx&&AREA[ctx.ar]?ctx.ar:null;
  const rows=Object.entries(AREA).filter(([k])=>k!=='gapyeong').map(([k,v])=>{
