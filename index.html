@@ -240,7 +240,7 @@ table{border-collapse:collapse;width:100%;font-size:13px}
 <div class="wrap">
   <header class="bar">
     <div><h1>🍁 首爾賞楓醫美購物團</h1><small>2026.11.04 – 11.08 · 4 人 · 台中 ⇄ 首爾</small></div>
-    <button class="pill-btn" id="btnAdd">📲 加入主畫面</button>
+    <div style="display:flex;gap:6px;flex:0 0 auto"><button class="pill-btn" id="btnRefresh" aria-label="重新整理，載入最新版">🔄</button><button class="pill-btn" id="btnAdd">📲 加入主畫面</button></div>
   </header>
   <main id="view"></main>
 </div>
@@ -924,6 +924,12 @@ function route(){
   document.querySelectorAll('.nav button').forEach(b=>{if(b.dataset.go===tab)b.setAttribute('aria-current','page')});
   closeSheet();$('#drv').classList.remove('on');
 }
+async function hardRefresh(){
+  toast('🔄 更新中，載入最新版…');
+  try{const rs=(navigator.serviceWorker&&await navigator.serviceWorker.getRegistrations())||[];for(const r of rs)await r.unregister();
+    const ks=(window.caches&&await caches.keys())||[];for(const k of ks)await caches.delete(k)}catch(e){}
+  setTimeout(()=>location.reload(),300);
+}
 function go(h){window.scrollTo(0,0);if(location.hash.slice(1)===h)route();else location.hash=h;}
 function refresh(keepScroll){const y=window.scrollY;route();if(keepScroll)window.scrollTo(0,y)}
 addEventListener('hashchange',()=>{window.scrollTo(0,0);route()});
@@ -943,6 +949,7 @@ document.addEventListener('click',e=>{
   if(el=q('[data-driver]')){const x=PM[el.dataset.driver];S.ctx=x.id;openDriver(x);return}
   if(q('#drvClose')){$('#drv').classList.remove('on');return}
   if(q('#drvGuide')){$('#drv').classList.remove('on');go('g-taxi');return}
+  if(q('#btnRefresh')){hardRefresh();return}
   if(q('#btnAdd')||q('#btnAdd2')){addHome();return}
   if(q('[data-close]')||t===$('#scrim')){closeSheet();return}
   if(el=q('[data-go]')){go(el.dataset.go);return}
