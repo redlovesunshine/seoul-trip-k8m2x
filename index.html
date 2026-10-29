@@ -430,7 +430,7 @@ const DAYS=[
   note:{c:'',h:'第一晚想吃炸雞？',b:['🍗 用 <b>Woowa／Baemin（배달의민족）</b>下單，出發前先在家註冊並設好付款（Apple Pay 或海外信用卡）。','🍗 先跟房東確認能不能外送到住宿，以及騎士能不能在入口面交。'],go:['g-food','看外送教學']},
   stops:[
    {k:'d1a',t:'17:50',e:'✈️',ti:'台中起飛',ds:'RMQ → ICN。',ps:[]},
-   {k:'d1b',t:'21:30',e:'🛬',ti:'抵達仁川',ds:'抓 60–90 分鐘入境與領行李，約 23:00 前後出關（第二航廈 T2）；再搭車前往民宿。',ps:['icn'],taxi:'home',go:['g-from','🛬 機場→民宿前往攻略'],tips:['落地先確認末班列車與機場巴士時間；四人＋行李建議直接叫車。']},
+   {k:'d1b',t:'21:30',e:'🛬',ti:'抵達仁川',ds:'抓 60–90 分鐘入境與領行李，約 23:00 前後出關（第二航廈 T2）；再搭車前往民宿。',ps:['icn'],taxi:'home',go:['g-from','🛬 機場→民宿前往攻略'],tips:['落地先確認末班列車與機場巴士時間；四人＋行李建議直接叫車。','WOWPASS 建議在台灣先預約，到 T2 1 樓 CU 2 號店（24 小時）領卡。詳見攻略的換錢頁。']},
    {k:'d1c',t:'23:00+',e:'🏠',ti:'前往民宿入住',ds:'可用 k.ride／Uber Taxi、機場巴士或 AREX＋計程車；航廈是第二航廈（T2），先確認末班。給司機看民宿地址。',ps:['home'],go:['g-from','🛬 機場→民宿前往攻略']},
    {k:'d1d',t:'深夜',e:'🛍️',ti:'想買才去 NYU NYU',ds:'東大門飾品、包包、髮飾；第一晚不排強制集合。',ps:['nyu']}]},
  {n:2,date:'11/5',w:'四',e:'🍁',c:'c-sight',ti:'銀杏 × 古宮 × 韓屋咖啡｜南大門採買',sub:'上午拍照逛街，下午南大門與折扣挖寶。',wx:['⛅','14° / 8°','多雲時晴；拍銀杏清晨偏冷，洋蔥式穿搭。'],
@@ -593,7 +593,7 @@ function results(){
 const GUIDES=[
  ['g-from','🛬','機場→民宿','21:30 落地後怎麼到民宿','c-stay'],
  ['g-taxi','🚕','叫車','k.ride／Uber，附給司機看的畫面','c-move'],
- ['g-wow','💴','WOWPASS 換錢','機台查詢、使用步驟','c-sight'],
+ ['g-wow','💴','WOWPASS 換錢','領卡、儲值、手續費、機台','c-sight'],
  ['g-fx','🔢','韓幣台幣換算','輸入金額馬上算、可分帳','c-sight'],
  ['g-food','🛵','叫外送（Woowa）','Baemin 註冊、付款、給騎士的韓文','c-food'],
  ['g-metro','🚇','地鐵','三條線就夠，各景點怎麼搭','c-stay'],
@@ -644,13 +644,56 @@ G['g-wow']=()=>{
   const days=DAYS.filter(d=>d.stops.some(s=>s.ps.some(id=>PM[id].ar===k))||P.some(x=>x.ar===k&&x.days.has(d.n))).map(d=>'D'+d.n).join(' ');
   const q='WOWPASS '+v[1];
   return `<div class="row c-sight wowrow" data-area="${v[0]} ${v[1]} ${k}" style="cursor:default"><div class="ico">📍</div><div class="rb"><div class="rt">${v[0]}${k===ca?'<span class="tag x">你剛剛看的區域</span>':''}</div><div class="rd">${days?'順路 '+days:'備用區域'}</div></div><div class="ra"><a class="ib" href="https://www.google.com/maps/search/?api=1&query=${enc(q)}" target="_blank" rel="noopener" aria-label="Google 地圖">🗺️</a><a class="ib" href="https://map.naver.com/p/search/${enc(q)}" target="_blank" rel="noopener" aria-label="Naver 地圖">N</a></div></div>`}).join('');
- return `${back}<div class="g"><h2>💴 WOWPASS 換錢</h2><p class="lead">把外幣換成可刷卡、可搭交通的預付卡。機台位置會調整，點開地圖看最新結果。</p>
- <div class="card"><h3>📍 找機台</h3><div class="btns"><a class="btn" href="https://www.google.com/maps/search/WOWPASS" target="_blank" rel="noopener">離我最近的 WOWPASS ↗</a><a class="btn soft" href="https://www.google.com/maps/search/?api=1&query=${enc('WOWPASS kiosk')}" target="_blank" rel="noopener">全部機台 ↗</a></div>
- <p style="color:var(--sub);font-size:12.5px;margin-top:8px">在 Google 地圖打開時請允許定位，會顯示附近的機台。也可以在下方選行程區域搜尋。</p></div>
- <div class="search" style="position:static;padding:0"><label for="wq"><span>🔍</span><input id="wq" type="search" placeholder="搜尋區域，例如 明洞、機場" autocomplete="off"></label></div>
- <div id="wlist" style="margin-top:12px">${rows}</div>
- <div class="card c-sight"><h3>機台怎麼用</h3><ol class="steps"><li><span>帶好<b>護照</b>，到機台選語言（有中文）。</span></li><li><span>依畫面放入紙鈔或刷卡；機台會顯示可換的幣別、匯率與手續費，換之前看清楚。</span></li><li><span>領卡後可直接刷卡、買東西，也可搭地鐵公車（功能以官方說明為準）。</span></li><li><span>剩餘金額可回到機台退款，費用以機台顯示為準，所以不用一次換太多。</span></li></ol></div>
- <div class="note butter"><p>💡 市場攤販、小店仍可能只收現金，建議留一點韓元現金。以上為一般使用說明，實際幣別、費率與功能請以機台及 WOWPASS 官方公告為準。</p></div></div>`};
+ const ok='<span class="tag" style="background:var(--sage-s);color:var(--sage)">多來源一致</span>',warn='<span class="tag x">來源不一致</span>',own='<span class="tag f">僅你提供的資料</span>';
+ const fee=(a,b,c)=>`<div class="kv"><div style="min-width:0">${a}${c?'<br><small style="color:var(--sub)">'+c+'</small>':''}</div><b style="text-align:right;flex:0 0 auto">${b}</b></div>`;
+ const hot=[
+  ['天空花園酒店 東大門 1 號店','1F 大廳，東大門歷史文化公園站 6 號出口約 150 公尺','24 小時','支援 NT$500／1,000'],
+  ['Summit Hotel Seoul 頂峰大酒店','1F 櫃檯，4 號出口約 100 公尺','24 小時','支援 NT$500／1,000'],
+  ['東大門歷史文化公園站','1 號出口方向，地下置物櫃附近','約 06:00–23:59','支援 NT$500／1,000'],
+  ['G3 Hotel Chungmuro','1F 櫃檯，忠武路站 6 號出口附近','24 小時','台幣是否支援請看機台']
+ ].map(h=>`<div class="card" style="margin:8px 0;padding:11px 13px"><b>${h[0]}</b><br><small style="color:var(--sub)">${h[1]}</small><div class="btns" style="margin-top:6px"><span class="chip">🕒 ${h[2]}</span><span class="chip">💵 ${h[3]}</span><a class="btn soft sm" href="https://www.google.com/maps/search/?api=1&query=${enc(h[0]+' 서울')}" target="_blank" rel="noopener">地圖 ↗</a></div></div>`).join('');
+ return `${back}<div class="g"><h2>💴 WOWPASS 換錢與儲值</h2><p class="lead">11/4 21:30 落地第二航廈：先預約領卡，隔天再用台幣現鈔儲值，最省手續費。</p>
+ <div class="note sage"><h3>🍊 建議這樣做</h3>
+  <ol class="steps" style="--c:var(--sage)"><li><span><b>出發前</b>：在官方預約頁選「仁川機場 T2＋機場 CU 便利商店領卡」，付款後存好條碼截圖。</span></li><li><span><b>11/4 落地</b>：到 T2 1 樓入境大廳的 CU 2 號店領卡，綁定 App。先只領卡就好。</span></li><li><span><b>11/5 起</b>：到民宿附近機台，投入台幣現鈔儲值（免手續費）。</span></li><li><span><b>大額消費</b>：直接刷海外高回饋信用卡，不要用 WOWPASS App 的信用卡儲值（約 4%）。</span></li></ol></div>
+
+ <div class="card c-sight"><h3>① 第一次領卡（仁川 T2）</h3>
+  <ol class="steps"><li><span>打開預約頁，選 <b>Incheon International Airport Terminal 2</b>。</span></li><li><span>選 <b>Airport CU Convenience Stores</b>（機場 CU 領卡），不要選機台領卡或 SKT 組合包。</span></li><li><span>選張數、填資料、付款。四個人都要用的話各預約一張，<b>一本護照只能綁定一張卡</b>。</span></li><li><span>完成後取得<b>條碼憑證</b>（有些平台給 6 位數預約碼），截圖存相簿。</span></li><li><span>11/4 到 <b>T2 1 樓入境大廳 A 出口附近的 CU 2 號店</b>（24 小時），向店員出示條碼領卡。</span></li><li><span>打開 WOWPASS App，掃描卡片背面條碼並輸入 CVC，完成綁定。</span></li></ol>
+  <div class="kv"><span>CU 2 號店 ${ok}</span><b>T2 1F 入境大廳 A 出口附近</b></div>
+  <div class="kv"><span>營業</span><b>24 小時</b></div>
+  <div class="kv"><span>領卡費用 ${warn}</span><b>約 ₩5,500／張</b></div>
+  <p style="color:var(--sub);font-size:12.5px;margin-top:6px">2026 年 3 月起費用調整，有資料寫 App 預約 ₩5,500、現場辦卡 ₩6,000，也有舊資料寫 ₩5,000，實際金額以預約付款頁為準。</p>
+  <div class="btns"><a class="btn" href="https://wowpass.oopy.io/voucher/cu/ct" target="_blank" rel="noopener">官方 CU 預約說明 ↗</a><a class="btn soft" href="https://www.wowpass.io/" target="_blank" rel="noopener">WOWPASS 官網 ↗</a></div></div>
+ <div class="note butter"><p>⚠️ <b>CU 領到的是卡片，不是裡面有錢的卡。</b>CU 櫃檯只負責發卡，官方客服也說櫃檯目前不能直接幫 WOWPASS 餘額儲值。</p></div>
+
+ <div class="card"><h3>② 領卡之後怎麼儲值？</h3>
+  ${fee('🏧 <b>市區 WOWPASS 機台</b>，投入台幣現鈔','免手續費','只收 NT$500、NT$1,000 紙鈔；按機台當下匯率換算。這是最推薦的方式。')}
+  ${fee('📱 <b>WOWPASS App 信用卡儲值</b>','約 4%','台灣信用卡銀行可能另收約 1.5% 海外手續費，合計約 5.5%。')}
+  ${fee('🏪 <b>CU 櫃檯</b>','不能儲值 WOWPASS','只能領卡。T-money 可用韓元現金在櫃檯加值。')}
+  ${fee('✈️ <b>T2 CU 3 號店的機台</b>（B 出口、10 號出口附近）','不要當唯一方案','只能辦卡、儲值，不能提領現金；營業約 07:00–22:00（另有資料寫 07:00–21:50）。你 21:30 才落地，出關後可能已打烊。機場機台收不收台幣現鈔各家說法不同，請看機台畫面。')}
+  ${fee('✈️ <b>AREX 站內舊機台</b>','已停止營運','舊攻略提到的，不要特地去找。 ')}
+  <p style="color:var(--sub);font-size:12.5px;margin-top:6px">機台儲值與換匯的各項規定來自多篇 2026 年教學，我沒有看到完整官方費率表。實際以機台畫面與 App 為準。</p></div>
+
+ <div class="card"><h3>③ 信用卡儲值手續費試算（4%）</h3>
+  ${[30000,50000,100000,200000].map(k=>fee('儲值 ₩'+fmt(k),'手續費 ₩'+fmt(k*0.04)+'<br><small style="color:var(--sub);font-weight:400">加銀行費約 ₩'+fmt(k*0.055)+'</small>')).join('')}
+  <p style="color:var(--sub);font-size:12.5px;margin-top:6px">試算未含匯率差。WOWPASS 偶爾有手續費折扣活動。</p></div>
+
+ <div class="card"><h3>④ 手續費總表</h3>
+  ${fee('辦卡','₩5,500～6,000','2026/3/4 起調整，來源不一，以付款頁為準')}
+  ${fee('換匯、機台現金儲值','免手續費','只有匯率差')}
+  ${fee('App 信用卡儲值','約 4%','另加發卡銀行海外手續費')}
+  ${fee('從卡內提領韓元現金','₩1,000／次','每次上限約 ₩10 萬，不要分很多次領')}
+  ${fee('補發遺失的卡','₩3,000～4,000','需到指定機台辦理')}
+  ${fee('WOWPASS 餘額 → T-money','來源不一','有寫免費、有寫 ₩500、也有說不能轉；以 App 畫面為準')}
+  ${fee('卡內餘額退回台幣','通常不行','花完或在機台提領韓元')}</div>
+ <div class="note sky"><p>🚇 <b>WOWPASS 消費餘額和 T-money 交通餘額是分開的。</b>儲值完請兩邊都看一下。搭地鐵最穩的做法是留一點韓元現金，到地鐵站或超商加值 T-money。</p></div>
+
+ <div class="card"><h3>🏠 民宿附近的 WOWPASS 機台 ${own}</h3>
+  <p style="font-size:13px;color:var(--sub)">以下資料來自你貼的 ChatGPT 整理，我沒有查到可以核對的來源，請先在地圖或 WOWPASS App 搜尋確認；其中前三個據說在東大門歷史文化公園站周邊，也標有非住客可使用。</p>${hot}
+  <div class="btns"><a class="btn soft sm" href="https://www.wowexchange.net/exchange/location/view/309?lang=zh_TW" target="_blank" rel="noopener">天空花園酒店機台資訊 ↗</a></div></div>
+ <div class="card"><h3>📍 其他區域找機台</h3><div class="btns" style="margin:0 0 8px"><a class="btn" href="https://www.google.com/maps/search/WOWPASS" target="_blank" rel="noopener">離我最近的 WOWPASS ↗</a></div>
+  <div class="search" style="position:static;padding:0"><label for="wq"><span>🔍</span><input id="wq" type="search" placeholder="搜尋區域，例如 明洞、機場" autocomplete="off"></label></div>
+  <div id="wlist" style="margin-top:10px">${rows}</div></div>
+ <div class="note butter"><p>💡 市場攤販、小店仍可能只收現金，留一點韓元備用。以上費率與位置常調整，出發前請用 WOWPASS App 的機台搜尋再確認一次。</p></div></div>`};
 G['g-metro']=()=>`${back}<div class="g"><h2>🚇 抓住 3 條線就好</h2><p class="lead">站名有韓文對照，真正搭車仍建議以 App 即時導航。</p>
  <div class="card">${[
   ['4','南大門／明洞','忠武路站（충무로）→ 4 號線往首爾站方向 → 明洞站（명동）／會賢站（회현）。'],
@@ -694,7 +737,7 @@ G['g-from']=()=>`${back}<div class="g"><h2>🛬 仁川機場→民宿</h2><p cla
  <ol class="steps"><li><span>入境、領完行李後，走到 <b>第二航廈 1 樓入境大廳</b>，跟著 <b>Taxi</b> 指標到乘車處。</span></li><li><span>也可以先在 <b>k.ride</b>／<b>Uber</b> 設好目的地，上車地點選航廈 1 樓入境大廳，先預估價格。</span></li><li><span>上車前說「<b>트렁크 열어 주세요</b>」，行李放後車廂；人多可選大型車（Van／Jumbo）。</span></li><li><span>把<b>民宿地址</b>亮給司機看（上面按鈕），確認是否含高速費、可否刷卡。</span></li><li><span>接近民宿時，用房東影片確認入口；有問題用 App 或翻譯。</span></li></ol></div>
  <div class="card"><h3>其他方式（需先查末班）</h3><p>🚆 <b>AREX 機場快線</b>：到首爾站再轉 4 號線或叫車，深夜班次有限，<b>落地後先查末班時間</b>再決定。</p><p>🚌 <b>機場巴士／深夜公車</b>：班次少、下車點離民宿可能有段距離，拖行李較累。</p>
  <div class="btns"><a class="btn soft sm" href="https://www.google.com/maps/dir/?api=1&origin=${enc('Incheon International Airport')}&destination=${enc(PM.home.a)}&travelmode=transit" target="_blank" rel="noopener">大眾運輸路線 ↗</a><a class="btn soft sm" href="https://www.google.com/maps/dir/?api=1&origin=${enc('Incheon International Airport')}&destination=${enc(PM.home.a)}&travelmode=driving" target="_blank" rel="noopener">開車路線 ↗</a></div></div>
- <div class="card"><h3>📋 落地前先準備</h3>${['房東的入住方式、門禁／鎖碼，先截圖存好','eSIM／漫遊先開通，落地就能叫車','k.ride／Uber 先註冊並設好付款','手上留一點韓元現金，或先查 WOWPASS 機台（機場有人潮）','民宿地址複製好，也可直接用「給司機看」'].map(t=>`<div class="kv"><div>✅ ${t}</div></div>`).join('')}<div class="btns"><button class="btn soft sm" data-go="g-wow">💴 WOWPASS</button><button class="btn soft sm" data-go="g-taxi">🚕 叫車教學</button></div></div>
+ <div class="card"><h3>📋 落地前先準備</h3>${['房東的入住方式、門禁／鎖碼，先截圖存好','eSIM／漫遊先開通，落地就能叫車','k.ride／Uber 先註冊並設好付款','先預約 WOWPASS 機場 CU 領卡（T2），條碼截圖；手上留一點韓元現金','民宿地址複製好，也可直接用「給司機看」'].map(t=>`<div class="kv"><div>✅ ${t}</div></div>`).join('')}<div class="btns"><button class="btn soft sm" data-go="g-wow">💴 WOWPASS</button><button class="btn soft sm" data-go="g-taxi">🚕 叫車教學</button></div></div>
  <div class="card"><h3>可複製的韓文</h3>${kr([['퇴계로50길 6-1로 가 주세요.','請載我到退溪路50街 6-1。'],['여기로 가 주세요.','請載我到這裡。'],['트렁크 열어 주세요.','請開後車廂。'],['고속도로 통행료 포함이에요?','高速公路費含在內嗎？'],['카드 결제 가능해요?','可以刷卡嗎？'],['건물 입구 앞에서 내려 주세요.','請在大樓入口前讓我下車。']])}</div></div>`;
 const fmt=(n,d=0)=>isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:d,minimumFractionDigits:0}):'';
 const fxRate=()=>{const r=+store.get('rate',46);return r>0?r:46};
@@ -730,7 +773,7 @@ const LIST=[
  ['t4','11/7 醫美','Doctors 或 GoldJ 擇一；確認開診、醫師、療程、術後照護及付款方式。'],
  ['t5','護照・網路','護照效期、eSIM／漫遊、行動電源。'],
  ['t6','先裝好 App','k.ride（或 Uber）、Baemin、Naver Map，先完成註冊與付款設定。'],
- ['t7','WOWPASS／韓元','先決定要換多少，留一點現金。']];
+ ['t7','WOWPASS 預約領卡','選仁川 T2＋機場 CU 領卡，付款後把條碼截圖；另留一點韓元現金。']];
 function viewMe(){
   const done=LIST.filter(l=>checks[l[0]]).length;
   const fl=favs.map(id=>PM[id]).filter(Boolean);
