@@ -138,6 +138,16 @@ a{color:inherit;text-decoration:none}
 .pinlab{font-size:12px;color:var(--sub);margin-top:2px}
 .wtabs{display:flex;gap:8px;margin:8px 0}
 .wtabs .fc{flex:1;text-align:center;padding:9px}
+.mapwrap{overflow:auto;border-radius:20px;background:var(--card);box-shadow:var(--shadow);margin-top:10px;-webkit-overflow-scrolling:touch}
+.mapwrap svg{display:block}
+.mapsvg text{font-family:inherit;paint-order:stroke;stroke:var(--card);stroke-width:3.5px;stroke-linejoin:round}
+.mp{cursor:pointer}
+.mp .pc{fill:var(--accent);stroke:var(--card);stroke-width:3}
+.mp.off .pc{fill:var(--sub)}
+.mp.dim{opacity:.22}
+.mp:focus-visible .pc,.mp:hover .pc{stroke:var(--ink)}
+.mapleg{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:12px;color:var(--sub);margin:8px 2px}
+.mapleg i{display:inline-block;width:18px;height:4px;border-radius:3px;vertical-align:middle;margin-right:4px}
 .more{color:var(--accent);font-size:12.5px;margin-top:6px;display:block}
 .ex{margin:14px 0 4px}
 .ex h3{font-size:15px;margin-bottom:8px}
@@ -663,7 +673,7 @@ function viewPlan(){
   <div class="facts"><div class="fact"><small>去程 ✈️</small><b>11/4 17:50 RMQ → 21:30 ICN</b></div><div class="fact"><small>回程 ✈️</small><b>11/8 14:15 ICN → 16:25 RMQ</b></div>
   <div class="fact wide"><small>🏠 民宿</small><div class="addr" style="margin:6px 0 0"><div>서울특별시 중구 퇴계로50가길 6-1, 201호<small>建築：세림빌라（Serim Villa）・Mono Bloom Stay 201 室</small></div><button class="btn sm" data-copy="home">📋 複製</button></div><div class="btns" style="margin-top:8px"><a class="btn soft sm" href="https://www.airbnb.com.tw/rooms/1571603518248584566" target="_blank" rel="noopener">Airbnb 房源頁 ↗</a></div></div></div>`:''}
   <div class="days" role="group" aria-label="選擇日期">${pills}</div>
-  <div class="dayhead"><h2>${d.e} ${esc(d.ti)}</h2><p>${esc(d.sub)}</p></div>
+  <div class="dayhead"><h2>${d.e} ${esc(d.ti)}</h2><p>${esc(d.sub)}</p><div class="btns" style="margin-top:8px"><button class="btn soft sm" data-go="g-map" data-mapday="${d.n}">🗺️ 看今天的地圖</button></div></div>
   <div class="wx"><span class="t">${d.wx[0]} ${d.wx[1]}</span><span>${esc(d.wx[2])}</span></div>
   <ul class="tl">${stops}</ul>
   ${xs.length?`<div class="ex"><h3>✨ 今天順路還可以加碼</h3><div class="exs">${xs.map(x=>`<button class="xc" data-open="${x.id}"><b>${CAT[x.cat][0]} ${esc(x.n)}</b><p>${esc(x.why)}</p></button>`).join('')}</div></div>`:''}
@@ -704,6 +714,7 @@ function results(){
 /* ============ 攻略頁 ============ */
 const GUIDES=[
  ['g-from','🛬','機場→民宿','21:30 落地後怎麼到民宿','c-stay'],
+ ['g-map','🗺️','我們的地圖','所有行程地點，依區域標在一張圖','c-move'],
  ['g-walk','🚶','漢南・聖水逛街路線','不回頭路線圖＋沿路美食','c-shop'],
  ['g-taxi','🚕','叫車','k.ride／Uber，附給司機看的畫面','c-move'],
  ['g-wow','💴','WOWPASS 換錢','領卡、儲值、手續費、機台','c-sight'],
@@ -836,6 +847,100 @@ const WALK={
    {w:'步行約 10 分（估計）',e:'🍜',ti:'Jojo 刀削麵、Darak、安木',ps:['jojo','darak','f-anmok'],d:'靠近首爾林一側的食物區。傍晚吃晚餐正好。'},
    {w:'步行約 10 分（估計）',e:'🍁',ti:'首爾林（서울숲）',ps:['seoulforest'],d:'最後散步看秋色，走累了就叫車回民宿。',end:1}]}
 };
+/* ===== 我們的地圖（示意位置：用各區中心點估計，誤差可能到 1 公里） ===== */
+const CL={
+ home:['民宿（忠武路）','🏠',37.5628,127.0010,'t'],
+ jongno:['安國・景福宮','🏯',37.5778,126.9800,'t'],
+ nam:['南大門・會賢','🧦',37.5588,126.9775,'b'],
+ myeong:['明洞','🛍️',37.5636,126.9858,'b'],
+ euljiro:['乙支路','🍖',37.5655,126.9915,'t'],
+ dongdae:['東大門','🏙️',37.5680,127.0105,'t'],
+ seoulstn:['首爾站','🚆',37.5547,126.9707,'b'],
+ cheongdam:['清潭・狎鷗亭','💆',37.5272,127.0400,'b'],
+ sinsa:['新沙林蔭道','🛍️',37.5205,127.0230,'b'],
+ hannam:['漢南洞','☕',37.5385,127.0005,'b'],
+ seongsu:['聖水洞・首爾林','👟',37.5445,127.0470,'t'],
+ hapjeong:['合井・延南洞','🛍️',37.5560,126.9200,'t'],
+ icn:['仁川機場 T2','✈️',null,null,'b'],
+ gap:['南怡島・小法國村','🌳',null,null,'b']
+};
+const OVR={home:'home',pildong:'home',cheonggye:'euljiro',norang:'euljiro',sancheong:'euljiro',euljiro:'euljiro',garosu:'sinsa',monorow:'sinsa',newcore:null,lotte:'seoulstn',sung:null};
+function clOf(x){
+  if(x.id in OVR)return OVR[x.id];
+  if(x.id.startsWith('eul-'))return 'euljiro';
+  return {jongno:'jongno',nam:'nam',myeong:'myeong',dongdae:'dongdae',seongsu:'seongsu',hannam:'hannam',gangnam:'cheongdam',hongdae:'hapjeong',incheon:'icn',gapyeong:'gap',seoulstn:'seoulstn'}[x.ar]||null;
+}
+const MROUTE={1:['icn','home','dongdae'],2:['home','jongno','nam','home','hapjeong','home'],3:['home','gap','home','dongdae','home'],4:['home','cheongdam','hannam','seongsu','home'],5:['home','seoulstn','icn']};
+const MCOL={1:'var(--sky)',2:'var(--accent)',3:'var(--sage)',4:'var(--lav)',5:'var(--butter)'};
+const MW=720,MH=800;
+const mx=lon=>(lon-126.905)/0.17*MW, my=lat=>(37.585-lat)/0.08*MH;
+const OFFPOS={icn:[90,640],gap:[630,80]};
+let _pos=null;
+function allPos(){
+  if(_pos)return _pos;
+  const ks=Object.keys(CL).filter(k=>CL[k][2]!=null),p={};
+  ks.forEach(k=>{p[k]=[mx(CL[k][3]),my(CL[k][2])]});
+  const fixed=Object.keys(OFFPOS);fixed.forEach(k=>{p[k]=OFFPOS[k]});
+  const all=Object.keys(p),minD=130;
+  for(let it=0;it<250;it++){
+    for(let a=0;a<all.length;a++)for(let b=a+1;b<all.length;b++){
+      const A=p[all[a]],B=p[all[b]];let dx=B[0]-A[0],dy=B[1]-A[1],d=Math.hypot(dx,dy)||0.01;
+      if(d<minD){const f=(minD-d)/2/d;
+        if(!fixed.includes(all[a])){A[0]-=dx*f;A[1]-=dy*f}
+        if(!fixed.includes(all[b])){B[0]+=dx*f;B[1]+=dy*f}}
+    }
+    all.forEach(k=>{if(fixed.includes(k))return;p[k][0]=Math.min(MW-90,Math.max(90,p[k][0]));p[k][1]=Math.min(MH-110,Math.max(90,p[k][1]))});
+  }
+  return _pos=p;
+}
+const clPos=k=>allPos()[k];
+function clPlaces(k){return P.filter(x=>clOf(x)===k&&x.days.size>0)}
+function clDays(k){const d=new Set();clPlaces(k).forEach(x=>x.days.forEach(n=>d.add(n)));return [...d].sort()}
+const RIVER=[[126.905,37.548],[126.915,37.541],[126.930,37.533],[126.950,37.523],[126.975,37.5165],[126.995,37.5185],[127.010,37.525],[127.025,37.532],[127.045,37.536],[127.065,37.532],[127.075,37.527]];
+G['g-map']=()=>{
+  const md=S.mapday||0,z=S.mz||1;
+  const keys=Object.keys(CL).filter(k=>clPlaces(k).length);
+  const inDay=k=>!md||clDays(k).includes(md);
+  const river=RIVER.map(p=>mx(p[0]).toFixed(0)+','+my(p[1]).toFixed(0)).join(' ');
+  const lines=Object.keys(MROUTE).filter(d=>!md||+d===md).map(d=>{
+    const pts=MROUTE[d].map(k=>clPos(k).map(v=>v.toFixed(0)).join(',')).join(' ');
+    return `<polyline points="${pts}" fill="none" stroke="${MCOL[d]}" stroke-width="${md?7:4}" stroke-dasharray="12 10" stroke-linecap="round" stroke-linejoin="round" opacity="${md?0.95:0.5}"/>`}).join('');
+  const placed=[],P2=allPos();
+  const hit=(a,b)=>a[0]<b[2]&&a[2]>b[0]&&a[1]<b[3]&&a[3]>b[1];
+  const sorted=[...keys].sort((a,b)=>P2[a][1]-P2[b][1]);
+  const sideOf={};
+  sorted.forEach(k=>{const [x,y]=P2[k],w=CL[k][0].length*23+16;
+    const box={t:[x-w/2,y-66,x+w/2,y-34],b:[x-w/2,y+34,x+w/2,y+84]};
+    const bad=side=>placed.some(r=>hit(box[side],r))||keys.some(o=>o!==k&&hit(box[side],[P2[o][0]-30,P2[o][1]-30,P2[o][0]+30,P2[o][1]+30]));
+    const pick=!bad('t')?'t':(!bad('b')?'b':'t');sideOf[k]=pick;placed.push(box[pick])});
+  const pins=keys.map(k=>{
+    const c=CL[k],[x,y]=clPos(k),off=c[2]==null,days=clDays(k),n=clPlaces(k).length;
+    const top=sideOf[k]==='t';
+    const ly=top?y-40:y+54;
+    const note=k==='icn'?'・往西約 50 公里':(k==='gap'?'・往東北約 60–80 公里':'');
+    return `<g class="mp ${off?'off':''} ${inDay(k)?'':'dim'}" data-cl="${k}" role="button" tabindex="0" aria-label="${esc(c[0])}，${n} 個地點">
+     <circle class="pc" cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="28"/>
+     <text x="${x.toFixed(0)}" y="${(y+10).toFixed(0)}" text-anchor="middle" font-size="28">${c[1]}</text>
+     <text x="${x.toFixed(0)}" y="${ly.toFixed(0)}" text-anchor="middle" font-size="23" font-weight="700" fill="var(--ink)">${esc(c[0])}</text>
+     <text x="${x.toFixed(0)}" y="${(ly+24).toFixed(0)}" text-anchor="middle" font-size="19" fill="var(--sub)">${days.map(d=>'D'+d).join('・')}・${n} 點</text></g>`}).join('');
+  const chips=`<button class="fc" data-mday="0" aria-pressed="${!md}">全部</button>`+DAYS.map(d=>`<button class="fc" data-mday="${d.n}" aria-pressed="${md===d.n}">Day ${d.n}</button>`).join('');
+  const leg=Object.keys(MCOL).map(d=>`<span><i style="background:${MCOL[d]}"></i>Day ${d}</span>`).join('');
+  return `${back}<div class="g"><h2>🗺️ 我們的地圖</h2><p class="lead">所有要去的地點，依區域標在一張圖上。點圓圈看那一區有哪些店。</p>
+  <div class="chips">${chips}<button class="fc" data-mz="1">${z>1?'縮小':'放大'}</button></div>
+  <div class="mapleg">${leg}<span>虛線 = 當天移動順序</span></div>
+  <div class="mapwrap"><svg class="mapsvg" viewBox="0 0 ${MW} ${MH}" style="width:${z*100}%;height:auto" role="img" aria-label="首爾行程示意地圖">
+   <rect width="${MW}" height="${MH}" fill="var(--chip)"/>
+   <ellipse cx="${mx(126.9905).toFixed(0)}" cy="${my(37.5512).toFixed(0)}" rx="70" ry="52" fill="var(--sage-s)"/>
+   <text x="${mx(126.9905).toFixed(0)}" y="${(my(37.5512)+8).toFixed(0)}" text-anchor="middle" font-size="20" fill="var(--sage)">南山</text>
+   <polyline points="${river}" fill="none" stroke="var(--sky)" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" opacity=".35"/>
+   <text x="${mx(126.985).toFixed(0)}" y="${(my(37.5165)+52).toFixed(0)}" text-anchor="middle" font-size="22" fill="var(--sky)">漢江</text>
+   <text x="30" y="40" font-size="19" fill="var(--sub)">北 ↑</text>
+   ${lines}${pins}</svg></div>
+  <div class="note butter" style="margin-top:12px"><p>⚠️ 這是<b>示意地圖</b>。位置是我依各區中心點估計的，圓圈的相對方向大致正確，但為了不重疊，距離有被拉開，誤差可能到 1 公里以上，不能拿來導航。要精準位置，請點各地點旁邊的地圖鈕。</p></div></div>`};
+function openCluster(k){
+  const c=CL[k],ps=clPlaces(k).sort((a,b)=>a.o-b.o),days=clDays(k);
+  openSheet(`<h2><span>${c[1]} ${esc(c[0])}</span><button class="close" data-close aria-label="關閉">✕</button></h2><p class="sub">${days.map(d=>'Day '+d).join('・')}・${ps.length} 個地點（依行程順序）${k==='icn'?'・在首爾以西約 50 公里':(k==='gap'?'・在首爾東北約 60–80 公里，搭 Klook 遊覽車':'')}</p><div style="margin-top:12px">${ps.map(row).join('')}</div>`);
+}
 G['g-walk']=()=>{
  const k=S.walk==='seongsu'?'seongsu':'hannam',W2=WALK[k];
  const lbl=id=>PM[id];
@@ -1153,8 +1258,11 @@ document.addEventListener('click',e=>{
   if(q('#btnRefresh')){hardRefresh();return}
   if(q('#btnAdd')||q('#btnAdd2')){addHome();return}
   if(q('[data-close]')||t===$('#scrim')){closeSheet();return}
+  if(el=q('[data-cl]')){openCluster(el.dataset.cl);return}
+  if(el=q('[data-mday]')){S.mapday=+el.dataset.mday;route();return}
+  if(el=q('[data-mz]')){S.mz=(S.mz||1)>1?1:1.5;route();return}
   if(el=q('[data-wtab]')){S.walk=el.dataset.wtab;route();return}
-  if(el=q('[data-go]')){if(el.dataset.walk)S.walk=el.dataset.walk;go(el.dataset.go);return}
+  if(el=q('[data-go]')){if(el.dataset.walk)S.walk=el.dataset.walk;if(el.dataset.mapday)S.mapday=+el.dataset.mapday;go(el.dataset.go);return}
   if(el=q('[data-day]')){S.day=+el.dataset.day;store.set('day',S.day);refresh();const dd=document.querySelector('.days');if(dd){const y=dd.getBoundingClientRect().top+scrollY;if(scrollY>y)window.scrollTo(0,y)}return}
   if(el=q('[data-stop]')){stopSheet(SM[el.dataset.stop]);return}
   if(el=q('[data-open]')){placeSheet(PM[el.dataset.open]);return}
@@ -1189,7 +1297,7 @@ document.addEventListener('change',e=>{
 });
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){closeSheet();$('#drv').classList.remove('on')}
-  if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('[role="button"]')){e.preventDefault();e.target.click()}
+  if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('[role="button"]')){e.preventDefault();e.target.dispatchEvent(new MouseEvent('click',{bubbles:true}))}
 });
 
 /* 主畫面圖示（執行時用 canvas 產生） */
