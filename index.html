@@ -443,7 +443,7 @@ HN('hn-soi','food','소이연남 한남','소이연남 한남','泰式料理。'
 /* 漢南洞指定要逛的選物店（你們點名的；搜尋找不到可靠地址） */
 p('folnua','shop','Folnua','folnua 한남','서울 용산구 한남동 685-23','設計師品牌與包款、選物。你的原 PDF 提到的漢南洞店。',{ar:'hannam',tip:'地址（685-23 한남동）由你提供的 Google 地圖資料，我沒有核對，營業時間也沒查到。'});
 p('feria','shop','FERIA','FERIA 한남','','你們指定要逛的店。',{unv:1,ar:'hannam',tip:'我搜尋不到這間的地址與營業時間，請在 Naver Map 搜尋「FERIA 한남」確認。'});
-p('monorow','shop','MONOROW','MONOROW 한남','','你們指定要逛的店。',{unv:1,ar:'hannam',tip:'我查到的 MONOROW 在狎鷗亭（압구정로10길 42 1층，11:30–20:30）和新沙林蔭道，沒有查到漢南洞分店，請用 Naver Map 確認是不是同一間。'});
+p('monorow','shop','MONOROW（新沙林蔭道）','MONOROW 가로수길','서울 강남구 신사동 520-8','你們指定要逛的店。在新沙林蔭道，不在漢南洞。',{ar:'gangnam',near:'d4c',tip:'地址（신사동 520-8）由你提供的 Google 地圖資料，我另外查到狎鷗亭（압구정로10길 42 1층）也有一間，營業 11:30–20:30（那間的資料），這間時間請確認。'});
 p('depond','shop','DEPOND','DEPOND 한남','','你們指定要逛的店。',{unv:1,ar:'hannam',tip:'我搜尋不到這間的地址與營業時間，請在 Naver Map 搜尋「DEPOND 한남」確認。'});
 /* 清潭早餐與散步（11/7 診所預約 12:00） */
 p('coffeebean-rodeo','cafe','Coffee Bean 狎鷗亭羅德奧 2 號店','커피빈 압구정로데오2호점','서울 강남구 선릉로157길 22','羅德奧一帶少數早上 8 點就開的咖啡店，和 It\'s me 在同一條巷子（선릉로157길）。',{x:1,src:'榜單推薦',near:'',ar:'gangnam',h:'平日 08:00–23:00；週六 08:00–24:00（評論資料，請確認）',why:'一篇評論說「狎鷗亭洞很少有早上早開的咖啡店」，這間 8 點開。',tip:'營業時間來自評論，地址是同一個來源。診所術前能不能喝咖啡，請先問診所。'});
@@ -529,7 +529,7 @@ Object.assign(PM0['onion-anguk'],{x:0,near:'',why:'',src:''});
 PM0.sung.near='';
 PM0.huwon.near='';
 PM0.dosan.x=0;PM0.dosan.near='';PM0.dosan.why='';
-PM0.garosu.near='';PM0['gangnam-myeonok'].near='';
+PM0.garosu.near='d4c';PM0.garosu.why='新沙林蔭道，MONOROW 在這裡（신사동 520-8）。離羅德奧一帶不遠，我沒有查到精確距離，叫車比較方便。';PM0['gangnam-myeonok'].near='';
 /* 行程 */
 const DAYS=[
  {n:1,date:'11/4',w:'三',e:'✈️',c:'c-move',ti:'落地首爾，第一晚不要趕',sub:'順利入住最重要，購物與炸雞是加分。',wx:['🌤️','12° / 3°','晴時多雲；夜間入境約 6–8°C，大衣、圍巾。'],
@@ -567,7 +567,7 @@ const DAYS=[
    {k:'d4b',t:'11:40',e:'🚪',ti:'抵達 It\'s me 清潭（12:00 預約）',ds:'提早 15–20 分抵達報到，11/7 週六診所約 17:00 前結束。',ps:['itsme']},
    {k:'d4b2',t:'12:00–約 14:30',e:'✨',ti:'醫美諮詢＋療程',ds:'實際需要多久以診所為準。想做音波、麗珠蘭、黃金微針、水光，未必適合當天全部做滿。',ps:[]},
    {k:'d4c',t:'約 14:30',e:'🍱',ti:'診所附近午餐＋休息',ds:'術後若紅腫就減少外出。想吃清淡選清潭純豆腐；愛吃牛選 Wooga；想坐下休息可去 우디집。',ps:[]},
-   {k:'d4d',t:'16:00 後（視體力）',e:'☕',ti:'漢南洞自由逛（與聖水洞二選一也可以）',ds:'沿梨泰院路一帶小巷找設計師品牌；醫美後想坐下休息，優先選冷氣室內的咖啡館。',ps:['folnua','feria','monorow','depond','anthracite','hetras-hannam','pipeground','hanroast','newmix-hn'],go:['g-walk','🚶 看漢南洞逛街路線圖'],walk:'hannam'},
+   {k:'d4d',t:'16:00 後（視體力）',e:'☕',ti:'漢南洞自由逛（與聖水洞二選一也可以）',ds:'沿梨泰院路一帶小巷找設計師品牌；醫美後想坐下休息，優先選冷氣室內的咖啡館。',ps:['folnua','feria','depond','anthracite','hetras-hannam','pipeground','hanroast','newmix-hn'],go:['g-walk','🚶 看漢南洞逛街路線圖'],walk:'hannam'},
    {k:'d4e',t:'傍晚（視體力）',e:'👟',ti:'聖水洞自由逛',ds:'從聖水站 3／4 號出口出發，進入延武場街一路看巷弄快閃、設計店、咖啡館。',ps:['musinsa-mega','musinsa-std','newmix-ss','onion','daelim','jojo','darak','hetras-seongsu'],go:['g-walk','🚶 看聖水洞逛街路線圖'],walk:'seongsu'},
    {k:'d4f',t:'晚上',e:'🍽️',ti:'晚餐／樂天超市（待選）',ds:'晚餐從下方或探索頁挑選；術後不舒服就直接回民宿。',ps:['lotte']}]},
  {n:5,date:'11/8',w:'日',e:'🧳',c:'c-move',ti:'收好戰利品，滿載回台',sub:'將零食、伴手禮提前買完，最後一天專心搭飛機。',wx:['☀️','15° / 5°','晴朗；趕機場早出門，薄外套必備。'],
@@ -812,7 +812,7 @@ const WALK={
    {e:'🚩',ti:'漢江鎮站 1 號出口',d:'出站後直走約 100 公尺，在右邊第一個巷口右轉，沿坡道往上，約 5 分鐘到 Leeum。（來源：Leeum 官方指引）'},
    {e:'🏛️',ti:'Leeum 美術館',ps:['leeum'],d:'建議停留 60–90 分。週六 10:00–18:00。你們 12:00 才預約診所，若 16:30 後才到，Leeum 可能來不及，可略過。入場方式請先確認。',pins:['hn-keem']},
    {w:'步行約 5–10 分（估計）',e:'🛍️',ti:'newmix 漢南',ps:['newmix-hn'],d:'Leeum 在 이태원로55길，newmix 在 54길，我依路名推估兩者很近。'},
-   {w:'位置待確認',e:'🛍️',ti:'選物店：Folnua、FERIA、MONOROW、DEPOND',ps:['folnua','feria','monorow','depond'],d:'你們指定要逛的四間。我查不到它們的地址，請先在 Naver Map 搜尋，確認位置後，把它們放在離你當下最近的一段，不要特地走回頭。',warn:'MONOROW 我只查到狎鷗亭和新沙的分店，沒查到漢南洞，請確認。'},
+   {w:'位置待確認',e:'🛍️',ti:'選物店：Folnua、FERIA、DEPOND',ps:['folnua','feria','depond'],d:'你們指定要逛的店。Folnua 在 한남동 685-23；FERIA、DEPOND 我還沒有地址，請先在 Naver Map 搜尋，確認位置後，放在離你當下最近的一段，不要特地走回頭。',warn:'MONOROW 在新沙林蔭道（신사동 520-8），不在漢南洞，已移到午餐那一站的備選。'},
    {w:'步行約 10 分（估計）',e:'☕',ti:'Anthracite Coffee 漢南',ps:['anthracite'],d:'休息一下。',warn:'有一篇文章提到這間可能會結束營業，請先用地圖確認。'},
    {w:'步行約 5 分（估計）',e:'🌸',ti:'Hetras 漢南',ps:['hetras-hannam'],d:'門牌 255-1，和 Anthracite（240）在同一條 이태원로，我依門牌推估很近。'},
    {w:'步行約 10 分（估計）',e:'🍕',ti:'Pipeground 漢南',ps:['pipeground'],d:'披薩與義大利麵，可四人分食。',warn:'有含牛肉的口味，不吃牛請避開。',pins:['hn-bolicine','hn-manri']},
