@@ -69,6 +69,7 @@ a{color:inherit;text-decoration:none}
 .c-beauty{--c:var(--rose);--cs:var(--rose-s)}
 .c-move{--c:var(--sky);--cs:var(--sky-s)}
 .c-stay{--c:var(--sage);--cs:var(--sage-s)}
+.c-money{--c:var(--sage);--cs:var(--sage-s)}
 
 /* app bar */
 .bar{display:block;padding-top:calc(env(safe-area-inset-top,0px) + 14px);padding-bottom:6px}
@@ -288,7 +289,7 @@ table{border-collapse:collapse;width:100%;font-size:13px}
 
 <script>
 /* ============ 資料 ============ */
-const CAT={sight:['🍁','景點'],cafe:['☕','咖啡'],food:['🍜','美食'],bakery:['🥐','麵包'],shop:['🛍️','購物'],beauty:['💆','醫美'],move:['🚇','交通'],stay:['🏠','住宿']};
+const CAT={money:['💱','換錢'],sight:['🍁','景點'],cafe:['☕','咖啡'],food:['🍜','美食'],bakery:['🥐','麵包'],shop:['🛍️','購物'],beauty:['💆','醫美'],move:['🚇','交通'],stay:['🏠','住宿']};
 const MEAT={beef:['🐮','牛肉'],pork:['🐷','豬肉'],both:['🐮🐷','牛豬都有'],chicken:['🐔','雞肉'],fish:['🐟','海鮮']};
 const AREA={incheon:['仁川機場','인천공항'],jongno:['安國・鍾路','안국 종로'],myeong:['明洞','명동'],dongdae:['東大門','동대문'],nam:['南大門・會賢','남대문 회현'],seoulstn:['首爾站','서울역'],seongsu:['聖水洞','성수'],gangnam:['新沙・江南','신사 강남'],hannam:['漢南・梨泰院','한남 이태원'],hongdae:['弘大','홍대']};
 // p(id,cat,名稱,韓文搜尋詞,地址,說明,選項{ar,q,x,near,why,tip})
@@ -497,6 +498,12 @@ YN('yn-hippo','cafe','Hippo Brunchhaus（히포 브런치하우스）','히포 �
 YN('yn-morino','bakery','모리노팡（鹽麵包）','모리노팡 연남','','延南洞的鹽麵包店。',{why:'文章提到的鹽麵包名店。地址與營業時間沒查到。'});
 YN('yn-yeonbaek','cafe','연백（草莓大福）','연백 딸기모찌 연남','','台灣部落格推薦的延南洞草莓大福。',{why:'地址與營業時間沒查到。'});
 YN('yn-jo','cafe','JO & DAWSON（法式吐司）','JO & DAWSON 연남','','以法式吐司著稱，表面有一層薄脆焦糖。',{why:'部落格推薦。地址與營業時間沒查到。'});
+/* 明洞換錢所（Day 2 換現金：南大門、童裝、女裝、棉被多半收現金） */
+const XC=(id,n,ko,a,d,o)=>p(id,'money',n,ko,a,d,{ar:'myeong',...o});
+XC('xc-embassy','大使館前換錢所（대사관 앞 환전소）','대사관 앞 환전소','서울 중구 명동2길 26','明洞最有名的換錢所之一，人最多。',{h:'09:00–21:30（Trip Onda 資料）',tip:'有部落客提醒這間人很多，要當面點清楚鈔票和收據，也可以先看隔壁一品香、大信的牌價。三間走路都在幾分鐘內，匯率通常相近。'});
+XC('xc-ilpum','一品香換錢所（일품향 환전소）','일품향 환전소 명동','서울 중구 명동2가 105','和大使館很近的換錢所。',{unv:1,tip:'有來源說 2025 年 7 月起搬到原位置旁約 10 公尺的一般店面，不再是地下室；營業時間各來源不一，請用地圖確認。'});
+XC('xc-daeshin','大信換錢所（대신환전소）','대신환전소 명동','','三間熱門換錢所之一，在大使館附近。',{unv:1,tip:'我沒有查到地址與營業時間，請用地圖搜尋確認。'});
+XC('xc-hanmi','한미환전소','한미환전소','서울 중구 명동7길 23','明洞的換錢所，電話 02-777-9922。',{h:'09:00–21:00',tip:'地址與時間只有一個來源，請用地圖確認。'});
 /* 地址核對（網路搜尋，來源為美食榜單／地圖整理頁；v=已找到一致地址，unv=找不到可靠地址） */
 const FIX={
  soha:{a:'서울 종로구 수표로28길 21-5',h:'09:00–20:30',v:1},
@@ -588,8 +595,8 @@ const DAYS=[
    {k:'d2b',t:'09:40–10:20',e:'🚶',ti:'前往景福宮，看 10:00 換崗儀式',ds:'早餐後從安國站搭 3 號線 1 站到景福宮站。換崗儀式在入口前的興禮門廣場，免費、約 20 分，不用買票就能看。先確認官網時間。',ps:['gyeongbok'],tips:['景福宮週二休，11/5 是週四，不受影響。換崗時間以官網為準。','早餐若排隊太久，來不及 10:00 換崗就直接入宮，不要為了看換崗壓縮早餐以外的時間。']},
    {k:'d2c',t:'10:20–12:00',e:'🏯',ti:'景福宮慢慢逛',ds:'光化門、勤政殿、慶會樓、香遠亭、建清宮。逛一圈約 1.5 小時，宮很大，穿好走的鞋。',ps:['gyeongbok']},
    {k:'d2d',t:'12:00–13:00',e:'🍽️',ti:'午餐（西村、仁寺洞一帶）',ds:'景福宮旁的西村有土俗村參雞湯（不含牛）。也可以選益善洞、廣藏市場、雞鍋、仁寺洞小物，從下方挑選。',ps:[]},
-   {k:'d2e',t:'13:00–13:45',e:'🚕',ti:'前往南大門市場',ds:'叫車或搭地鐵前往，途中可簡單吃點東西。',ps:[],taxi:'namdaemun'},
-   {k:'d2f',t:'13:45–17:00',e:'🛍️',ti:'南大門採買：今天的購物主場',ds:'童裝、女裝、飾品、小物。下午一到先去童裝區，因為童裝商場多半營業到約 17:00。',ps:['burdeng','namdaemun','vegtteok','kalguksu','galchi']},
+   {k:'d2e',t:'13:00–13:50',e:'💱',ti:'明洞換錢所：換現金',ds:'南大門的童裝、女裝、棉被多半要付現金，先到明洞換好再去。從景福宮搭地鐵到明洞站，換錢所在 5 或 6 號出口附近，走路約 3–5 分。換錢要帶護照。',ps:['xc-embassy','xc-ilpum','xc-daeshin','xc-hanmi'],go:['g-cash','💱 看換錢比價與試算'],tips:['先看 2–3 家門口的牌價再決定。','大面額台幣的匯率通常比較好。','換錢前先在「換錢所」頁算好預算。']},
+   {k:'d2f',t:'14:10–17:00',e:'🛍️',ti:'南大門採買：今天的購物主場',ds:'童裝、女裝、飾品、小物、棉被。從明洞站搭 4 號線南向 1 站到會賢站。下午一到先去童裝區，因為童裝商場多半營業到約 17:00。',ps:['burdeng','namdaemun','vegtteok','kalguksu','galchi']},
    {k:'d2g',t:'17:00–18:15',e:'🏠',ti:'回民宿放東西、休息',ds:'南大門逛完先回民宿放戰利品、休息、補充體力。想繼續補貨可以逛 Olive Young、大創，從下方挑。',ps:[]},
    {k:'d2g2',t:'18:30–20:00（二選一）',e:'🛍️',ti:'合井・延南洞：FERIA、DEPOUND',ds:'你們指定要逛的兩間在麻浦區（合井洞、聖美山路），不在漢南洞。從民宿搭地鐵約 40 分，叫車約 25–40 分。',ps:['feria','depond']},
    {k:'d2h',t:'20:00 後（A）',e:'🍽️',ti:'晚餐 A：合井・延南洞',ds:'逛完 FERIA、DEPOUND 就在附近吃。牛豬都有選 연남화로；不吃牛選 연남제비、팔계집、돼지전、鰻魚、雞鍋、生魚片；愛吃牛選 합정고깃집、화설。吃完可在咖啡甜點店會合。',ps:[]},
@@ -748,6 +755,7 @@ const GUIDES=[
  ['g-map','🗺️','我們的地圖','所有行程地點，依區域標在一張圖','c-move'],
  ['g-walk','🚶','漢南・聖水逛街路線','不回頭路線圖＋沿路美食','c-shop'],
  ['g-taxi','🚕','叫車','k.ride／Uber，附給司機看的畫面','c-move'],
+ ['g-cash','💱','換錢所與比價','明洞換錢所、台幣 vs WOWPASS 試算','c-sight'],
  ['g-wow','💴','WOWPASS 換錢','領卡、儲值、手續費、機台','c-sight'],
  ['g-fx','🔢','韓幣台幣換算','輸入金額馬上算、可分帳','c-sight'],
  ['g-food','🛵','叫外送（Woowa）','Baemin 註冊、付款、給騎士的韓文','c-food'],
@@ -793,6 +801,51 @@ G['g-food']=()=>{const x=S.ctx&&PM[S.ctx]&&PM[S.ctx].a?PM[S.ctx]:PM.home;const m
  <div class="kr"><div><b>소고기 안 들어간 메뉴로 부탁드려요.</b><small>請幫我選不含牛肉的餐點。</small></div><button class="btn soft sm" data-copytext="소고기 안 들어간 메뉴로 부탁드려요.">複製</button></div></div>
  <div class="note butter"><h3>⚠️ 先知道</h3><p>• 英文介面只在你這端，<b>店家和騎士都用韓文溝通</b>。</p><p>• 海外信用卡有時今天能付、明天失敗，取決於 App、發卡行和時間。付款失敗就換一張卡或改用 Apple Pay。</p><p>• 註冊規定和付款方式常更新，以 App 當下畫面為準。到達時間與費用都是即時變動。</p></div>
  <div class="card"><h3>參考資料</h3><div class="btns"><a class="btn soft sm" href="https://latteinseoul.com/how-to-use-baemin-in-korea-english-guide/" target="_blank" rel="noopener">Baemin 英文與海外卡教學 ↗</a><a class="btn soft sm" href="https://lacha.co.kr/korea-guide/en/food-delivery-app-english-korea/" target="_blank" rel="noopener">外送 App 英文與海外卡 ↗</a></div></div></div>`};
+const CASHD={amt:20000,mkt:41.06,md:41.06,w:2.1,b:6.0,cc:5.5};
+const cashGet=()=>({...CASHD,...store.get('cash',{})});
+function cashTbl(){
+  const c=cashGet(),amt=+c.amt||0,md=+c.md||0,mk=+c.mkt||0;
+  const rows=[
+   ['🏦','明洞換錢所（台幣現鈔）',md,'最推薦：大面額台幣、先比 2–3 家'],
+   ['🏧','WOWPASS 機台（台幣現鈔）',md*(1-(+c.w||0)/100),'免手續費，但匯率比明洞差約 '+(+c.w||0)+'%'],
+   ['💳','WOWPASS App 信用卡儲值',mk/1.04/1.015,'WOWPASS 約 4%，加台灣銀行海外手續費約 1.5%'],
+   ['🏤','台灣的銀行先換韓元',md*(1-(+c.b||0)/100),'少換約 '+(+c.b||0)+'%，出發前就要換']
+  ];
+  const base=amt*md;
+  return rows.map(r=>{const k=amt*r[2],d=k-base;
+   return `<div class="card" style="margin:8px 0;padding:11px 13px"><div class="kv" style="border:0;padding:0"><b>${r[0]} ${r[1]}</b><b>₩${fmt(k)}</b></div>
+   <div class="kv" style="border:0;padding:2px 0"><span>每 NT$1 ≈ ₩${fmt(r[2],2)}</span><span style="color:${d<0?'var(--rose)':'var(--sage)'}">${d===0?'基準':(d<0?'比明洞少 ₩'+fmt(-d)+'（約 NT$'+fmt(-d/(md||1))+'）':'')}</span></div>
+   <small style="color:var(--sub)">${r[3]}</small></div>`}).join('');
+}
+function cashCalc(){
+  const g=id=>{const e=$('#'+id);return e?parseFloat(e.value):NaN};
+  const c=cashGet();
+  const cur={amt:g('cashAmt'),mkt:g('cashMkt'),md:g('cashMd'),w:g('cashW'),b:g('cashB')};
+  Object.keys(cur).forEach(k=>{if(isFinite(cur[k]))c[k]=cur[k]});
+  store.set('cash',c);
+  const t=$('#cashTbl');if(t)t.innerHTML=cashTbl();
+  const need=parseFloat(($('#cashKrw')||{}).value);
+  const o=$('#cashNeed');
+  if(o){const md=+c.md||0;o.innerHTML=isFinite(need)&&md?`要拿到 ₩${fmt(need)}：明洞約需 <b>NT$${fmt(need/md)}</b>；WOWPASS 機台約需 <b>NT$${fmt(need/(md*(1-(+c.w||0)/100)))}</b>。`:'輸入想要的韓元，算需要帶多少台幣。'}
+}
+G['g-cash']=()=>{const c=cashGet();
+ const mc=XCS=>['xc-embassy','xc-ilpum','xc-daeshin','xc-hanmi'].map(id=>row(PM[id])).join('');
+ return `${back}<div class="g"><h2>💱 換錢所與換匯比價</h2><p class="lead">南大門的童裝、女裝、棉被多半要付現金。Day 2 先到明洞換好現金再去。</p>
+ <div class="note sage"><h3>📍 Day 2 怎麼排</h3><p>景福宮 → 午餐 → <b>13:00 明洞換錢所</b>（4 號線明洞站 5 或 6 號出口附近，走路約 3–5 分）→ 搭 4 號線 1 站到會賢站 → 14:10 南大門。</p><p>換錢要帶<b>護照</b>。換好後在店裡就點清楚鈔票，收據留著。</p></div>
+ <div class="sec">明洞換錢所</div>${mc()}
+ <div class="note butter"><p>⚠️ 三間（大使館、一品香、大信）走路幾分鐘內，匯率通常相近。多篇攻略建議先看 2–3 家門口的牌價再決定，大面額台幣匯率通常比較好。大使館人最多，有部落客提醒要當面點清楚。</p></div>
+ <div class="sec">試算：換多少、差多少</div>
+ <div class="card"><h3>🧮 輸入</h3>
+  <label class="kv" for="cashAmt" style="border:0"><span>要換的台幣 NT$</span><input id="cashAmt" type="number" inputmode="numeric" value="${c.amt}" style="width:110px;font:inherit;text-align:right;background:var(--chip);color:var(--ink);border:0;border-radius:12px;padding:8px 10px"></label>
+  <label class="kv" for="cashMd" style="border:0"><span>明洞換錢所牌價（1 台幣＝？韓元）</span><input id="cashMd" type="number" inputmode="decimal" step="0.01" value="${c.md}" style="width:90px;font:inherit;text-align:right;background:var(--chip);color:var(--ink);border:0;border-radius:12px;padding:8px 10px"></label>
+  <label class="kv" for="cashMkt" style="border:0"><span>市場參考價（信用卡試算用）</span><input id="cashMkt" type="number" inputmode="decimal" step="0.01" value="${c.mkt}" style="width:90px;font:inherit;text-align:right;background:var(--chip);color:var(--ink);border:0;border-radius:12px;padding:8px 10px"></label>
+  <label class="kv" for="cashW" style="border:0"><span>WOWPASS 比明洞差 %</span><input id="cashW" type="number" inputmode="decimal" step="0.1" value="${c.w}" style="width:90px;font:inherit;text-align:right;background:var(--chip);color:var(--ink);border:0;border-radius:12px;padding:8px 10px"></label>
+  <label class="kv" for="cashB" style="border:0"><span>台灣銀行比明洞差 %</span><input id="cashB" type="number" inputmode="decimal" step="0.1" value="${c.b}" style="width:90px;font:inherit;text-align:right;background:var(--chip);color:var(--ink);border:0;border-radius:12px;padding:8px 10px"></label>
+  <div class="btns">${[5000,10000,20000,30000].map(n=>`<button class="btn soft sm" data-cashamt="${n}">NT$${fmt(n)}</button>`).join('')}</div></div>
+ <div id="cashTbl">${cashTbl()}</div>
+ <div class="card"><h3>想要 ₩X，要帶多少台幣？</h3><label class="kv" for="cashKrw" style="border:0"><span>想要的韓元 ₩</span><input id="cashKrw" type="number" inputmode="numeric" placeholder="例如 500000" style="width:130px;font:inherit;text-align:right;background:var(--chip);color:var(--ink);border:0;border-radius:12px;padding:8px 10px"></label><p id="cashNeed" style="font-size:14px;margin-top:6px">輸入想要的韓元，算需要帶多少台幣。</p></div>
+ <div class="note sky"><h3>這些數字從哪來</h3><p>• 市場參考價 <b>41.06</b>：鉅亨網 TWD/KRW 10/30 收盤，不是換錢所報價。我連不上即時匯率，請在現場看牌價後改上面的欄位。</p><p>• 明洞換錢所、WOWPASS、台灣銀行的相對差距：取自一篇比較文章，每 NT$10,000 明洞約 ₩417,000、WOWPASS ₩408,400、台灣銀行 ₩392,003，WOWPASS 少約 2.1%、銀行少約 6%。那是當時的匯率，現在的實際牌價會不同，差距比例只供參考。</p><p>• WOWPASS 信用卡儲值約 4%，台灣信用卡銀行可能再收約 1.5%。</p><p>• 韓元近幾個月升值，8 月新聞說明洞換錢所曾跌到約 42，匯率變動快，請在出發前一兩天再看一次。</p></div>
+ <div class="btns"><button class="btn soft" data-go="g-wow">💴 WOWPASS 領卡與機台</button><button class="btn soft" data-go="g-fx">🔢 韓幣台幣換算</button></div></div>`};
 G['g-wow']=()=>{
  const ctx=S.ctx&&PM[S.ctx]?PM[S.ctx]:null;const ca=ctx&&AREA[ctx.ar]?ctx.ar:null;
  const rows=Object.entries(AREA).filter(([k])=>k!=='gapyeong').map(([k,v])=>{
@@ -1031,11 +1084,11 @@ G['g-from']=()=>`${back}<div class="g"><h2>🛬 仁川機場→民宿</h2><p cla
  <div class="card"><h3>📋 落地前先準備</h3>${['房東的入住方式、門禁／鎖碼，先截圖存好','eSIM／漫遊先開通，落地就能叫車','k.ride／Uber 先註冊並設好付款','先預約 WOWPASS 機場 CU 領卡（T2），條碼截圖；手上留一點韓元現金','民宿地址複製好，也可直接用「給司機看」'].map(t=>`<div class="kv"><div>✅ ${t}</div></div>`).join('')}<div class="btns"><button class="btn soft sm" data-go="g-wow">💴 WOWPASS</button><button class="btn soft sm" data-go="g-taxi">🚕 叫車教學</button></div></div>
  <div class="card"><h3>可複製的韓文</h3>${kr([['퇴계로50가길 6-1로 가 주세요.','請載我到退溪路50街 6-1。'],['여기로 가 주세요.','請載我到這裡。'],['트렁크 열어 주세요.','請開後車廂。'],['고속도로 통행료 포함이에요?','高速公路費含在內嗎？'],['카드 결제 가능해요?','可以刷卡嗎？'],['건물 입구 앞에서 내려 주세요.','請在大樓入口前讓我下車。']])}</div></div>`;
 const fmt=(n,d=0)=>isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:d,minimumFractionDigits:0}):'';
-const fxRate=()=>{const r=+store.get('rate',46);return r>0?r:46};
+const fxRate=()=>{const r=+store.get('rate2',41.06);return r>0?r:41.06};
 function fxTable(){const r=fxRate();return [1000,3000,5000,10000,15000,30000,50000,100000,300000].map(k=>`<div class="kv"><b>₩${fmt(k)}</b><span>≈ NT$ ${fmt(k/r,k<5000?1:0)}</span></div>`).join('')}
 G['g-fx']=()=>{const r=fxRate();return `${back}<div class="g"><h2>🔢 韓幣⇄台幣換算</h2><p class="lead">輸入任一邊，另一邊馬上算好。匯率可自己改，會記在這支手機。</p>
  <div class="card"><h3>💱 匯率</h3><label for="fxRate" class="kv" style="border:0;align-items:center"><span>1 台幣 =</span><span style="display:flex;gap:6px;align-items:center;color:var(--ink)"><input id="fxRate" type="number" inputmode="decimal" step="0.01" min="0" value="${r}" style="width:90px;font:inherit;text-align:right;background:var(--chip);color:var(--ink);border:0;border-radius:12px;padding:8px 10px">韓元</span></label>
- <p style="color:var(--sub);font-size:12.5px;margin-top:6px">預設 46 只是參考值，不是即時匯率。出發前和換錢時請到查詢匯率更新，實際換匯以機台、銀行或刷卡匯率為準。</p>
+ <p style="color:var(--sub);font-size:12.5px;margin-top:6px">預設 41.06 是鉅亨網 10/30 的市場收盤價，不是換錢所的牌價，也不是即時匯率。換錢時請改成現場牌價，實際以機台、換錢所或刷卡匯率為準。</p>
  <div class="btns"><a class="btn soft sm" href="https://www.google.com/search?q=${enc('TWD to KRW')}" target="_blank" rel="noopener">查今日匯率 ↗</a></div></div>
  <div class="card"><h3>🧮 換算</h3>
   <label for="fxK" style="font-size:13px;color:var(--sub)">韓元 ₩</label><input id="fxK" class="fxin" type="number" inputmode="decimal" placeholder="例如 35000" style="width:100%;font:inherit;font-size:22px;background:var(--chip);color:var(--ink);border:0;border-radius:14px;padding:10px 12px;margin:4px 0 10px">
@@ -1108,11 +1161,11 @@ const ROUTES={
  d2b:{from:'onion-anguk',to:'gyeongbok',total:'約 10–15 分',steps:[
   M('3','搭 3 號線，往 대화（Daehwa）方向','1 站，約 2–3 分','在「景福宮站」下車，常見走法是 5 號出口'),
   W('步行到景福宮入口與興禮門廣場','約 5–10 分（估計），依站內指標與 Naver Map')]},
- d2e:{from:'gyeongbok',to:'namdaemun',total:'約 35–45 分（含走到站、轉乘）',steps:[
+ d2e:{from:'gyeongbok',to:'xc-embassy',total:'約 35–45 分（含走到站、轉乘、走到換錢所）',steps:[
   W('從景福宮走到景福宮站','約 5–10 分（估計）'),
   M('3','搭 3 號線，往 오금（Ogeum）方向','4 站（安國、鍾路 3 街、乙支路 3 街、忠武路），約 8–10 分','在「忠武路站」下車並轉乘'),
-  M('4','轉 4 號線，往 사당／오이도（Sadang／Oido，南向）方向','2 站（明洞、會賢），約 4–5 分','在「會賢站」下車，走 5 或 6 號出口'),
-  W('步行到南大門市場','約 5 分')],
+  M('4','轉 4 號線，往 사당／오이도（Sadang／Oido，南向）方向','1 站（明洞），約 2–3 分','在「明洞站」下車，換錢所在 5 或 6 號出口附近'),
+  W('步行到換錢所','約 3–5 分（來源說法，依地圖為準）')],
   notes:['如果走累了，這一段叫車也可以。若中午去西村吃土俗村，從那裡走回景福宮站約 10–15 分（估計）。']},
  d2g:{from:'namdaemun',to:'home',total:'約 25–30 分（含步行）',steps:[
   W('走到會賢站','約 5 分'),
@@ -1143,7 +1196,10 @@ Object.assign(ROUTES,{
   M('4','搭 4 號線，往 당고개（Danggogae）方向','1 站，約 3 分','在「東大門歷史文化公園站」下車'),
   W('步行到 NYU NYU','約 10–15 分。網路資料寫從東大門歷史文化公園站或新堂站走路都可以到')],
   notes:['NYU NYU 營業到凌晨約 05:00，第一晚想去再去。']},
- d2f:{from:'namdaemun',to:'burdeng',total:'市場內步行約 5 分',steps:[W('從會賢站 5 或 6 號出口進市場，先找童裝區','Burdeng 的地址取自截圖，到了用 Naver Map 搜尋「부르뎅 아동복」')]},
+ d2f:{from:'xc-embassy',to:'burdeng',total:'約 15 分',steps:[
+  W('走回明洞站','約 3–5 分'),
+  M('4','搭 4 號線，往 사당／오이도（南向）方向','1 站，約 2–3 分','在「會賢站」下車，走 6 號出口'),
+  W('步行到 Burdeng','你提供的資料：6 號出口步行約 2 分。到了先找童裝區，用 Naver Map 搜尋「부르뎅 아동복」')]},
  d2g2:{from:'home',to:'depond',total:'地鐵約 40 分；叫車約 25–40 分',steps:[
   W('走到忠武路站','依 Naver Map 導航'),
   M('3','搭 3 號線，往 대화（Daehwa）方向','1 站，約 3 分','在「乙支路 3 街站」下車並轉乘'),
@@ -1294,6 +1350,7 @@ document.addEventListener('click',e=>{
   if(q('#btnRefresh')){hardRefresh();return}
   if(q('#btnAdd')||q('#btnAdd2')){addHome();return}
   if(q('[data-close]')||t===$('#scrim')){closeSheet();return}
+  if(el=q('[data-cashamt]')){const c=cashGet();c.amt=+el.dataset.cashamt;store.set('cash',c);$('#cashAmt').value=c.amt;cashCalc();return}
   if(el=q('[data-cl]')){openCluster(el.dataset.cl);return}
   if(el=q('[data-mday]')){S.mapday=+el.dataset.mday;route();return}
   if(el=q('[data-mz]')){S.mz=(S.mz||1)>1?1:1.5;route();return}
@@ -1321,9 +1378,10 @@ function syncFilters(){
 document.addEventListener('input',e=>{
   const t=e.target;
   if(t.id==='q'){S.f.q=t.value;$('#qx').hidden=!t.value;results()}
+  if(t.id&&t.id.startsWith('cash'))cashCalc();
   if(t.id==='fxK')fxCalc('k');
   if(t.id==='fxT')fxCalc('t');
-  if(t.id==='fxRate'){const v=parseFloat(t.value);if(v>0){store.set('rate',v);$('#fxTab').innerHTML=fxTable();$('#fxTax').textContent=fmt(15000/v);fxCalc($('#fxK').value?'k':'t')}}
+  if(t.id==='fxRate'){const v=parseFloat(t.value);if(v>0){store.set('rate2',v);$('#fxTab').innerHTML=fxTable();$('#fxTax').textContent=fmt(15000/v);fxCalc($('#fxK').value?'k':'t')}}
   if(t.id==='wq'){const v=t.value.trim().toLowerCase();document.querySelectorAll('.wowrow').forEach(r=>r.hidden=v&&!r.dataset.area.toLowerCase().includes(v))}
   if(t.dataset&&t.dataset.chk){checks[t.dataset.chk]=t.checked;store.set('checks',checks);t.closest('.chk').classList.toggle('done',t.checked);const done=LIST.filter(l=>checks[l[0]]).length;const s=document.querySelector('.sec');if(s)s.textContent='出發前確認　'+done+'/'+LIST.length}
 });
