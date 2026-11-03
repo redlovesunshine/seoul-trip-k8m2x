@@ -592,7 +592,7 @@ const DAYS=[
   note:{c:'',h:'第一晚想吃炸雞？',b:['🍗 用 <b>Woowa／Baemin（배달의민족）</b>下單，出發前先在家註冊並設好付款（Apple Pay 或海外信用卡）。','🍗 先跟房東確認能不能外送到住宿，以及騎士能不能在入口面交。'],go:['g-food','看外送教學']},
   stops:[
    {k:'d1a',t:'17:50',e:'✈️',ti:'台中起飛',ds:'RMQ → ICN。',ps:[]},
-   {k:'d1b',t:'21:30',e:'🛬',ti:'抵達仁川',ds:'抓 60–90 分鐘入境與領行李，約 23:00 前後出關（第二航廈 T2）；再搭車前往民宿。',ps:['icn'],taxi:'home',go:['g-from','🛬 機場→民宿前往攻略'],tips:['落地先確認末班列車與機場巴士時間；四人＋行李建議直接叫車。','WOWPASS 建議在台灣先預約，到 T2 1 樓 CU 2 號店（24 小時）領卡。詳見攻略的換錢頁。']},
+   {k:'d1b',t:'21:30',e:'🛬',ti:'抵達仁川',ds:'抓 60–90 分鐘入境與領行李，約 23:00 前後出關（第二航廈 T2）；再搭車前往民宿。',ps:['icn'],taxi:'home',go:['g-from','🛬 機場→民宿前往攻略'],tips:['落地先確認末班列車與機場巴士時間；四人＋行李建議直接叫車。','交通用 T-money：落地後可在 T2 的便利商店（CU）買卡，用韓元現金加值；出發前先在台灣準備一點韓元現金。詳見攻略的「T-money・現金・刷卡」。']},
    {k:'d1c',t:'23:00+',e:'🏠',ti:'前往民宿入住',ds:'可用 k.ride／Uber Taxi、機場巴士或 AREX＋計程車；航廈是第二航廈（T2），先確認末班。給司機看民宿地址。',ps:['home'],go:['g-from','🛬 機場→民宿前往攻略']},
    {k:'d1d',t:'深夜',e:'🛍️',ti:'想買才去 NYU NYU',ds:'東大門飾品、包包、髮飾；第一晚不排強制集合。',ps:['nyu']}]},
  {n:2,date:'11/5',w:'四',e:'🍁',c:'c-sight',ti:'安國早餐 × 景福宮 × 南大門採買',sub:'上午景福宮（看 10:00 換崗），中午午餐，下午專心逛南大門。',wx:['⛅','14° / 8°','多雲時晴；清晨偏冷，洋蔥式穿搭。'],
@@ -762,8 +762,8 @@ const GUIDES=[
  ['g-map','🗺️','我們的地圖','所有行程地點，依區域標在一張圖','c-move'],
  ['g-walk','🚶','漢南・聖水逛街路線','不回頭路線圖＋沿路美食','c-shop'],
  ['g-taxi','🚕','叫車','k.ride／Uber，附給司機看的畫面','c-move'],
- ['g-cash','💱','換錢所與比價','明洞換錢所、台幣 vs WOWPASS 試算','c-sight'],
- ['g-wow','💴','WOWPASS 換錢','領卡、儲值、手續費、機台','c-sight'],
+ ['g-cash','💱','換錢所與比價','明洞換錢所、換多少、比價試算','c-sight'],
+ ['g-tmoney','🚇','T-money・現金・刷卡','怎麼買、怎麼加值、怎麼退','c-move'],
  ['g-fx','🔢','韓幣台幣換算','輸入金額馬上算、可分帳','c-sight'],
  ['g-food','🛵','叫外送（Woowa）','Baemin 註冊、付款、給騎士的韓文','c-food'],
  ['g-metro','🚇','地鐵','三條線就夠，各景點怎麼搭','c-stay'],
@@ -808,15 +808,14 @@ G['g-food']=()=>{const x=S.ctx&&PM[S.ctx]&&PM[S.ctx].a?PM[S.ctx]:PM.home;const m
  <div class="kr"><div><b>소고기 안 들어간 메뉴로 부탁드려요.</b><small>請幫我選不含牛肉的餐點。</small></div><button class="btn soft sm" data-copytext="소고기 안 들어간 메뉴로 부탁드려요.">複製</button></div></div>
  <div class="note butter"><h3>⚠️ 先知道</h3><p>• 英文介面只在你這端，<b>店家和騎士都用韓文溝通</b>。</p><p>• 海外信用卡有時今天能付、明天失敗，取決於 App、發卡行和時間。付款失敗就換一張卡或改用 Apple Pay。</p><p>• 註冊規定和付款方式常更新，以 App 當下畫面為準。到達時間與費用都是即時變動。</p></div>
  <div class="card"><h3>參考資料</h3><div class="btns"><a class="btn soft sm" href="https://latteinseoul.com/how-to-use-baemin-in-korea-english-guide/" target="_blank" rel="noopener">Baemin 英文與海外卡教學 ↗</a><a class="btn soft sm" href="https://lacha.co.kr/korea-guide/en/food-delivery-app-english-korea/" target="_blank" rel="noopener">外送 App 英文與海外卡 ↗</a></div></div></div>`};
-const CASHD={amt:20000,mkt:41.06,md:41.06,w:2.1,b:6.0,cc:5.5};
+const CASHD={amt:20000,mkt:41.06,md:41.06,b:6.0};
 const cashGet=()=>({...CASHD,...store.get('cash',{})});
 function cashTbl(){
   const c=cashGet(),amt=+c.amt||0,md=+c.md||0,mk=+c.mkt||0;
   const rows=[
    ['🏦','明洞換錢所（台幣現鈔）',md,'最推薦：大面額台幣、先比 2–3 家'],
-   ['🏧','WOWPASS 機台（台幣現鈔）',md*(1-(+c.w||0)/100),'免手續費，但匯率比明洞差約 '+(+c.w||0)+'%'],
-   ['💳','WOWPASS App 信用卡儲值',mk/1.04/1.015,'WOWPASS 約 4%，加台灣銀行海外手續費約 1.5%'],
-   ['🏤','台灣的銀行先換韓元',md*(1-(+c.b||0)/100),'少換約 '+(+c.b||0)+'%，出發前就要換']
+   ['🏤','台灣的銀行先換韓元',md*(1-(+c.b||0)/100),'少換約 '+(+c.b||0)+'%，出發前就要換'],
+   ['💳','信用卡直接刷（海外手續費約 1.5%）',mk/1.015,'不用換現金，但市場攤販多半只收現金']
   ];
   const base=amt*md;
   return rows.map(r=>{const k=amt*r[2],d=k-base;
@@ -827,13 +826,13 @@ function cashTbl(){
 function cashCalc(){
   const g=id=>{const e=$('#'+id);return e?parseFloat(e.value):NaN};
   const c=cashGet();
-  const cur={amt:g('cashAmt'),mkt:g('cashMkt'),md:g('cashMd'),w:g('cashW'),b:g('cashB')};
+  const cur={amt:g('cashAmt'),mkt:g('cashMkt'),md:g('cashMd'),b:g('cashB')};
   Object.keys(cur).forEach(k=>{if(isFinite(cur[k]))c[k]=cur[k]});
   store.set('cash',c);
   const t=$('#cashTbl');if(t)t.innerHTML=cashTbl();
   const need=parseFloat(($('#cashKrw')||{}).value);
   const o=$('#cashNeed');
-  if(o){const md=+c.md||0;o.innerHTML=isFinite(need)&&md?`要拿到 ₩${fmt(need)}：明洞約需 <b>NT$${fmt(need/md)}</b>；WOWPASS 機台約需 <b>NT$${fmt(need/(md*(1-(+c.w||0)/100)))}</b>。`:'輸入想要的韓元，算需要帶多少台幣。'}
+  if(o){const md=+c.md||0;o.innerHTML=isFinite(need)&&md?`要拿到 ₩${fmt(need)}：明洞約需 <b>NT$${fmt(need/md)}</b>；台灣的銀行約需 <b>NT$${fmt(need/(md*(1-(+c.b||0)/100)))}</b>。`:'輸入想要的韓元，算需要帶多少台幣。'}
 }
 G['g-cash']=()=>{const c=cashGet();
  const mc=()=>['xc-embassy','xc-ilpum','xc-daeshin','xc-hanmi','xc-yijee'].map(id=>row(PM[id])).join('');
@@ -843,79 +842,26 @@ G['g-cash']=()=>{const c=cashGet();
  <div class="sec">明洞換錢所（Day 2 13:00）</div>${mc()}
  <div class="note butter"><p>⚠️ 三間（大使館、一品香、大信）走路幾分鐘內，匯率通常相近。多篇攻略建議先看 2–3 家門口的牌價再決定，大面額台幣匯率通常比較好。大使館人最多，有部落客提醒要當面點清楚。</p></div>
  <div class="sec">其他行程區域的換錢所</div>
- <div class="card"><h3>🏙️ 東大門（Day 3 傍晚 18:50 下車後、或 Day 1 深夜）</h3><p style="font-size:13px;color:var(--sub);margin-bottom:8px">東大門歷史文化公園站站內有 WOWPASS 機台（約 06:00–23:59）。一般換錢所有幾間，多數資料是單一來源。有人說東大門適合急用或小額，大額還是明洞比較好。</p>${lst(['xc-moneybox-ddm','xc-gs25-ddp','xc-kimeun'])}</div>
- <div class="card"><h3>🛍️ 弘大・合井（Day 2 晚上去 FERIA、DEPOUND 時）</h3><p style="font-size:13px;color:var(--sub);margin-bottom:8px">弘大的匯率通常比明洞略差，金額不大差距有限。另有 WOW Exchange 自助機在弘大站內（2024 年資料寫 06:00–23:30，需護照）。</p>${lst(['xc-traveldepot','xc-moneybox-hd'])}</div>
+ <div class="card"><h3>🏙️ 東大門（Day 3 傍晚 18:50 下車後、或 Day 1 深夜）</h3><p style="font-size:13px;color:var(--sub);margin-bottom:8px">東大門有幾間換錢所，多數資料是單一來源。有人說東大門適合急用或小額，大額還是明洞比較好。</p>${lst(['xc-moneybox-ddm','xc-gs25-ddp','xc-kimeun'])}</div>
+ <div class="card"><h3>🛍️ 弘大・合井（Day 2 晚上去 FERIA、DEPOUND 時）</h3><p style="font-size:13px;color:var(--sub);margin-bottom:8px">弘大的匯率通常比明洞略差，金額不大差距有限。</p>${lst(['xc-traveldepot','xc-moneybox-hd'])}</div>
  <div class="card"><h3>📍 其他區域</h3><p style="font-size:13px;color:var(--sub)">漢南、聖水、清潭一帶我沒有查到可靠的換錢所。梨泰院那間換錢所不收新台幣。首爾站和會賢站一帶我也沒查到，建議在明洞一次換好。</p></div>
  <div class="sec">試算：換多少、差多少</div>
  <div class="card"><h3>🧮 輸入</h3>
-  <label class="kv" for="cashAmt" style="border:0"><span>要換的台幣 NT$</span><input id="cashAmt" type="number" inputmode="numeric" value="${c.amt}" style="width:110px;font:inherit;text-align:right;background:var(--chip);color:var(--ink);border:0;border-radius:12px;padding:8px 10px"></label>
+  <label class="kv" for="cashAmt" style="border:0"><span>要換的台幣 NT$</span><input id="cashAmt" type="number" inputmode="numeric" step="1" value="${c.amt}" style="width:110px;font:inherit;text-align:right;background:var(--chip);color:var(--ink);border:0;border-radius:12px;padding:8px 10px"></label>
   <label class="kv" for="cashMd" style="border:0"><span>明洞換錢所牌價（1 台幣＝？韓元）</span><input id="cashMd" type="number" inputmode="decimal" step="0.01" value="${c.md}" style="width:90px;font:inherit;text-align:right;background:var(--chip);color:var(--ink);border:0;border-radius:12px;padding:8px 10px"></label>
   <label class="kv" for="cashMkt" style="border:0"><span>市場參考價（信用卡試算用）</span><input id="cashMkt" type="number" inputmode="decimal" step="0.01" value="${c.mkt}" style="width:90px;font:inherit;text-align:right;background:var(--chip);color:var(--ink);border:0;border-radius:12px;padding:8px 10px"></label>
-  <label class="kv" for="cashW" style="border:0"><span>WOWPASS 比明洞差 %</span><input id="cashW" type="number" inputmode="decimal" step="0.1" value="${c.w}" style="width:90px;font:inherit;text-align:right;background:var(--chip);color:var(--ink);border:0;border-radius:12px;padding:8px 10px"></label>
   <label class="kv" for="cashB" style="border:0"><span>台灣銀行比明洞差 %</span><input id="cashB" type="number" inputmode="decimal" step="0.1" value="${c.b}" style="width:90px;font:inherit;text-align:right;background:var(--chip);color:var(--ink);border:0;border-radius:12px;padding:8px 10px"></label>
   <div class="btns">${[5000,10000,20000,30000].map(n=>`<button class="btn soft sm" data-cashamt="${n}">NT$${fmt(n)}</button>`).join('')}</div></div>
  <div id="cashTbl">${cashTbl()}</div>
  <div class="card"><h3>想要 ₩X，要帶多少台幣？</h3><label class="kv" for="cashKrw" style="border:0"><span>想要的韓元 ₩</span><input id="cashKrw" type="number" inputmode="numeric" placeholder="例如 500000" style="width:130px;font:inherit;text-align:right;background:var(--chip);color:var(--ink);border:0;border-radius:12px;padding:8px 10px"></label><p id="cashNeed" style="font-size:14px;margin-top:6px">輸入想要的韓元，算需要帶多少台幣。</p></div>
- <div class="note sky"><h3>這些數字從哪來</h3><p>• 市場參考價 <b>41.06</b>：鉅亨網 TWD/KRW 10/30 收盤，不是換錢所報價。我連不上即時匯率，請在現場看牌價後改上面的欄位。</p><p>• 明洞換錢所、WOWPASS、台灣銀行的相對差距：取自一篇比較文章，每 NT$10,000 明洞約 ₩417,000、WOWPASS ₩408,400、台灣銀行 ₩392,003，WOWPASS 少約 2.1%、銀行少約 6%。那是當時的匯率，現在的實際牌價會不同，差距比例只供參考。</p><p>• WOWPASS 信用卡儲值約 4%，台灣信用卡銀行可能再收約 1.5%。</p><p>• 韓元近幾個月升值，8 月新聞說明洞換錢所曾跌到約 42，匯率變動快，請在出發前一兩天再看一次。</p></div>
- <div class="btns"><button class="btn soft" data-go="g-wow">💴 WOWPASS 領卡與機台</button><button class="btn soft" data-go="g-fx">🔢 韓幣台幣換算</button></div></div>`};
-G['g-wow']=()=>{
- const ctx=S.ctx&&PM[S.ctx]?PM[S.ctx]:null;const ca=ctx&&AREA[ctx.ar]?ctx.ar:null;
- const rows=Object.entries(AREA).filter(([k])=>k!=='gapyeong').map(([k,v])=>{
-  const days=DAYS.filter(d=>d.stops.some(s=>s.ps.some(id=>PM[id].ar===k))||P.some(x=>x.ar===k&&x.days.has(d.n))).map(d=>'D'+d.n).join(' ');
-  const q='WOWPASS '+v[1];
-  return `<div class="row c-sight wowrow" data-area="${v[0]} ${v[1]} ${k}" style="cursor:default"><div class="ico">📍</div><div class="rb"><div class="rt">${v[0]}${k===ca?'<span class="tag x">你剛剛看的區域</span>':''}</div><div class="rd">${days?'順路 '+days:'備用區域'}</div></div><div class="ra"><a class="ib" href="https://www.google.com/maps/search/?api=1&query=${enc(q)}" target="_blank" rel="noopener" aria-label="Google 地圖">🗺️</a><a class="ib" href="https://map.naver.com/p/search/${enc(q)}" target="_blank" rel="noopener" aria-label="Naver 地圖">N</a></div></div>`}).join('');
- const ok='<span class="tag" style="background:var(--sage-s);color:var(--sage)">多來源一致</span>',warn='<span class="tag x">來源不一致</span>',own='<span class="tag f">僅你提供的資料</span>';
- const fee=(a,b,c)=>`<div class="kv"><div style="min-width:0">${a}${c?'<br><small style="color:var(--sub)">'+c+'</small>':''}</div><b style="text-align:right;flex:0 0 auto">${b}</b></div>`;
- const stT={ok:'<span class="tag" style="background:var(--sage-s);color:var(--sage)">已核對</span>',part:'<span class="tag x">部分核對</span>',no:'<span class="tag f">查不到</span>'};
- const hot=[
-  ['東大門歷史文化公園站','2 號線 1 號出口方向、4 號線換乘通道售票機旁','約 06:00–23:59','ok','WOW Exchange 機台頁與日本整理站兩個來源都有，位置與時間一致。'],
-  ['Summit Hotel Seoul（頂峰大酒店）','飯店內（Airbnb 房東寫飯店內有機台）','24 小時（日本整理站）','part','只找到房東留言和日本整理站，沒有查到官方位置頁；你貼的「4 號出口約 100 公尺」我無法核對。'],
-  ['Novotel Ambassador Seoul Dongdaemun','20 樓大廳','24 小時','part','日本整理站列出，我沒有再找到第二個來源。'],
-  ['天空花園酒店 東大門 1 號店','你貼的資料寫 1F 大廳','24 小時','no','搜尋找不到這間的機台資料。可能指 Hotel Skypark Dongdaemun I，但我不確定，請在 WOWPASS App 確認。'],
-  ['G3 Hotel Chungmuro','你貼的資料寫 1F 櫃檯','24 小時','no','搜尋找不到。我只看到忠武路 2 街 109-2 有另一台機台（離明洞站近），和 G3 無關。']
- ].map(h=>`<div class="card" style="margin:8px 0;padding:11px 13px"><b>${h[0]}</b> ${stT[h[3]]}<br><small style="color:var(--sub)">${h[1]}</small><div class="btns" style="margin-top:6px"><span class="chip">🕒 ${h[2]}</span><a class="btn soft sm" href="https://www.google.com/maps/search/?api=1&query=${enc(h[0]+' 서울')}" target="_blank" rel="noopener">地圖 ↗</a></div><p style="font-size:12.5px;color:var(--sub);margin-top:6px">${h[4]}</p></div>`).join('');
- return `${back}<div class="g"><h2>💴 WOWPASS 換錢與儲值</h2><p class="lead">11/4 21:30 落地第二航廈：先預約領卡，隔天再用台幣現鈔儲值，最省手續費。</p>
- <div class="note sage"><h3>🍊 建議這樣做</h3>
-  <ol class="steps" style="--c:var(--sage)"><li><span><b>出發前</b>：在官方預約頁選「仁川機場 T2＋機場 CU 便利商店領卡」，付款後存好條碼截圖。</span></li><li><span><b>11/4 落地</b>：到 T2 1 樓入境大廳的 CU 2 號店領卡，綁定 App。先只領卡就好。</span></li><li><span><b>11/5 起</b>：到民宿附近機台，投入台幣現鈔儲值（免手續費）。</span></li><li><span><b>大額消費</b>：直接刷海外高回饋信用卡，不要用 WOWPASS App 的信用卡儲值（約 4%）。</span></li></ol></div>
-
- <div class="card c-sight"><h3>① 第一次領卡（仁川 T2）</h3>
-  <ol class="steps"><li><span>打開預約頁，選 <b>Incheon International Airport Terminal 2</b>。</span></li><li><span>選 <b>Airport CU Convenience Stores</b>（機場 CU 領卡），不要選機台領卡或 SKT 組合包。</span></li><li><span>選張數、填資料、付款。四個人都要用的話各預約一張，<b>一本護照只能綁定一張卡</b>。</span></li><li><span>完成後取得<b>條碼憑證</b>（有些平台給 6 位數預約碼），截圖存相簿。</span></li><li><span>11/4 到 <b>T2 1 樓入境大廳 A 出口附近的 CU 2 號店</b>（24 小時），向店員出示條碼領卡。</span></li><li><span>打開 WOWPASS App，掃描卡片背面條碼並輸入 CVC，完成綁定。</span></li></ol>
-  <div class="kv"><span>CU 2 號店 ${ok}</span><b>T2 1F 入境大廳 A 出口附近</b></div>
-  <div class="kv"><span>營業</span><b>24 小時</b></div>
-  <div class="kv"><span>領卡費用 ${warn}</span><b>約 ₩5,500／張</b></div>
-  <p style="color:var(--sub);font-size:12.5px;margin-top:6px">2026 年 3 月起費用調整，有資料寫 App 預約 ₩5,500、現場辦卡 ₩6,000，也有舊資料寫 ₩5,000，實際金額以預約付款頁為準。</p>
-  <div class="btns"><a class="btn" href="https://wowpass.oopy.io/voucher/cu/ct" target="_blank" rel="noopener">官方 CU 預約說明 ↗</a><a class="btn soft" href="https://www.wowpass.io/" target="_blank" rel="noopener">WOWPASS 官網 ↗</a></div></div>
- <div class="note butter"><p>⚠️ <b>CU 領到的是卡片，不是裡面有錢的卡。</b>CU 櫃檯只負責發卡，官方客服也說櫃檯目前不能直接幫 WOWPASS 餘額儲值。</p></div>
-
- <div class="card"><h3>② 領卡之後怎麼儲值？</h3>
-  ${fee('🏧 <b>市區 WOWPASS 機台</b>，投入台幣現鈔','免手續費','台幣紙鈔的面額限制與是否支援，各機台不同，以機台畫面為準。有韓文報導寫匯率價差約 0.5%。這是最推薦的方式。')}
-  ${fee('📱 <b>WOWPASS App 信用卡儲值</b>','約 4%','台灣信用卡銀行可能另收約 1.5% 海外手續費，合計約 5.5%。')}
-  ${fee('🏪 <b>CU 櫃檯</b>','不能儲值 WOWPASS','只能領卡。T-money 可用韓元現金在櫃檯加值。')}
-  ${fee('✈️ <b>T2 CU 3 號店的機台</b>（B 出口、10 號出口附近）','不要當唯一方案','只能辦卡、儲值，不能提領現金；營業約 07:00–22:00（另有資料寫 07:00–21:50）。你 21:30 才落地，出關後可能已打烊。機場機台收不收台幣現鈔各家說法不同，請看機台畫面。')}
-  ${fee('✈️ <b>AREX 站內舊機台</b>','已停止營運','舊攻略提到的，不要特地去找。 ')}
-  <p style="color:var(--sub);font-size:12.5px;margin-top:6px">機台儲值與換匯的各項規定來自多篇 2026 年教學，我沒有看到完整官方費率表。實際以機台畫面與 App 為準。</p></div>
-
- <div class="card"><h3>③ 信用卡儲值手續費試算（4%）</h3>
-  ${[30000,50000,100000,200000].map(k=>fee('儲值 ₩'+fmt(k),'手續費 ₩'+fmt(k*0.04)+'<br><small style="color:var(--sub);font-weight:400">加銀行費約 ₩'+fmt(k*0.055)+'</small>')).join('')}
-  <p style="color:var(--sub);font-size:12.5px;margin-top:6px">試算未含匯率差。WOWPASS 偶爾有手續費折扣活動。</p></div>
-
- <div class="card"><h3>④ 手續費總表</h3>
-  ${fee('辦卡','₩5,500～6,000','2026/3/4 起調整，來源不一，以付款頁為準')}
-  ${fee('換匯、機台現金儲值','免手續費','只有匯率差')}
-  ${fee('App 信用卡儲值','約 4%','另加發卡銀行海外手續費')}
-  ${fee('從卡內提領韓元現金','₩1,000／次','每次上限約 ₩10 萬，不要分很多次領')}
-  ${fee('補發遺失的卡','₩3,000～4,000','需到指定機台辦理')}
-  ${fee('WOWPASS 餘額 → T-money','來源不一','有寫免費、有寫 ₩500、也有說不能轉；以 App 畫面為準')}
-  ${fee('卡內餘額退回台幣','通常不行','花完或在機台提領韓元')}</div>
- <div class="note sky"><p>🚇 <b>WOWPASS 消費餘額和 T-money 交通餘額是分開的。</b>儲值完請兩邊都看一下。搭地鐵最穩的做法是留一點韓元現金，到地鐵站或超商加值 T-money。</p></div>
-
- <div class="card"><h3>🏠 民宿附近的 WOWPASS 機台</h3>
-  <p style="font-size:13px;color:var(--sub)">我用網路搜尋逐一核對了 ChatGPT 給的 4 個點。<b>只有東大門歷史文化公園站站內那台有明確來源</b>，其他沒有官方頁可核對。機台各站是否收台幣現鈔，我沒有查到明確資料，請看機台畫面。</p>${hot}
-  <p style="font-size:12.5px;color:var(--sub);margin-top:6px">最準的做法：到東大門歷史文化公園站就用站內那台；其他點出發前先在 WOWPASS App 的機台地圖確認。</p></div>
- <div class="card"><h3>📍 其他區域找機台</h3><div class="btns" style="margin:0 0 8px"><a class="btn" href="https://www.google.com/maps/search/WOWPASS" target="_blank" rel="noopener">離我最近的 WOWPASS ↗</a></div>
-  <div class="search" style="position:static;padding:0"><label for="wq"><span>🔍</span><input id="wq" type="search" placeholder="搜尋區域，例如 明洞、機場" autocomplete="off"></label></div>
-  <div id="wlist" style="margin-top:10px">${rows}</div></div>
- <div class="note butter"><p>💡 市場攤販、小店仍可能只收現金，留一點韓元備用。以上費率與位置常調整，出發前請用 WOWPASS App 的機台搜尋再確認一次。</p></div></div>`};
+ <div class="note sky"><h3>這些數字從哪來</h3><p>• 市場參考價 <b>41.06</b>：鉅亨網 TWD/KRW 10/30 收盤，不是換錢所報價。我連不上即時匯率，請在現場看牌價後改上面的欄位。</p><p>• 明洞和台灣銀行的相對差距：取自一篇比較文章，每 NT$10,000 明洞約 ₩417,000、台灣銀行 ₩392,003，銀行少約 6%。那是當時的匯率，現在的實際牌價會不同，差距比例只供參考。</p><p>• 信用卡的海外手續費約 1.5% 是常見值，請看自己的卡。</p><p>• 韓元近幾個月升值，8 月新聞說明洞換錢所曾跌到約 42，匯率變動快，請在出發前一兩天再看一次。</p></div>
+ <div class="btns"><button class="btn soft" data-go="g-tmoney">🚇 T-money 與付款</button><button class="btn soft" data-go="g-fx">🔢 韓幣台幣換算</button></div></div>`};
+G['g-tmoney']=()=>`${back}<div class="g"><h2>🚇 T-money・現金・刷卡</h2><p class="lead">搭車用 T-money，市場和小攤用現金，大額和餐廳刷卡。</p>
+ <div class="card c-move"><h3>🚇 T-money 交通卡</h3><ol class="steps"><li><span><b>買卡</b>：便利商店（CU、GS25、7-Eleven）或地鐵站售票機。卡片本身要付費，約 ₩2,500–4,000（依卡面設計），不能退。</span></li><li><span><b>加值</b>：實體卡用<b>韓元現金</b>加值，在便利商店櫃檯或地鐵站機台，餘額上限約 ₩50 萬（各來源寫法不一）。</span></li><li><span><b>搭車</b>：地鐵、公車、計程車（部分）都可以刷。AREX 一般列車可刷，直達列車要買票。</span></li><li><span><b>回台前退款</b>：便利商店可退餘額，各店上限不同：GS25、7-Eleven 約 ₩2 萬以內，CU、emart24 約 ₩3 萬以內；餘額高的要到 T-money 總部。在店裡確認當下規定。</span></li></ol>
+ <p style="color:var(--sub);font-size:12.5px;margin-top:6px">iPhone 也可以用虛擬卡（Apple 錢包），官方 App 列出 Mastercard、美國運通、銀聯、JCB，Visa 沒列。細節以 App 為準。</p></div>
+ <div class="card"><h3>💵 現金</h3><p style="font-size:14px">南大門的童裝、女裝、棉被，市場攤販和小店多半只收現金。Day 2 在明洞換好，其他時候留一點韓元備用。</p><div class="btns"><button class="btn" data-go="g-cash">💱 換錢所與比價</button></div></div>
+ <div class="card"><h3>💳 刷卡</h3><p style="font-size:14px">餐廳、百貨、藥妝、診所多半可以刷卡。大額購物和醫美費用可以刷海外高回饋信用卡，要看自己的海外手續費。</p></div>
+ <div class="note butter"><p>⚠️ T-money 的購買、加值、退款規定各網站寫得不一，上面是 2026 年的整理，請在店裡確認。</p></div></div>`;
 const WALK={
  hannam:{ti:'漢南洞',start:'6 號線 漢江鎮站（한강진역）1 號出口',time:'逛街＋咖啡＋用餐約 4–5 小時',
   gOrigin:'한강진역 1번 출구',gIds:['leeum','newmix-hn','anthracite','hetras-hannam','pipeground'],gDest:'hanroast',
@@ -1082,9 +1028,9 @@ G['g-air']=()=>`${back}<div class="g"><h2>✈️ 回程：民宿→仁川機場<
  <div class="card c-move"><h3>🛫 你們的航廈：第二航廈（T2）</h3><p style="font-size:13.5px;color:var(--sub);margin-bottom:8px">來回航班都在第二航廈，已預設選好。之後如果改航班，再切換下面的選項。</p>${termRow()}${addrBlock(PM.icn)}<div class="btns"><button class="btn" data-driver="icn">🚕 給司機看機場航廈</button>${mapBtns(PM.icn)}</div></div>
  <div class="card"><h3>三種方式</h3><p>🚆 <b>AREX</b>：民宿→首爾站→機場快線，時間較可控；到「仁川機場第2航廈站」，先看列車班次。</p><p>🚌 <b>機場巴士</b>：有大行李可考慮，注意尖峰路段。</p><p>🚕 <b>包車／計程車</b>：四人＋大行李可評估總價，早上建議提前預約（Uber／k.ride）。</p></div>
  <div class="card"><h3>建議時間表</h3><div class="kv"><span>09:30–10:00</span><b>民宿退房、叫車</b></div><div class="kv"><span>約 10:30–11:15</span><b>抵達機場（含緩衝）</b></div><div class="kv"><span>11:15 前</span><b>託運、退稅、出境</b></div><div class="kv"><span>14:15</span><b>起飛</b></div></div>
- <div class="card"><h3>出發前確認</h3>${['液體託運、行動電源隨身','退稅單、發票與護照放在好拿的位置','零食先看是否涉及肉製品、蛋奶或入境檢疫限制，不要僅憑超市販售就認定可攜回','WOWPASS 剩餘金額先消費或退款'].map(t=>`<div class="kv"><div>✅ ${t}</div></div>`).join('')}</div>
+ <div class="card"><h3>出發前確認</h3>${['液體託運、行動電源隨身','退稅單、發票與護照放在好拿的位置','零食先看是否涉及肉製品、蛋奶或入境檢疫限制，不要僅憑超市販售就認定可攜回','T-money 餘額先在便利商店退款（各店上限不同，約 ₩2–3 萬以內）'].map(t=>`<div class="kv"><div>✅ ${t}</div></div>`).join('')}</div>
  <div class="card"><h3>可複製的韓文</h3>${kr([['인천공항 제1터미널로 가 주세요.','請到仁川機場第一航廈。'],['인천공항 제2터미널로 가 주세요.','請到仁川機場第二航廈。'],['출발층(3층)에서 내려 주세요.','請在 3 樓出境層放我下車。'],['트렁크 열어 주세요.','請開後車廂。']])}</div>
- <div class="btns"><button class="btn soft" data-go="g-wow">💴 WOWPASS 退款</button><button class="btn soft" data-go="g-tax">🧾 退稅</button></div></div>`;
+ <div class="btns"><button class="btn soft" data-go="g-tmoney">🚇 T-money 退款</button><button class="btn soft" data-go="g-tax">🧾 退稅</button></div></div>`;
 G['g-from']=()=>`${back}<div class="g"><h2>🛬 仁川機場→民宿</h2><p class="lead">11/4 約 21:30 落地，4 人＋行李。這一段要給司機看的是民宿地址。</p>
  <div class="card c-stay"><h3>🏠 民宿地址（給司機看）</h3>${addrBlock(PM.home)}<div class="btns"><button class="btn" data-driver="home">🚕 給司機看（大字）</button>${mapBtns(PM.home)}</div>
  <p style="color:var(--sub);font-size:12.5px;margin-top:8px">下車地點請照房東提供的入口影片，窄巷司機可能只能停在大路邊。</p></div>
@@ -1093,7 +1039,7 @@ G['g-from']=()=>`${back}<div class="g"><h2>🛬 仁川機場→民宿</h2><p cla
  <ol class="steps"><li><span>入境、領完行李後，走到 <b>第二航廈 1 樓入境大廳</b>，跟著 <b>Taxi</b> 指標到乘車處。</span></li><li><span>也可以先在 <b>k.ride</b>／<b>Uber</b> 設好目的地，上車地點選航廈 1 樓入境大廳，先預估價格。</span></li><li><span>上車前說「<b>트렁크 열어 주세요</b>」，行李放後車廂；人多可選大型車（Van／Jumbo）。</span></li><li><span>把<b>民宿地址</b>亮給司機看（上面按鈕），確認是否含高速費、可否刷卡。</span></li><li><span>接近民宿時，用房東影片確認入口；有問題用 App 或翻譯。</span></li></ol></div>
  <div class="card"><h3>其他方式（需先查末班）</h3><p>🚆 <b>AREX 機場快線</b>：到首爾站再轉 4 號線或叫車，深夜班次有限，<b>落地後先查末班時間</b>再決定。</p><p>🚌 <b>機場巴士／深夜公車</b>：班次少、下車點離民宿可能有段距離，拖行李較累。</p>
  <div class="btns"><a class="btn soft sm" href="https://www.google.com/maps/dir/?api=1&origin=${enc('Incheon International Airport')}&destination=${enc(PM.home.a)}&travelmode=transit" target="_blank" rel="noopener">大眾運輸路線 ↗</a><a class="btn soft sm" href="https://www.google.com/maps/dir/?api=1&origin=${enc('Incheon International Airport')}&destination=${enc(PM.home.a)}&travelmode=driving" target="_blank" rel="noopener">開車路線 ↗</a></div></div>
- <div class="card"><h3>📋 落地前先準備</h3>${['房東的入住方式、門禁／鎖碼，先截圖存好','eSIM／漫遊先開通，落地就能叫車','k.ride／Uber 先註冊並設好付款','先預約 WOWPASS 機場 CU 領卡（T2），條碼截圖；手上留一點韓元現金','民宿地址複製好，也可直接用「給司機看」'].map(t=>`<div class="kv"><div>✅ ${t}</div></div>`).join('')}<div class="btns"><button class="btn soft sm" data-go="g-wow">💴 WOWPASS</button><button class="btn soft sm" data-go="g-taxi">🚕 叫車教學</button></div></div>
+ <div class="card"><h3>📋 落地前先準備</h3>${['房東的入住方式、門禁／鎖碼，先截圖存好','eSIM／漫遊先開通，落地就能叫車','k.ride／Uber 先註冊並設好付款','手上留一點韓元現金，落地後在便利商店買 T-money 並加值','民宿地址複製好，也可直接用「給司機看」'].map(t=>`<div class="kv"><div>✅ ${t}</div></div>`).join('')}<div class="btns"><button class="btn soft sm" data-go="g-tmoney">🚇 T-money</button><button class="btn soft sm" data-go="g-taxi">🚕 叫車教學</button></div></div>
  <div class="card"><h3>可複製的韓文</h3>${kr([['퇴계로50가길 6-1로 가 주세요.','請載我到退溪路50街 6-1。'],['여기로 가 주세요.','請載我到這裡。'],['트렁크 열어 주세요.','請開後車廂。'],['고속도로 통행료 포함이에요?','高速公路費含在內嗎？'],['카드 결제 가능해요?','可以刷卡嗎？'],['건물 입구 앞에서 내려 주세요.','請在大樓入口前讓我下車。']])}</div></div>`;
 const fmt=(n,d=0)=>isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:d,minimumFractionDigits:0}):'';
 const fxRate=()=>{const r=+store.get('rate2',41.06);return r>0?r:41.06};
@@ -1129,7 +1075,7 @@ const LIST=[
  ['t4','11/7 醫美','It\'s me 清潭，預約 12:00；確認開診（11/7 週六約 17:00 前）、醫師、療程、術後照護及付款方式。'],
  ['t5','護照・網路','護照效期、eSIM／漫遊、行動電源。'],
  ['t6','先裝好 App','k.ride（或 Uber）、Baemin、Naver Map，先完成註冊與付款設定。'],
- ['t7','WOWPASS 預約領卡','選仁川 T2＋機場 CU 領卡，付款後把條碼截圖；另留一點韓元現金。']];
+ ['t7','T-money 與現金','準備一點韓元現金，落地後在便利商店買 T-money；南大門用現金，大額刷海外高回饋信用卡。']];
 function viewMe(){
   const done=LIST.filter(l=>checks[l[0]]).length;
   const fl=favs.map(id=>PM[id]).filter(Boolean);
@@ -1147,7 +1093,7 @@ function actsFor(x,k){
   const hasAddr=x&&(x.a||x.ko);
   return `<div class="acts">
    <button class="act" data-act="taxi" data-p="${x.id}"><span>🚕</span>叫車</button>
-   <button class="act" data-act="wow" data-p="${x.id}"><span>💴</span>換錢</button>
+   <button class="act" data-act="cash" data-p="${x.id}"><span>💴</span>換錢</button>
    <button class="act" data-act="food" data-p="${x.id}"><span>🛵</span>叫外送</button>
    <button class="act" data-act="metro" data-p="${x.id}" data-k="${k||''}"><span>🚇</span>${k?'地鐵路線':'地鐵'}</button></div>`;
 }
@@ -1354,7 +1300,7 @@ document.addEventListener('click',e=>{
     if(q('.sheet'))placeSheet(PM[id]);else if(S.tab==='explore')results();else refresh(true);return}
   if(el=q('[data-term]')){store.set('term',+el.dataset.term);if($('#drv').classList.contains('on'))openDriver(PM.icn);else refresh(true);return}
   if(el=q('[data-act]')){const x=PM[el.dataset.p];const a=el.dataset.act;S.ctx=x.id;
-    if(a==='taxi'){closeSheet();openDriver(x)}else if(a==='metro'&&el.dataset.k){showRoute(el.dataset.k)}else go({wow:'g-wow',food:'g-food',metro:'g-metro'}[a]);return}
+    if(a==='taxi'){closeSheet();openDriver(x)}else if(a==='metro'&&el.dataset.k){showRoute(el.dataset.k)}else go({cash:'g-cash',food:'g-food',metro:'g-metro'}[a]);return}
   if(el=q('[data-backstop]')){stopSheet(SM[el.dataset.backstop]);return}
   if(el=q('[data-driver]')){const x=PM[el.dataset.driver];S.ctx=x.id;openDriver(x);return}
   if(q('#drvClose')){$('#drv').classList.remove('on');return}
